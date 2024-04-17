@@ -10,6 +10,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Cadê Buffet?</h1>
+      <nav>
+        <% if user_signed_in? %>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Criar sua conta', new_user_registration_path %> |
+          <%= link_to 'Entrar', new_user_session_path %>
+        <% end %>
+      </nav>
+    </header>
+    
+    <main>
+      <div>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+      <%= yield %>
+    </main>
+
   </body>
 </html>
