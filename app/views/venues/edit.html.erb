@@ -1,0 +1,12 @@
+<h2>Editar informações do seu Buffet</h2>
+
+    <% if(@venue.errors.any?) %>
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+        <% @venue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+    </ul>
+    <% end %>
+
+<%= render 'form' %>

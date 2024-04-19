@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    models:
+      venue: Buffet
+    attributes:
+      venue:
+        brand_name: "Nome fantasia"
+        corporate_name: "Razão Social"
+        registration_number: "CNPJ"
+        address: "Endereço"
+        district: "Bairro"
+        city: "Cidade"
+        state: "Estado"
+        zip_code: "CEP"
+        email: "E-mail"
+        phone_number: "Telefone"
+        description: "Descrição"
+        payment_methods: "Opções de pagamento"
+        user_id: "Dono / Proprietário"
