@@ -1,0 +1,29 @@
+<h2>Tipo de evento: <%= @event.name %></h2>
+<p> Descrição:</p>
+<p>
+  <%= @event.description %> 
+  para até <%= @event.maximun_guests_number %> convidados, 
+  <%= @event.duration %> minutos de duração.
+</p>
+<h3>Serviços opcionais que oferecemos:</h3>
+<ul>
+  <% if @event.has_alcoholic_drinks %>
+    <li>bebidas alcoólicas</li>
+  <% end%>
+  <% if @event.has_decorations %>
+    <li>decoração</li>
+  <% end%>
+  <% if @event.has_parking_service %>
+    <li>estacionamento</li>
+  <% end%>
+  <% if @event.has_valet_service %>
+    <li>valet</li>
+  <% end%>
+</ul>
+
+<h3>Observações:</h3>
+<% if @event.can_be_catering %>
+  <p>Além do nosso espaço, temos como opção o serviço de catering para que você possa realizar seu evento num espaço de sua preferência.</p>
+<% else %>
+  <p>Evento realizado exclusivamente em nosso espaço.</p>
+<% end %>

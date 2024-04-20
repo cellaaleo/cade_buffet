@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      event: Evento
+    attributes:
+      event:
+        name: "Nome do evento"
+        description: "Descrição"
+        minimum_guests_number: "Quantidade mínima de convidados"
+        maximun_guests_number: "Quantidade máxima de convidados"
+        duration: "Tempo de duração padrão"
+        menu: "Cardápio"
+        has_alcoholic_drinks: "Bebidas alcoólicas"
+        has_decorations: "Decoração"
+        has_parking_service: "Estacionamento"
+        has_valet_service: "Valet"
+        can_be_catering: "Catering"

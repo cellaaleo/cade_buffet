@@ -1,0 +1,54 @@
+<h3>Cadastre um tipo de evento:</h3>
+
+<%= form_with(model: @event) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :minimum_guests_number %>
+    <%= f.number_field :minimum_guests_number %>
+  </div>
+  <div>
+    <%= f.label :maximun_guests_number %>
+    <%= f.number_field :maximun_guests_number %>
+  </div>
+  <div>
+    <%= f.label :duration %>
+    <%= f.number_field :duration %>
+  </div>
+  <div>
+    <%= f.label :menu %>
+    <%= f.text_area :menu %>
+  </div>
+  <div>
+    <h3>Marque os serviços extras oferecidos:</h3>
+  </div>
+  <div>
+    <%= f.label :has_alcoholic_drinks %>
+    <%= f.check_box :has_alcoholic_drinks %>
+  </div>
+  <div>
+    <%= f.label :has_decorations %>
+    <%= f.check_box :has_decorations %>
+  </div>
+  <div>
+    <%= f.label :has_parking_service %>
+    <%= f.check_box :has_parking_service %>
+  </div>
+  <div>
+    <%= f.label :has_valet_service %>
+    <%= f.check_box :has_valet_service %>
+  </div>
+  <div>
+    <%= f.label :can_be_catering %>
+    <%= f.check_box :can_be_catering %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

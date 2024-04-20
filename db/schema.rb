@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_111608) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_19_161154) do
+  create_table "events", force: :cascade do |t|
+    t.integer "venue_id", null: false
+    t.string "name"
+    t.string "description"
+    t.integer "minimum_guests_number"
+    t.integer "maximun_guests_number"
+    t.integer "duration"
+    t.text "menu"
+    t.boolean "has_alcoholic_drinks"
+    t.boolean "has_decorations"
+    t.boolean "has_parking_service"
+    t.boolean "has_valet_service"
+    t.boolean "can_be_catering"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["venue_id"], name: "index_events_on_venue_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -45,5 +63,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_111608) do
     t.index ["user_id"], name: "index_venues_on_user_id"
   end
 
+  add_foreign_key "events", "venues"
   add_foreign_key "venues", "users"
 end
