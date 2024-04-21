@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      price: Preço
+    attributes:
+      price:
+        weekday_base_price: "preço-base"
+        weekday_plus_per_person: "taxa adicional por pessoa"
+        weekday_plus_per_hour: "hora extra"
+        weekend_base_price: "preço-base"
+        weekend_plus_per_person: "taxa adicional por pessoa"
+        weekend_plus_per_hour: "hora extra"
+        event_id: "tipo de evento"

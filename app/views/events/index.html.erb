@@ -1,0 +1,15 @@
+<h3>Eventos cadastrados:</h3>
+
+<% if current_user.venue.events.any? %>
+  <% current_user.venue.events.each do |e| %>
+    <div>
+      <ul>
+        <li>
+          <%= link_to "#{e.name}", event_path(e.id) %>
+        </li>
+      </ul>
+    </div>
+  <% end %>
+<% else %>
+  <p>Nenhum evento cadastrado</p>
+<% end %>

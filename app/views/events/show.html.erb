@@ -27,3 +27,15 @@
 <% else %>
   <p>Evento realizado exclusivamente em nosso espaço.</p>
 <% end %>
+
+
+<% @prices.each do |p| %>
+  <% if p.event_id == @event.id %>
+    <p><%= "preço-base de R$ #{p.weekday_base_price},00 (para #{@event.minimum_guests_number} convidados)." %></p>
+  <% else %>
+    <p>Este evento ainda não possui preços cadastrados.</p>
+  <% end %>
+<% end %>
+
+
+

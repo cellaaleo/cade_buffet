@@ -1,0 +1,42 @@
+<h2>Cadastro de preços:</h2>
+
+<%= form_with(model: @price) do |f| %>
+  <div>
+    <%= f.label :event_id%>
+    <%= f.collection_select :event_id, @events, :id, :name %>
+  </div>
+  <div id="weekdays_prices">
+    <p>De segunda a sexta-feira</p>
+    <div>
+      <%= f.label :weekday_base_price %>
+      <%= f.number_field :weekday_base_price %>
+    </div>
+    <div>
+      <%= f.label :weekday_plus_per_person %>
+      <%= f.number_field :weekday_plus_per_person %>
+    </div>
+    <div>
+      <%= f.label :weekday_plus_per_hour %>
+      <%= f.number_field :weekday_plus_per_hour %>
+    </div>
+  </div>
+  <div id="weekends_prices">
+    <p>Sábado e domingo</p>
+    <div>
+      <%= f.label :weekend_base_price %>
+      <%= f.number_field :weekend_base_price %>
+    </div>
+    <div>
+      <%= f.label :weekend_plus_per_person %>
+      <%= f.number_field :weekend_plus_per_person %>
+    </div>
+    <div>
+      <%= f.label :weekend_plus_per_hour %>
+      <%= f.number_field :weekend_plus_per_hour %>
+    </div>
+  </div>
+  <div>
+    <%= f.submit "Enviar" %>
+  </div>
+  
+<% end%>
