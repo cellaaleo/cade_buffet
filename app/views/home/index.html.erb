@@ -1,0 +1,14 @@
+<% unless user_signed_in? %>
+    <h2>Lista de Buffets</h2>
+
+    
+    <% @venues.each do |v| %>
+        <ul>
+            <li>
+                <%= link_to v.brand_name, venue_path(v.id) %>
+                <%= " - #{v.city}/#{v.state}" %>
+            </li>
+        </ul>
+    <% end %>
+    
+<% end %>

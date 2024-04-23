@@ -1,10 +1,16 @@
 <h2><%= @venue.brand_name %></h2>
-<p><%= "#{@venue.district} - #{@venue.city}/#{@venue.state}" %></p>
 
+<% if user_signed_in? %>
+  <h3><%= @venue.corporate_name %></h3>
+<% end %>
+
+<p>
+  <%= "#{@venue.district} - #{@venue.city}/#{@venue.state} - CEP: #{@venue.zip_code}" %>
+</p>
+<p>CNPJ: <%= @venue.registration_number %></p>
 <div>
-    <p><%= @venue.description %></p>
+  <p><%= @venue.description %></p>
 </div>
-
 <h3>contatos:</h3>
 <p>email: <%= @venue.email %></p>
 <p>tel.: <%= @venue.phone_number %></p>
