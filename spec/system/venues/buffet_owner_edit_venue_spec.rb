@@ -7,16 +7,11 @@ describe 'Dono de buffet faz edita dados de sua empresa' do
     Venue.create!(brand_name: "Meu Buffet", corporate_name: "Buffet & Eventos Ltda", registration_number:"66.666.666/0001-00",
                   address: "Avenida Tal, 2000", district: "Vila Tal", city: "Recife", state: "PE", zip_code: "56655-560", 
                   phone_number: "99555-6666", email: "sac@buffet.com.br", description: "Um buffet espaçoso para eventos diversos",
-                  payment_methods: "", user_id: u.id)
+                  payment_methods: "", user: u)
 
     # Act
     visit root_path
-    click_on "Entrar"
-    fill_in "E-mail", with: "buffet@buffet.com.br"
-    fill_in "Senha", with: "senha123"
-    within('form') do
-      click_on "Entrar"
-    end
+    login(u)
     click_on 'Editar dados do Buffet'
 
     # Assert
@@ -34,16 +29,11 @@ describe 'Dono de buffet faz edita dados de sua empresa' do
     Venue.create!(brand_name: "Meu Buffet", corporate_name: "Buffet & Eventos Ltda", registration_number:"66.666.666/0001-00",
                   address: "Avenida Tal, 2000", district: "Vila Tal", city: "Recife", state: "PE", zip_code: "56655-560", 
                   phone_number: "99555-6666", email: "sac@buffet.com.br", description: "Um buffet espaçoso para eventos diversos",
-                  payment_methods: "", user_id: u.id)
+                  payment_methods: "", user: u)
     
     # Act
     visit root_path
-    click_on "Entrar"
-    fill_in "E-mail", with: "buffet@buffet.com.br"
-    fill_in "Senha", with: "senha123"
-    within('form') do
-      click_on "Entrar"
-    end
+    login(u)
     click_on 'Editar dados do Buffet'
     fill_in 'Nome fantasia', with: 'Vila Tal Eventos'
     fill_in 'E-mail', with: 'atendimento@buffeteventos.com.br'
@@ -63,16 +53,11 @@ describe 'Dono de buffet faz edita dados de sua empresa' do
     Venue.create!(brand_name: "Meu Buffet", corporate_name: "Buffet & Eventos Ltda", registration_number:"66.666.666/0001-00",
                   address: "Avenida Tal, 2000", district: "Vila Tal", city: "Recife", state: "PE", zip_code: "56655-560", 
                   phone_number: "99555-6666", email: "sac@buffet.com.br", description: "Um buffet espaçoso para eventos diversos",
-                  payment_methods: "", user_id: u.id)
+                  payment_methods: "", user: u)
     
     # Act
     visit root_path
-    click_on "Entrar"
-    fill_in "E-mail", with: "buffet@buffet.com.br"
-    fill_in "Senha", with: "senha123"
-    within('form') do
-      click_on "Entrar"
-    end
+    login(u)
     click_on 'Editar dados do Buffet'
     fill_in 'Nome fantasia', with: ''
     fill_in 'E-mail', with: ''

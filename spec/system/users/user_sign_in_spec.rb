@@ -10,7 +10,7 @@ describe "Usuário se autentica" do
     click_on "Entrar"
     fill_in "E-mail",	with: "sac@eventos.com"
     fill_in "Senha",	with: "senha123"
-    within('form') do
+    within('main form') do
       click_on "Entrar"
     end
 
@@ -32,7 +32,7 @@ describe "Usuário se autentica" do
     click_on "Entrar"
     fill_in "E-mail",	with: "sac@eventos.com"
     fill_in "Senha",	with: "senha123"
-    within('form') do
+    within('main form') do
       click_on "Entrar"
     end
     click_on 'Sair'

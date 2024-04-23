@@ -8,16 +8,11 @@ describe "Usuário registra valores de um evento" do
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user_id: u.id)
+                      payment_methods: "", user: u)
 
     # Act - clicar em link para registrar os valores deste evento
     visit root_path
-    click_on "Entrar"
-    fill_in "E-mail", with: 'tiella@email.com.br'
-    fill_in "Senha", with: 'tiella123'
-    within('form') do
-      click_on "Entrar"
-    end
+    login(u)
     click_on 'Cadastrar preços de eventos'
     
     # Assert - chegar na página de registro
@@ -36,24 +31,19 @@ describe "Usuário registra valores de um evento" do
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user_id: u.id)
+                      payment_methods: "", user: u)
     first_e = Event.create!(name: 'Casamento', description: 'Festas e recepções de casamento', minimum_guests_number: 50,
                       maximun_guests_number: 150, duration: 240, menu: '(opções de brunch, almoço e jantar)', 
                       has_alcoholic_drinks: true, has_decorations: true, has_parking_service: true,
-                      has_valet_service: true, can_be_catering: true, venue_id: v.id)
+                      has_valet_service: true, can_be_catering: true, venue: v)
     second_e = Event.create!(name: 'Festa de 15 anos', description: 'Festa e baile de 15 anos', minimum_guests_number: 50,
                       maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                       has_alcoholic_drinks: false, has_decorations: true, has_parking_service: true,
-                      has_valet_service: true, can_be_catering: false, venue_id: v.id)
+                      has_valet_service: true, can_be_catering: false, venue: v)
 
     # Act
     visit root_path
-    click_on "Entrar"
-    fill_in "E-mail", with: 'tiella@email.com.br'
-    fill_in "Senha", with: 'tiella123'
-    within('form') do
-      click_on "Entrar"
-    end
+    login(u)
     click_on 'Cadastrar preços de eventos'
     select second_e.name, from: 'tipo de evento'
     within('#weekdays_prices') do

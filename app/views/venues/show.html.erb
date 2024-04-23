@@ -1,6 +1,6 @@
 <h2><%= @venue.brand_name %></h2>
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.venue%>
   <h3><%= @venue.corporate_name %></h3>
 <% end %>
 
