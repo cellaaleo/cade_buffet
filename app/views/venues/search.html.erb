@@ -4,6 +4,6 @@
 
 <% @venues.each do |v| %>
   <ul>
-    <li><%= v.brand_name %> </li>
+    <li><%= link_to v.brand_name, venue_path(v.id) %></li>
   </ul>
-<% end%>
+<% end %>

@@ -40,7 +40,30 @@ describe "Usuário busca um buffet" do
     expect(page).to have_content "Resultado da busca por: #{query}"
     expect(page).to have_content '2 buffets encontrados'
     expect(page).to have_text(:all, "Buffet São Paulo Pinheiros Hall")
+    expect(page).not_to have_content 'Buffet do Vale'
   end
   
+  it "e vê detalhes de um buffet" do
+    # Arrange - criar buffets
+    first_user = User.create!(email: "first@email.com", password: "password")
+    second_user = User.create!(email: "second@email.com", password: "password")
+    first_venue = Venue.create!(brand_name: "Pinheiros Hall", corporate_name: "Primeiro Buffet Ltda", 
+                                registration_number: "11.111.1111/0001-10", address: "Rua dos Pinheiros, 1001",
+                                district: "Pinheiros", city: 'São Paulo', state: "SP", zip_code: "05422-000", 
+                                email: "eventos@first.com", phone_number: "(11)99110-9191", user: first_user,)
+    second_venue = Venue.create!(brand_name: "Buffet São Paulo", corporate_name: "Segundo Buffet SA", 
+                                registration_number: "22.222.222/0002-20", address: "Rua dos Timbiras, 2500",
+                                district: "Barro Preto", city: 'Belo Horizonte', state: "MG", zip_code: "30140-000", 
+                                email: "eventos@second.com", phone_number: "(31)99220-9292", user: second_user,
+                                description: "Espaço ideal para casamentos, aniversários, eventos corporativos, entre outras ocasiões especiais")
+    # Act - clicar em um nome buffet
+    query = 'são paulo'
+    visit root_path
+    fill_in "Buscar buffet", with: query
+    click_on 'Buscar'
+    click_on 'Buffet São Paulo'
 
+    # Arrange - detalhes deste buffet
+    expect(current_path).to eq venue_path(second_venue.id)
+  end
 end
