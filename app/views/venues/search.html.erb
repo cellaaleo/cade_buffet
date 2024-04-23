@@ -1,0 +1,9 @@
+<h2>Resultado da busca por: <%= @query %></h2>
+
+2 buffets encontrados
+
+<% @venues.each do |venue| %>
+  <ul>
+    <li><%= venue.brand_name %> </li>
+  </ul>
+<% end%>

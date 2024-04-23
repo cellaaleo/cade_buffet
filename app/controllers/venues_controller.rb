@@ -34,6 +34,11 @@ class VenuesController < ApplicationController
     end
   end
 
+  def search
+    @query = params["query"]
+    @venues = Venue.where("brand_name LIKE ?", "%#{@query}%") 
+  end
+
   
   private
   def venue_params
