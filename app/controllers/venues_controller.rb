@@ -36,7 +36,8 @@ class VenuesController < ApplicationController
 
   def search
     @query = params["query"]
-    @venues = Venue.where("brand_name LIKE ?", "%#{@query}%") 
+    #@venues = Venue.where("brand_name LIKE ?", "%#{@query}%").or(Venue.where("city LIKE ?", "%#{@query}%"))
+    @venues = Venue.where("brand_name LIKE ? or city LIKE ?", "%#{@query}%", "%#{@query}%")
   end
 
   
