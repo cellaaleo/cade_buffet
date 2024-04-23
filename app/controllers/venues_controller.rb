@@ -38,6 +38,7 @@ class VenuesController < ApplicationController
     @query = params["query"]
     #@venues = Venue.where("brand_name LIKE ?", "%#{@query}%").or(Venue.where("city LIKE ?", "%#{@query}%"))
     @venues = Venue.where("brand_name LIKE ? or city LIKE ?", "%#{@query}%", "%#{@query}%")
+    @venues = @venues.order(:brand_name) if @venues.count > 1
   end
 
   

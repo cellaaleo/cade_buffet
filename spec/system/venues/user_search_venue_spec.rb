@@ -21,7 +21,7 @@ describe "Usuário busca um buffet" do
                                 registration_number: "11.111.1111/0001-10", address: "Rua dos Pinheiros, 1001",
                                 district: "Pinheiros", city: 'São Paulo', state: "SP", zip_code: "05422-000", 
                                 email: "eventos@first.com", phone_number: "(11)99110-9191", user: first_user,)
-    second_venue = Venue.create!(brand_name: "São Paulo Hall", corporate_name: "Segundo Buffet SA", 
+    second_venue = Venue.create!(brand_name: "Buffet São Paulo", corporate_name: "Segundo Buffet SA", 
                                 registration_number: "22.222.222/0002-20", address: "Rua dos Timbiras, 2500",
                                 district: "Barro Preto", city: 'Belo Horizonte', state: "MG", zip_code: "30140-000", 
                                 email: "eventos@second.com", phone_number: "(31)99220-9292", user: second_user,
@@ -39,7 +39,7 @@ describe "Usuário busca um buffet" do
     # Arrange - lista de resultados
     expect(page).to have_content "Resultado da busca por: #{query}"
     expect(page).to have_content '2 buffets encontrados'
-    expect(page).to have_text(:all, "Pinheiros Hall São Paulo Hall")
+    expect(page).to have_text(:all, "Buffet São Paulo Pinheiros Hall")
   end
   
 
