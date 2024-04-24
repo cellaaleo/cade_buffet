@@ -36,9 +36,21 @@ class VenuesController < ApplicationController
 
   def search
     @query = params["query"]
-    #@venues = Venue.where("brand_name LIKE ?", "%#{@query}%").or(Venue.where("city LIKE ?", "%#{@query}%"))
-    @venues = Venue.where("brand_name LIKE ? or city LIKE ?", "%#{@query}%", "%#{@query}%")
+    first_condition = ["brand_name LIKE ? or city LIKE ?", "%#{@query}%", "%#{@query}%"]
+    second_condition = ["events.name LIKE ?", "%#{@query}%"]
+
+    @venues = Venue.where(first_condition)
     @venues = @venues.order(:brand_name) if @venues.count > 1
+
+    venues_by_event = Venue.joins(:events).where(second_condition).distinct
+
+    if @venues.empty?
+      @venues = venues_by_event
+      @venues = @venues.order(:brand_name) if @venues.count > 1
+    elsif venues_by_event.any?
+      @venues = @venues + venues_by_event
+      @venues.uniq!.sort! { |a,b| a.brand_name.downcase <=> b.brand_name.downcase } if @venues.count > 1
+    end
   end
 
   
@@ -54,6 +66,7 @@ class VenuesController < ApplicationController
                                   :zip_code, 
                                   :email,
                                   :phone_number,
-                                  :description)
+                                  :description,
+                                  :events)
   end
 end

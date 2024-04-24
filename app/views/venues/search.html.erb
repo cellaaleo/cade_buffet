@@ -1,6 +1,14 @@
 <h2>Resultado da busca por: <%= @query %></h2>
 
-2 buffets encontrados
+<% if @venues.count == 0 %>
+  <p>Nenhum buffet encontrado</p>
+<% else %>
+  <p>
+    <%= @venues.count %>
+    <%= Venue.model_name.human(count: @venues.count) %>
+    <%= t(:found, count: @venues.count) %>
+  </p>
+<% end %>
 
 <% @venues.each do |v| %>
   <ul>

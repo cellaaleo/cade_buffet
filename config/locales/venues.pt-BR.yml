@@ -2,6 +2,9 @@ pt-BR:
   activerecord:
     models:
       venue: Buffet
+      venue:
+        one: Buffet
+        other: Buffets
     attributes:
       venue:
         brand_name: "Nome fantasia"
