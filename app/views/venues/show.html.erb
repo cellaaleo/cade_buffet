@@ -11,6 +11,20 @@
 <div>
   <p><%= @venue.description %></p>
 </div>
+
+<div>
+  <% if @events.any? %>
+    <h3>Nossos eventos:</h3>
+    <% @events.each do |e| %>
+      <ul>
+        <li><%= link_to "#{e.name}", event_path(e.id) %></li>
+      </ul>
+    <% end %>
+  <% else %>
+    <p>Nenhum evento cadastrado</p>
+  <% end %>
+</div>
+
 <h3>contatos:</h3>
 <p>email: <%= @venue.email %></p>
 <p>tel.: <%= @venue.phone_number %></p>

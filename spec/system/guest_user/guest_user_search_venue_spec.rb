@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Usuário busca um buffet" do
+describe "Usuário não autenticado busca um buffet" do
   it "a partir do menu" do
     # Arrange
     # Act
@@ -85,7 +85,7 @@ describe "Usuário busca um buffet" do
     first_venue = Venue.create!(brand_name: "Pinheiros Hall", corporate_name: "Primeiro Buffet Ltda", 
                                 registration_number: "11.111.1111/0001-10", address: "Rua dos Pinheiros, 1001",
                                 district: "Pinheiros", city: 'São Paulo', state: "SP", zip_code: "05422-000", 
-                                email: "eventos@first.com", phone_number: "(11)99110-9191", user: first_user,)
+                                email: "eventos@first.com", phone_number: "(11)99110-9191", user: first_user)
     second_venue = Venue.create!(brand_name: "Buffet São Paulo", corporate_name: "Segundo Buffet SA", 
                                 registration_number: "22.222.222/0002-20", address: "Rua dos Timbiras, 2500",
                                 district: "Barro Preto", city: 'Belo Horizonte', state: "MG", zip_code: "30140-000", 
@@ -112,5 +112,4 @@ describe "Usuário busca um buffet" do
     # Arrange 
     expect(page).to have_content 'Nenhum buffet encontrado'
   end
-  
 end

@@ -14,7 +14,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @prices = Price.all
+    @price = @event.price
   end
 
   def index

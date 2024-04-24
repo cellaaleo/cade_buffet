@@ -62,6 +62,6 @@ describe "Usuário registra valores de um evento" do
     expect(current_path).to eq event_path(second_e.id)
     expect(page).to have_content 'Preços cadastrados com sucesso'
     expect(page).to have_content 'Festa de 15 anos'
-    expect(page).to have_content 'preço-base de R$ 10000,00 (para 50 convidados)'
+    expect(page).to have_content 'Valor inicial: R$ 10000,00 (50 convidados)'
   end
 end

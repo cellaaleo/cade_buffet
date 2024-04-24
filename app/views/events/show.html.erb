@@ -1,10 +1,12 @@
-<h2>Tipo de evento: <%= @event.name %></h2>
+<h2><%= @event.name %> - <%= @event.venue.brand_name %></h2>
 <p> Descrição:</p>
 <p>
-  <%= @event.description %> 
-  para até <%= @event.maximun_guests_number %> convidados, 
-  <%= @event.duration %> minutos de duração.
+  <%= @event.description %>, 
+  a partir de <%= @event.minimum_guests_number %> 
+  até o máximo de <%= @event.maximun_guests_number %> convidados, 
+  com pelo menos <%= @event.duration %> minutos de duração.
 </p>
+
 <h3>Serviços opcionais que oferecemos:</h3>
 <ul>
   <% if @event.has_alcoholic_drinks %>
@@ -28,14 +30,29 @@
   <p>Evento realizado exclusivamente em nosso espaço.</p>
 <% end %>
 
-
-<% @prices.each do |p| %>
-  <% if p.event_id == @event.id %>
-    <p><%= "preço-base de R$ #{p.weekday_base_price},00 (para #{@event.minimum_guests_number} convidados)." %></p>
-  <% else %>
-    <p>Este evento ainda não possui preços cadastrados.</p>
-  <% end %>
+<% if @event.price %>
+  <div>
+    <h3>Nossos preços:</h3>
+    <section>
+      <p>DIAS ÚTEIS</p>
+      <p>
+        Valor inicial:
+        <%= "R$ #{@price.weekday_base_price},00 (#{@event.minimum_guests_number} convidados)." %>
+      </p>
+      <p>Taxa extra por pessoa: R$ <%= @price.weekday_plus_per_person %>,00</p>
+      <p>Taxa por hora adicional: R$ <%= @price.weekday_plus_per_hour%>,00</p>
+    </section>
+    <section>
+      <p>FINS DE SEMANA</p>
+      <p>
+        Valor inicial:
+        <%= "R$ #{@price.weekend_base_price},00 (#{@event.minimum_guests_number} convidados)." %>
+      </p>
+      <p>Taxa extra por pessoa: R$ <%= @price.weekend_plus_per_person %>,00</p>
+      <p>Taxa por hora adicional: R$ <%= @price.weekend_plus_per_hour%>,00</p>
+    </section>
+  </div>
+<% else %>
+  <p>Este evento ainda não possui preços cadastrados.</p>
 <% end %>
-
-
 
