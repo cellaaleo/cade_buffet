@@ -10,8 +10,8 @@ describe "dono de buffet registra tipo de evento" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: u)
     # Act
+    login_as u, :scope => :user
     visit root_path
-    login(u)
     within('nav') do
       click_on 'Cadastrar tipos de evento'
     end
@@ -41,8 +41,8 @@ describe "dono de buffet registra tipo de evento" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: u)
     # Act
+    login_as u, :scope => :user
     visit root_path
-    login(u)
     click_on 'Cadastrar tipos de evento'
     fill_in "Nome do evento",	with: "Casamento"
     fill_in "Descrição",	with: "Festas e recepções de casamento"
@@ -65,4 +65,25 @@ describe "dono de buffet registra tipo de evento" do
     expect(page).not_to have_content 'catering'
     expect(page).to have_content 'Evento realizado exclusivamente em nosso espaço'
   end
+
+  it "e aparece na página do seu buffet" do
+    # Arrange
+    u = User.create!(email: 'tiella@email.com.br', password: 'tiella123')
+    v = Venue.create!(brand_name: "Tiella", corporate_name: "Tiella Eventos Ltda", registration_number:"11.111.111/0001-00",
+                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                      phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
+                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
+                      payment_methods: "", user: u)
+    Event.create!(name: 'Eventos corporativos', venue: v)
+    Event.create!(name: 'Aniversários', venue: v)
+
+    # Act
+    login_as u, :scope => :user
+    visit root_path
+
+    # Assert
+    expect(page).to have_link 'Eventos corporativos'
+    expect(page).to have_link 'Aniversários' 
+  end
+  
 end

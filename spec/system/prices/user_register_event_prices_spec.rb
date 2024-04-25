@@ -11,8 +11,8 @@ describe "Usuário registra valores de um evento" do
                       payment_methods: "", user: u)
 
     # Act - clicar em link para registrar os valores deste evento
+    login_as u, :scope => :user
     visit root_path
-    login(u)
     click_on 'Cadastrar preços de eventos'
     
     # Assert - chegar na página de registro
@@ -42,8 +42,8 @@ describe "Usuário registra valores de um evento" do
                       has_valet_service: true, can_be_catering: false, venue: v)
 
     # Act
+    login_as u, :scope => :user
     visit root_path
-    login(u)
     click_on 'Cadastrar preços de eventos'
     select second_e.name, from: 'tipo de evento'
     within('#weekdays_prices') do

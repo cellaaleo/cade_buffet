@@ -1,4 +1,6 @@
 class PricesController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @price = Price.new
     @events = Event.all
@@ -10,7 +12,6 @@ class PricesController < ApplicationController
     flash[:notice] = "Preços cadastrados com sucesso"
     redirect_to event_path(@price.event_id)
   end
-
   
   private
   def prices_params

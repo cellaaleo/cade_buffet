@@ -1,4 +1,6 @@
 class VenuesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+
   def show
     @venue = Venue.find(params[:id])
     @events = @venue.events

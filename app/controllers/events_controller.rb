@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  
+  before_action :authenticate_user!, only: [:new, :create]
+
   def new
     @event = Event.new
   end
@@ -17,9 +18,9 @@ class EventsController < ApplicationController
     @price = @event.price
   end
 
-  def index
-    @events =  Event.all
-  end
+  #def index
+  #  @events =  Event.all
+  #end
 
   private
   def event_params

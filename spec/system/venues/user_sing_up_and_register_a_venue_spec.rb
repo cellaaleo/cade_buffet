@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Usuário cria sua conta" do
+describe "Usuário dono de buffet cria sua conta" do
   it "e deve cadastrar um buffet" do
     # Arrange 
     # Act - cria conta
@@ -49,6 +49,7 @@ describe "Usuário cria sua conta" do
     # Assert
     expect(page).to have_content 'Buffet cadastrado com sucesso'
     expect(page).to have_content 'Buffet & Eventos'
+    expect(page).to have_content 'Buffet e Eventos Ltda'
     expect(page).to have_content 'Vila Mariana - Sâo Paulo/SP'
     expect(page).to have_content 'atendimento@buffet.com.br'
   end

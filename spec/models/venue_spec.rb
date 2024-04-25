@@ -132,7 +132,9 @@ RSpec.describe Venue, type: :model do
         # Assert
         expect(result).to eq(false)
       end
+    end
 
+    context 'uniqueness' do
       it 'false when registrantion number is already in use' do
         # Arrange
         first_user = User.create!(email: "buffet@buffet.com.br", password: "senha123")
