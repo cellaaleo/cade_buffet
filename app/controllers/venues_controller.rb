@@ -1,5 +1,6 @@
 class VenuesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_and_check_user, only: [:show, :edit, :update]
 
   def show
     @venue = Venue.find(params[:id])
@@ -56,6 +57,12 @@ class VenuesController < ApplicationController
     end
   end
 
+  def set_and_check_user
+    @venue = Venue.find(params[:id])
+    if user_signed_in? && @venue.user != current_user
+      return redirect_to venue_path(current_user.venue.id)
+    end
+  end
   
   private
   def venue_params
