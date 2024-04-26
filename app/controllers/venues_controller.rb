@@ -60,7 +60,7 @@ class VenuesController < ApplicationController
   def set_and_check_user
     @venue = Venue.find(params[:id])
     if user_signed_in? && @venue.user != current_user
-      return redirect_to venue_path(current_user.venue.id)
+      return redirect_to venue_path(current_user.venue.id), alert: 'Acesso não permitido!'
     end
   end
   

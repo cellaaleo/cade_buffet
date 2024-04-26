@@ -52,6 +52,7 @@ describe "Usuário dono de buffet faz login" do
 
     # Assert - cair na página do buffet
     expect(current_path).to eq venue_path(first_venue.id)
+    expect(page).to have_content 'Acesso não permitido'  
     expect(page).to have_content 'Primeiro Buffet Ltda'
     expect(page).not_to have_content 'Segundo Buffet SA'
   end
