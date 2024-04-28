@@ -6,7 +6,7 @@ describe "Usuário não autenticado busca um buffet" do
     # Act
     visit root_path
     # Assert
-    within('header #busca') do
+    within('header nav form') do
       expect(page).to have_field 'Buscar buffet'
       expect(page).to have_button 'Buscar' 
     end
@@ -37,7 +37,7 @@ describe "Usuário não autenticado busca um buffet" do
     click_on 'Buscar'
 
     # Arrange - lista de resultados
-    expect(page).to have_content "Resultado da busca por: #{query}"
+    expect(page).to have_content "Resultado da busca por: '#{query}'"
     expect(page).to have_content '2 Buffets encontrados'
     expect(page).to have_text(:all, "Buffet São Paulo Pinheiros Hall")
     expect(page).not_to have_content 'Buffet do Vale'
@@ -72,7 +72,7 @@ describe "Usuário não autenticado busca um buffet" do
     click_on 'Buscar'
 
     # Arrange
-    expect(page).to have_content "Resultado da busca por: #{query}"
+    expect(page).to have_content "Resultado da busca por: '#{query}'"
     expect(page).to have_content '2 Buffets encontrados'
     expect(page).to have_text(:all, 'Buffet do Vale Casamento Mineiro Buffet')
     expect(page).not_to have_content 'Pinheiros Hall'  

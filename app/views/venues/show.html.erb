@@ -1,30 +1,29 @@
-<h2><%= @venue.brand_name %></h2>
+<div id="venue-details">
+  <h2><%= @venue.brand_name %></h2>
 
-<% if user_signed_in? && current_user.venue%>
-  <h3><%= @venue.corporate_name %></h3>
-<% end %>
-
-<p>
-  <%= "#{@venue.district} - #{@venue.city}/#{@venue.state} - CEP: #{@venue.zip_code}" %>
-</p>
-<p>CNPJ: <%= @venue.registration_number %></p>
-<div>
-  <p><%= @venue.description %></p>
-</div>
-
-<div>
-  <% if @events.any? %>
-    <h3>Nossos eventos:</h3>
-    <% @events.each do |e| %>
-      <ul>
-        <li><%= link_to "#{e.name}", event_path(e.id) %></li>
-      </ul>
-    <% end %>
-  <% else %>
-    <p>Nenhum evento cadastrado</p>
+  <% if user_signed_in? && current_user.venue%>
+    <h3><%= @venue.corporate_name %></h3>
   <% end %>
+
+  <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
+  <p><strong>CNPJ: </strong> <%= @venue.registration_number %></p>
+  <p><strong>Descrição: </strong> <%= @venue.description %></p>
+
+  <div class="venues-list">
+    <h4>Eventos que realizamos:</h4>
+    <% if @events.any? %>
+      <% @events.each do |e| %>
+        <ul>
+          <li><%= link_to "#{e.name}", event_path(e.id) %></li>
+        </ul>
+      <% end %>
+    <% else %>
+      <p>Nenhum evento cadastrado</p>
+    <% end %>
+  </div>
+
+  <h5>Contatos:</h5>
+  <p><strong>email: </strong> <%= @venue.email %></p>
+  <p><strong>tel.: </strong> <%= @venue.phone_number %></p>
 </div>
 
-<h3>contatos:</h3>
-<p>email: <%= @venue.email %></p>
-<p>tel.: <%= @venue.phone_number %></p>

@@ -1,0 +1,35 @@
+.venues-list {
+    margin: 30px 50px; 
+    padding: 30px 50px
+}
+
+.venues-list h2 {
+    margin-bottom: 40px;
+}
+
+.venues-list ul {
+    margin: 30px 50px; 
+    padding: 0 50px;
+}
+
+.venues-list li {
+    list-style-type: none;
+}
+
+.venues-list li a {
+    text-decoration: none;
+    color: #212529;
+    font-weight: 600;
+}
+
+#venue-details {
+    background-color: #f8f9fa;;
+    margin: 0 50px;
+    padding: 20px 50px;
+}
+
+#venue-details h2 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 3.5rem; 
+}

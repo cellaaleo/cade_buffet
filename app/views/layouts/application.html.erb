@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CadeBuffet</title>
+    <title>Cadê Buffet?</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,33 +12,42 @@
 
   <body>
     <header>
-      <%= link_to root_path do %>
-        <h1>Cadê Buffet?</h1>
-      <% end %>
-      
-      <nav>
-        <% if user_signed_in? %>
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-          <% if current_user.venue && current_user.venue.valid? %>
-            <%= link_to 'Editar dados do Buffet', edit_venue_path(current_user.venue.id) %>
-            <%= link_to 'Cadastrar tipos de evento', new_event_path %>
-            <%# link_to 'Visualizar lista de eventos', events_path %>
-            <%= link_to 'Cadastrar preços de eventos', new_price_path %>
+      <div class="p-3 mb-2 bg-danger-subtle text-danger-emphasis">
+        <h1>
+          <%= link_to root_path do %>
+            Cadê Buffet?
           <% end %>
-        <% else %>
+        </h1>
+        <nav class="navbar bg-body-tertiary">
+          <div class="container-fluid">
+            <% if user_signed_in? %>
+              <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+              <% if current_user.venue && current_user.venue.valid? %>
+                <%= link_to 'Editar dados do Buffet', edit_venue_path(current_user.venue.id) %>
+                <%= link_to 'Cadastrar tipos de evento', new_event_path %>
+                <%# link_to 'Visualizar lista de eventos', events_path %>
+                <%= link_to 'Cadastrar preços de eventos', new_price_path %>
+              <% end %>
+            <% else %>
 
-          <%= form_with(url: search_venues_path, method: :get) do |f| %>
-            <div id="busca">
-              <%= f.label :query, 'Buscar buffet' %>
-              <%= f.text_field :query %>
-              <%= f.submit "Buscar" %>
-            </div>
-          <% end%>
-
-          <%= link_to 'Criar sua conta', new_user_registration_path %> |
-          <%= link_to 'Entrar', new_user_session_path %>
-        <% end %>
-      </nav>
+              <%= form_with(url: search_venues_path, method: :get) do |f| %>
+                  <%= f.label :query, 'Buscar buffet' %>
+                  <%= f.text_field :query %>
+                  <%= f.submit "Buscar" %>
+              <% end %>
+              
+              <%= link_to new_user_registration_path do %>
+                <span class="navbar-brand fs-6">Criar sua conta</span>
+              <% end %>
+              <%= link_to new_user_session_path do %>
+                <span class="btn btn-secondary" role="button">Entrar</span>
+              <% end %>
+              <%# link_to 'Criar sua conta', new_user_registration_path %>
+              <%# link_to 'Entrar', new_user_session_path %>
+            <% end %>
+          </div>
+        </nav>
+      </div>
     </header>
     
     <main>
@@ -47,6 +57,6 @@
       </div>
       <%= yield %>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
   </body>
 </html>
