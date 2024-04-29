@@ -28,6 +28,14 @@
                 <%# link_to 'Visualizar lista de eventos', events_path %>
                 <%= link_to 'Cadastrar preços de eventos', new_price_path %>
               <% end %>
+            <% elsif customer_signed_in? %>
+              Olá, <%= current_customer.description %>
+              <%= form_with(url: search_venues_path, method: :get) do |f| %>
+                  <%= f.label :query, 'Buscar buffet' %>
+                  <%= f.text_field :query %>
+                  <%= f.submit "Buscar" %>
+              <% end %>
+              <%= button_to 'Sair', destroy_customer_session_path, method: :delete %>
             <% else %>
 
               <%= form_with(url: search_venues_path, method: :get) do |f| %>
@@ -36,6 +44,9 @@
                   <%= f.submit "Buscar" %>
               <% end %>
               
+              <%= link_to new_customer_registration_path do %>
+                <span class="navbar-brand fs-6">Cadastre-se para contratar um buffet</span>
+              <% end %>
               <%= link_to new_user_registration_path do %>
                 <span class="navbar-brand fs-6">Criar sua conta</span>
               <% end %>

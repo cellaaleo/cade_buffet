@@ -47,7 +47,7 @@ describe "Usuário dono de buffet faz login" do
                                 description: "Espaço ideal para casamentos, aniversários, eventos corporativos, entre outras ocasiões especiais")
     
     # Act - fazer log in
-    login_as(first_user)
+    login_as(first_user, :scope => :user)
     visit venue_path(second_venue.id)
 
     # Assert - cair na página do buffet
