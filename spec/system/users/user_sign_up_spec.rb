@@ -7,9 +7,10 @@ describe "Usuário faz cadastro" do
     # Act
     visit root_path
     click_on "Criar sua conta"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "atendimento@buffet.com.br"
-    fill_in "Senha",	with: "senha123"
-    fill_in "Confirme sua senha",	with: "senha123"
+    fill_in "Senha",	with: "password"
+    fill_in "Confirme sua senha",	with: "password"
     click_on "Criar conta"
 
     # Assert

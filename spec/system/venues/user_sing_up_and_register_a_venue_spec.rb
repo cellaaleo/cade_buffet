@@ -6,9 +6,10 @@ describe "Usuário dono de buffet cria sua conta" do
     # Act - cria conta
     visit root_path
     click_on "Criar sua conta"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
-    fill_in "Senha",	with: "senha123"
-    fill_in "Confirme sua senha",	with: "senha123"
+    fill_in "Senha",	with: "password"
+    fill_in "Confirme sua senha",	with: "password"
     click_on "Criar conta"
 
     # Assert - encaminhado à página de registro do buffet
@@ -28,9 +29,10 @@ describe "Usuário dono de buffet cria sua conta" do
     # Act
     visit root_path
     click_on "Criar sua conta"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
-    fill_in "Senha",	with: "senha123"
-    fill_in "Confirme sua senha",	with: "senha123"
+    fill_in "Senha",	with: "password"
+    fill_in "Confirme sua senha",	with: "password"
     click_on "Criar conta"
     fill_in "Nome fantasia", with: "Buffet & Eventos"
     fill_in "Razão Social", with: "Buffet e Eventos Ltda"
@@ -61,9 +63,10 @@ describe "Usuário dono de buffet cria sua conta" do
     # Act
     visit root_path
     click_on "Criar sua conta"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
-    fill_in "Senha",	with: "senha123"
-    fill_in "Confirme sua senha",	with: "senha123"
+    fill_in "Senha",	with: "password"
+    fill_in "Confirme sua senha",	with: "password"
     click_on "Criar conta"
     fill_in "Nome fantasia", with: "Buffet & Eventos"
     fill_in "Razão Social", with: "Buffet e Eventos Ltda"

@@ -5,7 +5,8 @@ describe "Cliente realiza cadastro" do
     # Arrange
     # Act
     visit root_path
-    click_on 'Cadastre-se para contratar um buffet'
+    click_on 'Criar sua conta'
+    click_on 'Cliente'
     fill_in "Nome",	with: "Bruna"
     fill_in "CPF", with: "673.337.860-48"
     fill_in 'E-mail', with: 'bruna@email.com'
@@ -29,7 +30,8 @@ describe "Cliente realiza cadastro" do
      # Arrange
     # Act
     visit root_path
-    click_on 'Cadastre-se para contratar um buffet'
+    click_on 'Criar sua conta'
+    click_on 'Cliente'
     fill_in "Nome",	with: ""
     fill_in "CPF", with: ""
     fill_in 'E-mail', with: 'bruna@email.com'
@@ -46,7 +48,8 @@ describe "Cliente realiza cadastro" do
     # Arrange
     # Act
     visit root_path
-    click_on 'Cadastre-se para contratar um buffet'
+    click_on 'Criar sua conta'
+    click_on 'Cliente'
     fill_in "Nome",	with: "Bruna"
     fill_in "CPF", with: "111.111.111-11"
     fill_in 'E-mail', with: 'bruna@email.com'
@@ -63,7 +66,8 @@ describe "Cliente realiza cadastro" do
     Customer.create!(name: 'Jose', cpf: '673.337.860-48', email: 'jose@email.com', password: 'password')
     # Act
     visit root_path
-    click_on 'Cadastre-se para contratar um buffet'
+    click_on 'Criar sua conta'
+    click_on 'Cliente'
     fill_in "Nome",	with: "Bruna"
     fill_in "CPF", with: "673.337.860-48"
     fill_in 'E-mail', with: 'bruna@email.com'

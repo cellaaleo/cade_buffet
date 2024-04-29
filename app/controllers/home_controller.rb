@@ -11,4 +11,10 @@ class HomeController < ApplicationController
       
     end
   end
+
+  def select_login_type
+  end
+
+  def select_sign_up_type
+  end
 end

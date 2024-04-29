@@ -8,6 +8,7 @@ describe "Usuário se autentica" do
     # Act - fazer log in
     visit root_path
     click_on "Entrar"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "sac@eventos.com"
     fill_in "Senha",	with: "senha123"
     within('main form') do
@@ -30,6 +31,7 @@ describe "Usuário se autentica" do
     # Act - fazer log in
     visit root_path
     click_on "Entrar"
+    click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "sac@eventos.com"
     fill_in "Senha",	with: "senha123"
     within('main form') do

@@ -21,13 +21,13 @@
         <nav class="navbar bg-body-tertiary">
           <div class="container-fluid">
             <% if user_signed_in? %>
-              <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
               <% if current_user.venue && current_user.venue.valid? %>
                 <%= link_to 'Editar dados do Buffet', edit_venue_path(current_user.venue.id) %>
                 <%= link_to 'Cadastrar tipos de evento', new_event_path %>
                 <%# link_to 'Visualizar lista de eventos', events_path %>
                 <%= link_to 'Cadastrar preços de eventos', new_price_path %>
               <% end %>
+              <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
             <% elsif customer_signed_in? %>
               Olá, <%= current_customer.description %>
               <%= form_with(url: search_venues_path, method: :get) do |f| %>
@@ -44,17 +44,13 @@
                   <%= f.submit "Buscar" %>
               <% end %>
               
-              <%= link_to new_customer_registration_path do %>
-                <span class="navbar-brand fs-6">Cadastre-se para contratar um buffet</span>
-              <% end %>
-              <%= link_to new_user_registration_path do %>
+              <%= link_to select_sign_up_type_path do %>
                 <span class="navbar-brand fs-6">Criar sua conta</span>
               <% end %>
-              <%= link_to new_user_session_path do %>
+              <%= link_to select_login_type_path do %>
                 <span class="btn btn-secondary" role="button">Entrar</span>
               <% end %>
-              <%# link_to 'Criar sua conta', new_user_registration_path %>
-              <%# link_to 'Entrar', new_user_session_path %>
+              
             <% end %>
           </div>
         </nav>
