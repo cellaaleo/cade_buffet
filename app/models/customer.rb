@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :name, :cpf, presence: true
+  validates :cpf, cpf: { message: 'CPF inválido' }
   validates :cpf, uniqueness: true
 
   def description
