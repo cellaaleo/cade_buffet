@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Usuário não autenticado vê detalhes de um buffet" do
   it "e vê lista de eventos que ele oferece" do
-    # Arrange - criar user, buffet, 2 eventos
+    # Arrange
     first_user = User.create!(email: "first@email.com", password: "password")
     second_user = User.create!(email: "second@email.com", password: "password")
     first_venue = Venue.create!(brand_name: "Pinheiros Hall", corporate_name: "Primeiro Buffet Ltda", 
@@ -13,22 +13,21 @@ describe "Usuário não autenticado vê detalhes de um buffet" do
                                 registration_number: "33.333.333/0003-30", address: "Rua Vale Formoso, 33",
                                 district: "Jardim das Oliveiras", city: 'Fortaleza', state: "CE", zip_code: "60820-000", 
                                 email: "eventos@third.com", phone_number: "(85)99330-9393", user: second_user)
-    one_first_venue_event = Event.create!(name: "Eventos corporativos", description: 'Evento para promover a interação entre o público interno e clientes', 
-                                          minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
-                                          menu: 'brunch ou coffee break', has_valet_service: true, can_be_catering: true,
-                                          venue: first_venue)
-    other_first_venue_event = Event.create!(name: "Casamento", description: 'Recepção e festa de casamento',
-                                            minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
-                                            menu: 'brunch e coffee breaks', has_valet_service: true, venue: first_venue)
-    one_second_venue_event = Event.create!(name: "Festa de 15 anos", venue: second_venue)
-    # Act - clicar no buffet na ágina inicial
+    Event.create!(name: "Eventos corporativos", description: 'Evento para promover a interação entre o público interno e clientes', 
+                  minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                  menu: 'brunch ou coffee break', has_valet_service: true, can_be_catering: true,
+                  venue: first_venue)
+    Event.create!(name: "Casamento", description: 'Recepção e festa de casamento',
+                  minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                  menu: 'brunch e coffee breaks', has_valet_service: true, venue: second_venue)
+
+    # Act
     visit root_path
     click_on 'Pinheiros Hall'
 
     # Assert - ver a lista de eventos do buffet
     expect(page).to have_content 'Eventos corporativos'
-    expect(page).to have_content 'Casamento'
-    expect(page).not_to have_content 'Festa de 15 anos'
+    expect(page).not_to have_content 'Casamento'
     expect(page).not_to have_link 'Cadastrar um evento'
   end
 

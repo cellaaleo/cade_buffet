@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     resources :events, only: [:new, :create]
   end
-  resources :events, only: [:show]
-  resources :prices, only: [:new, :create]
+  
+  resources :events, only: [:show] do
+    resources :prices, only: [:new, :create]
+  end
+  
 end

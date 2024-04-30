@@ -40,7 +40,7 @@ describe "usuário não autenticado visita página inicial" do
   end
 
   it "e vê detalhes de um buffet" do
-    # Arrange - criar usuários e seus buffets (com nome, cidade, estado)
+    # Arrange
     first_user = User.create!(email: "first@email.com", password: "password")
     second_user = User.create!(email: "second@email.com", password: "password")
     third_user = User.create!(email: "third@email.com", password: "password")
@@ -60,7 +60,7 @@ describe "usuário não autenticado visita página inicial" do
     # Act
     visit root_path
     click_on "Minas Buffet & Eventos"
-    # Assert - ver a lista destes buffets
+    # Assert
     expect(page).to have_content 'Minas Buffet & Eventos'
     expect(page).to have_content 'Barro Preto - Belo Horizonte/MG - CEP: 30140-000'
     expect(page).to have_content 'CNPJ: 22.222.222/0002-20'
@@ -68,5 +68,6 @@ describe "usuário não autenticado visita página inicial" do
     expect(page).to have_content 'email: eventos@second.com'  
     expect(page).to have_content 'tel.: (31)99220-9292'
     expect(page).not_to have_content 'Segundo Buffet SA'
+    expect(page).not_to have_link 'Cadastrar um evento'
   end
 end

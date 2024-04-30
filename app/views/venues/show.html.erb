@@ -9,8 +9,8 @@
       <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id) %>
     <% end %>
 
-    <% if @events.any? %>
-      <% @events.each do |e| %>
+    <% if @venue.events.any? %>
+      <% @venue.events.each do |e| %>
         <ul>
           <li><%= link_to "#{e.name}", event_path(e.id) %></li>
         </ul>
@@ -25,7 +25,7 @@
   <p><strong>tel.: </strong> <%= @venue.phone_number %></p>
   <br>
   <h5>Outras informações:</h5>
-  <% if user_signed_in? && current_user.venue%>
+  <% if user_signed_in? && current_user.venue %>
     <p><strong>Razão Social: </strong> <%= @venue.corporate_name %></p>
   <% end %>
   <p><strong>Meios de pagamentos aceitos: </strong> <%= @venue.payment_methods %></p>

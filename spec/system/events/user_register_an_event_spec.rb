@@ -88,4 +88,29 @@ describe "dono de buffet registra tipo de evento" do
     expect(page).to have_link 'Aniversários' 
   end
   
+  it "e não vê eventos de outros buffets" do
+    # Arrange
+    first_user = User.create!(email: 'tiella@email.com.br', password: 'password')
+    first_venue = Venue.create!(brand_name: "Tiella", corporate_name: "Tiella Eventos Ltda", registration_number:"11.111.111/0001-00",
+                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                      phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
+                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
+                      payment_methods: "", user: first_user)
+    second_user = User.create!(email: 'casajardim@email.com.br', password: 'password')
+    second_venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"22.222.222/0002-00",
+                      address: "Av. Brasil, 2000", district: "Centor", city: "Rio de Janeiro", state: "RJ", zip_code: "12345-050", 
+                      phone_number: "(21)99222-2222", email: "eventoscasajardim@email.com.br", 
+                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
+                      payment_methods: "", user: second_user)
+    Event.create!(name: 'Eventos corporativos', venue: first_venue)
+    Event.create!(name: 'Casamento', venue: second_venue)
+
+    # Act
+    login_as first_user, :scope => :user
+    visit root_path
+
+    # Assert
+    expect(page).not_to have_link 'Casamento'
+  end
+  
 end

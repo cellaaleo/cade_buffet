@@ -2,9 +2,7 @@ class VenuesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_and_check_user, only: [:show, :edit, :update]
 
-  def show
-    @events = @venue.events
-  end
+  def show; end
 
   def new
     @venue = Venue.new
@@ -22,8 +20,7 @@ class VenuesController < ApplicationController
     end
   end
 
-  def edit 
-  end
+  def edit; end
   
   def update
     if @venue.update(venue_params)

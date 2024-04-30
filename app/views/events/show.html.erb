@@ -58,5 +58,8 @@
   </div>
 <% else %>
   <p>Este evento ainda não possui preços cadastrados.</p>
+  <% if user_signed_in? && @event.venue == current_user.venue %>
+    <%= link_to 'Cadastrar preços deste evento', new_event_price_path(event_id: @event.id) %>
+  <% end %>
 <% end %>
 
