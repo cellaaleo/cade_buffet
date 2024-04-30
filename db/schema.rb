@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_165838) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_190138) do
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -41,6 +41,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_165838) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["venue_id"], name: "index_events_on_venue_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.integer "venue_id", null: false
+    t.integer "event_id", null: false
+    t.date "event_date"
+    t.integer "number_of_guests"
+    t.string "event_details"
+    t.string "event_adress"
+    t.string "code"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["event_id"], name: "index_orders_on_event_id"
+    t.index ["venue_id"], name: "index_orders_on_venue_id"
   end
 
   create_table "prices", force: :cascade do |t|
@@ -91,6 +108,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_165838) do
   end
 
   add_foreign_key "events", "venues"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "events"
+  add_foreign_key "orders", "venues"
   add_foreign_key "prices", "events"
   add_foreign_key "venues", "users"
 end
