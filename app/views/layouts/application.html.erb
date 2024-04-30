@@ -23,8 +23,6 @@
             <% if user_signed_in? %>
               <% if current_user.venue && current_user.venue.valid? %>
                 <%= link_to 'Editar dados do Buffet', edit_venue_path(current_user.venue.id) %>
-                <%= link_to 'Cadastrar tipos de evento', new_event_path %>
-                <%# link_to 'Visualizar lista de eventos', events_path %>
                 <%= link_to 'Cadastrar preços de eventos', new_price_path %>
               <% end %>
               <%= button_to 'Sair', destroy_user_session_path, method: :delete %>

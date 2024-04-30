@@ -57,4 +57,21 @@ describe "Usuário dono de buffet faz login" do
     expect(page).not_to have_content 'Segundo Buffet SA'
   end
   
+  it "e não tem nenhum evento cadastrado" do
+    # Arrange
+    u = User.create!(email: "buffet@buffet.com.br", password: "senha123")
+    Venue.create!(brand_name: "Meu Buffet", corporate_name: "Buffet & Eventos Ltda", registration_number:"66.666.666/0001-00",
+                  address: "Avenida Tal, 2000", district: "Vila Tal", city: "Recife", state: "PE", zip_code: "56655-560", 
+                  phone_number: "99555-6666", email: "sac@buffet.com.br", description: "Um buffet espaçoso para eventos diversos",
+                  payment_methods: "", user: u)
+
+    # Act
+    login_as(u, :scope => :user )
+    visit root_path
+
+    # Assert - cair na página do buffet
+    expect(page).to have_content "Nenhum evento cadastrado"
+    expect(page).to have_link "Cadastrar um evento"
+  end
+  
 end

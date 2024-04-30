@@ -3,7 +3,6 @@ class VenuesController < ApplicationController
   before_action :set_and_check_user, only: [:show, :edit, :update]
 
   def show
-    @venue = Venue.find(params[:id])
     @events = @venue.events
   end
 
@@ -23,13 +22,10 @@ class VenuesController < ApplicationController
     end
   end
 
-  def edit
-    @venue = Venue.find(params[:id])
+  def edit 
   end
   
   def update
-    @venue = Venue.find(params[:id])
-
     if @venue.update(venue_params)
       redirect_to @venue, notice: 'Buffet editado com sucesso'
     else
@@ -77,6 +73,6 @@ class VenuesController < ApplicationController
                                   :email,
                                   :phone_number,
                                   :description,
-                                  :events)
+                                  :payment_methods)
   end
 end

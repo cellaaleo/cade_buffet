@@ -2,12 +2,14 @@ class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def new
+    @venue = Venue.find(params[:venue_id])
     @event = Event.new
   end
 
   def create
+    @venue = Venue.find(params[:venue_id])
     @event = Event.new(event_params)
-    @event.venue = current_user.venue
+    @event.venue = @venue
 
     @event.save
     redirect_to @event, notice: 'Evento cadastrado com sucesso!'
@@ -17,10 +19,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @price = @event.price
   end
-
-  #def index
-  #  @events =  Event.all
-  #end
 
   private
   def event_params

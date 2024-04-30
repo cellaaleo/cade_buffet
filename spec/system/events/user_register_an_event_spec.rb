@@ -12,12 +12,12 @@ describe "dono de buffet registra tipo de evento" do
     # Act
     login_as u, :scope => :user
     visit root_path
-    within('nav') do
-      click_on 'Cadastrar tipos de evento'
+    within('main') do
+      click_on 'Cadastrar um evento'
     end
 
     # Assert
-    expect(page).to have_content 'Cadastre um tipo de evento:'
+    expect(page).to have_content 'Cadastre um tipo de evento'
     expect(page).to have_field 'Nome do evento'
     expect(page).to have_field 'Descrição'
     expect(page).to have_field 'Quantidade mínima de convidados'
@@ -43,7 +43,9 @@ describe "dono de buffet registra tipo de evento" do
     # Act
     login_as u, :scope => :user
     visit root_path
-    click_on 'Cadastrar tipos de evento'
+    within('main') do
+      click_on 'Cadastrar um evento'
+    end
     fill_in "Nome do evento",	with: "Casamento"
     fill_in "Descrição",	with: "Festas e recepções de casamento"
     fill_in "Quantidade mínima de convidados",	with: "60"

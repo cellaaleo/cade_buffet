@@ -29,6 +29,7 @@ describe "Usuário não autenticado vê detalhes de um buffet" do
     expect(page).to have_content 'Eventos corporativos'
     expect(page).to have_content 'Casamento'
     expect(page).not_to have_content 'Festa de 15 anos'
+    expect(page).not_to have_link 'Cadastrar um evento'
   end
 
 

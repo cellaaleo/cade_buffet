@@ -30,7 +30,7 @@ describe 'Usuário edita dados de seu buffet' do
 
     # Assert
     expect(current_path).to eq edit_venue_path(u.venue.id)
-    expect(page).to have_content 'Editar informações do seu Buffet'
+    expect(page).to have_content "Editar informações de #{u.venue.brand_name}"
     expect(page).to have_field 'Nome fantasia', with: 'Meu Buffet'
     expect(page).to have_field 'CNPJ', with: '66.666.666/0001-00'
     expect(page).to have_field 'Telefone', with: '99555-6666'

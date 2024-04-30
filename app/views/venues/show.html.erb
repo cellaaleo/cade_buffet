@@ -1,16 +1,14 @@
 <div id="venue-details">
   <h2><%= @venue.brand_name %></h2>
-
-  <% if user_signed_in? && current_user.venue%>
-    <h3><%= @venue.corporate_name %></h3>
-  <% end %>
-
   <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
-  <p><strong>CNPJ: </strong> <%= @venue.registration_number %></p>
   <p><strong>Descrição: </strong> <%= @venue.description %></p>
 
   <div class="venues-list">
     <h4>Eventos que realizamos:</h4>
+    <% if user_signed_in? && current_user.venue%>
+      <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id) %>
+    <% end %>
+
     <% if @events.any? %>
       <% @events.each do |e| %>
         <ul>
@@ -21,9 +19,15 @@
       <p>Nenhum evento cadastrado</p>
     <% end %>
   </div>
-
+  
   <h5>Contatos:</h5>
   <p><strong>email: </strong> <%= @venue.email %></p>
   <p><strong>tel.: </strong> <%= @venue.phone_number %></p>
+  <br>
+  <h5>Outras informações:</h5>
+  <% if user_signed_in? && current_user.venue%>
+    <p><strong>Razão Social: </strong> <%= @venue.corporate_name %></p>
+  <% end %>
+  <p><strong>Meios de pagamentos aceitos: </strong> <%= @venue.payment_methods %></p>
+  <p><strong>CNPJ: </strong> <%= @venue.registration_number %></p>
 </div>
-
