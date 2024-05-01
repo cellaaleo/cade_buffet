@@ -25,7 +25,7 @@ describe "Usuário registra valores de um evento" do
 
   it "com sucesso" do
     # Arrange - criar user, venue, event
-    user = User.create!(email: 'tiella@email.com.br', password: 'tiella123')
+    user = User.create!(email: 'tiella@email.com', password: 'password')
     venue = Venue.create!(brand_name: "Tiella", corporate_name: "Tiella Eventos Ltda", registration_number:"11.111.111/0001-00",
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
@@ -60,7 +60,7 @@ describe "Usuário registra valores de um evento" do
 
   it "com dados incompletos" do
     # Arrange - criar user, venue, event
-    user = User.create!(email: 'tiella@email.com.br', password: 'tiella123')
+    user = User.create!(email: 'tiella@email.com', password: 'password')
     venue = Venue.create!(brand_name: "Tiella", corporate_name: "Tiella Eventos Ltda", registration_number:"11.111.111/0001-00",
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 

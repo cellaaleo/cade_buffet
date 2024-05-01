@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_190138) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_104611) do
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -50,11 +50,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_190138) do
     t.date "event_date"
     t.integer "number_of_guests"
     t.string "event_details"
-    t.string "event_adress"
     t.string "code"
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "event_address"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["event_id"], name: "index_orders_on_event_id"
     t.index ["venue_id"], name: "index_orders_on_venue_id"

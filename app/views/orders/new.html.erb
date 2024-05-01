@@ -1,0 +1,27 @@
+<h3><%= current_customer.name %>, informe detalhes do seu pedido:</h3>
+<p><strong>Evento:</strong> <%= @event.name %></p>
+<p><strong>Buffet:</strong> <%= @event.venue.brand_name %></p>
+<br>
+
+<%= form_with(model: [@event, @order]) do |f| %>
+  <div>
+    <%= f.label  :event_date %>
+    <%= f.date_field :event_date %>
+  </div>
+  <div>
+    <%= f.label  :number_of_guests %>
+    <%= f.number_field :number_of_guests %>
+  </div>
+  <div>
+    <%= f.label  :event_details %>
+    <%= f.text_area :event_details %>
+  </div>
+  <div>
+    <% if @event.can_be_catering %>
+      <p>Se quiser realizar o evento fora do nosso espaço, preencha o endereço abaixo:</p>
+      <%= f.label  :event_address, 'Endereço do evento' %>
+      <%= f.text_field :event_address %>
+    <% end %>
+  </div>
+  <%= f.submit "Enviar" %>
+<% end %>

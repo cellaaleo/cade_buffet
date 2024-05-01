@@ -1,0 +1,19 @@
+<h2>Meus pedidos</h2>
+
+<% if @orders.empty? %>
+  <p>Você ainda não tem nenhum pedido.</p>
+<% end %>
+
+<% @orders.each do |order| %>
+  <dl>
+    <dt>
+      <strong><%= Order.human_attribute_name(:code) %>: </strong>
+      <%= link_to order.code, order %>
+    </dt>
+    <dd>
+      <strong><%= Order.human_attribute_name(:event_date) %>: </strong>
+      <%= I18n.localize(order.event_date) %>
+    </dd>
+  </dl> 
+<% end %>
+

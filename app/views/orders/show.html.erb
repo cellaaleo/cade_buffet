@@ -1,0 +1,26 @@
+<h2>Detalhes do pedido</h2>
+<h3><%= Order.model_name.human %>: <%= @order.code %></h3>
+
+<dl>
+  <dt><%= Order.human_attribute_name(:event_id) %>:</dt>
+  <dd><%= @order.event.name %></dd>
+  <dt><%= Order.human_attribute_name(:event_date) %>:</dt>
+  <dd><%= I18n.localize(@order.event_date) %></dd>
+  <dt><%= Order.human_attribute_name(:number_of_guests) %>:</dt>
+  <dd><%= @order.number_of_guests %></dd>
+  <dt><%= Order.human_attribute_name(:event_details) %>:</dt>
+  <dd><%= @order.event_details %></dd>
+  <dt><%= Order.human_attribute_name(:venue_id) %>:</dt>
+  <dd><%= @order.venue.brand_name %></dd>
+  <dt><%= Order.human_attribute_name(:event_address) %>:</dt>
+  
+  <% if @order.event_address %>
+    <dd><%= @order.event_address %></dd>
+  <% else %>
+    <dd><%= @order.venue.full_address %></dd>
+  <% end %>
+  
+  <dd><%= @order.event_address %></dd>
+  <dt><%= Order.human_attribute_name(:status) %>:</dt>
+  <dd><%= t(@order.status) %></dd>
+</dl>

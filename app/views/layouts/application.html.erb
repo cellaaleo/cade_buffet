@@ -35,6 +35,7 @@
                   <%= f.text_field :query %>
                   <%= f.submit "Buscar" %>
               <% end %>
+              <%= link_to 'Meus pedidos', orders_path %>
               <%= button_to 'Sair', destroy_customer_session_path, method: :delete %>
               
             <% else %>
