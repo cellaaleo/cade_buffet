@@ -25,6 +25,7 @@
               <% if current_user.venue && current_user.venue.valid? %>
                 <%= link_to 'Editar dados do Buffet', edit_venue_path(current_user.venue.id) %>
               <% end %>
+              <%= link_to 'Pedidos', orders_path %>
               <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
 
             <% elsif customer_signed_in? %>

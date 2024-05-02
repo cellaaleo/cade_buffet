@@ -4,16 +4,33 @@
   <p>Você ainda não tem nenhum pedido.</p>
 <% end %>
 
-<% @orders.each do |order| %>
-  <dl>
-    <dt>
-      <strong><%= Order.human_attribute_name(:code) %>: </strong>
-      <%= link_to order.code, order %>
-    </dt>
-    <dd>
-      <strong><%= Order.human_attribute_name(:event_date) %>: </strong>
-      <%= I18n.localize(order.event_date) %>
-    </dd>
-  </dl> 
-<% end %>
+<% if current_user %>
 
+  <div id="venue-orders">
+    <section class="orders pending-orders">
+      <h4>Aguardando avaliação:</h4> 
+      <% @orders.pending.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+
+    <section class="orders confirmed-orders">
+      <h4>Confirmados:</h4>
+      <% @orders.confirmed.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+
+    <section class="orders canceled-orders">
+      <h4>Cancelados:</h4>
+      <% @orders.canceled.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+  </div>
+
+<% else %>
+  <% @orders.each do |order| %>
+    <%= render order %>
+  <% end %>
+<% end %>

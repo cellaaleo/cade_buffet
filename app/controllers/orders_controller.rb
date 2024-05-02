@@ -1,12 +1,30 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!, only: [:new, :create]
 
   def index
-    @orders = current_customer.orders
+    if current_customer
+      @orders = current_customer.orders
+    elsif current_user
+      @orders = current_user.venue.orders
+    end
   end
   
   def show
-    @order = Order.find(params[:id])
+    if current_customer
+      @order = Order.find(params[:id])
+    elsif current_user
+      @order = Order.find(params[:id])
+      @same_date_orders = []
+
+      orders = current_user.venue.orders
+      orders.each do |ord|
+        unless ord.status == 'canceled'
+          if ord.code != @order.code && ord.event_date == @order.event_date
+            @same_date_orders << ord
+          end
+        end
+      end
+    end
   end
 
   def new

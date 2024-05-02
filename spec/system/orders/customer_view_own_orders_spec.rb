@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe "Usuário vê os próprios pedidos" do
+describe "Cliente vê os próprios pedidos" do
   it "e deve estar autenticado" do
     # Arrange
     # Act
     visit root_path
     # Assert
-    expect(page).not_to have_link 'Meus Pedidos'
+    expect(page).not_to have_link 'Meus pedidos'
   end
 
   it "e não vê outros pedidos" do
