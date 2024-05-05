@@ -2,15 +2,49 @@ class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :venue
   belongs_to :event
+  has_one :quotation
   
-  enum status: { pending: 0, confirmed: 5, canceled: 9 }
+  enum status: { pending: 0, approved: 3, confirmed: 6, canceled: 9 }
 
   validates :code, :event_date, :number_of_guests, presence: true
   validate  :event_date_must_be_one_month_from_now, 
             :number_of_guests_must_be_greater_than_or_equal_to_minimum_guests_number, 
             :number_of_guests_must_be_less_than_or_equal_to_maximum_guests_number
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
+
+  def base_price
+    if event_date.saturday? || event_date.sunday?
+      event.price.weekend_base_price
+    else
+      event.price.weekday_base_price
+    end
+  end
+
+  def extra_guests_number
+    if number_of_guests > event.minimum_guests_number
+      number_of_guests - event.minimum_guests_number
+    else
+      0
+    end
+  end
+
+  def plus_per_person
+    return event.price.weekend_plus_per_person if event_date.saturday? || event_date.sunday?
+    event.price.weekday_plus_per_person
+  end
+=begin
+  def set_extra_guest_tax
+    if event_date.saturday? || event_date.sunday?
+      event.price.weekend_plus_per_person * extra_guests_number
+    else
+      event.price.weekday_plus_per_person * extra_guests_number
+    end
+  end
+=end
+  def subtotal
+    base_price + (extra_guests_number * plus_per_person)
+  end
 
   private
 

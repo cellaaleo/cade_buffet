@@ -1,0 +1,26 @@
+<h3>Orçamento do pedido</h3>
+<p><strong>Dia da semana:</strong> <%= @order.event_date.strftime("%A") %> </p>
+<p><strong>Preço-base:</strong> <%= @order.base_price %></p>
+<p>Número extra de pessoas: <%= @order.extra_guests_number %></p>
+<p>Adicional/pessoa: <%= @order.plus_per_person %></p>
+<p>
+  <strong>Total do adicional/pessoa: </strong> 
+  <%= @order.extra_guests_number * @order.plus_per_person %>
+</p>
+<p><strong>Subtotal:</strong> <%= @order.subtotal %></p>
+
+<%= form_with(model: [@order, @quotation]) do |f| %>
+  <div>
+    <%= f.label :discount_or_extra_fee %>
+    <%= f.number_field :discount_or_extra_fee %>
+  </div>
+  <div>
+    <%= f.label :discount_or_extra_fee_description %>
+    <%= f.text_area :discount_or_extra_fee_description %>
+  </div>
+  <div>
+    <%= f.label :expiry_date %>
+    <%= f.date_field :expiry_date %>
+  </div>
+  <%= f.submit 'Enviar orçamento' %>
+<% end %>

@@ -7,7 +7,7 @@
   </div>
 <% end %>
 
-<div>
+<div id="order-details">
   <h2>Detalhes do pedido</h2>
   <h3><%= Order.model_name.human %>: <%= @order.code %></h3>
 
@@ -35,3 +35,22 @@
     <dd><%= t(@order.status) %></dd>
   </dl>
 </div>
+
+
+<% if current_user %>
+  <div style="background-color: #F0F2F2">
+
+    <% if @order.quotation %>
+      <%= render "quotations/table" %>
+    <% else %>
+      <% if @order.event.price %>
+        <%= link_to 'Fazer orçamento', new_order_quotation_path(order_id: @order.id) %>
+      <% else %>
+        <p><strong>Este evento ainda não possui preços cadastrados.</strong></p>
+        <p>Só é possível fazer o orçamento do pedido com os preços cadastrados.</p>
+        <%= link_to 'Cadastrar preços deste evento', new_event_price_path(event_id: @order.event.id) %>
+      <% end %>
+    <% end %>
+    
+  </div>
+<% end %>

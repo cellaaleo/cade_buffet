@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_104611) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_184159) do
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,6 +73,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_104611) do
     t.index ["event_id"], name: "index_prices_on_event_id"
   end
 
+  create_table "quotations", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "discount_or_extra_fee"
+    t.string "discount_or_extra_fee_description"
+    t.date "expiry_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_quotations_on_order_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -112,5 +122,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_104611) do
   add_foreign_key "orders", "events"
   add_foreign_key "orders", "venues"
   add_foreign_key "prices", "events"
+  add_foreign_key "quotations", "orders"
   add_foreign_key "venues", "users"
 end

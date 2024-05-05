@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create]
   end
 
-  resources :orders, only: [:show, :index]
+  resources :orders, only: [:show, :index] do
+    resources :quotations, only: [:new, :create, :show]
+  end
   
 end

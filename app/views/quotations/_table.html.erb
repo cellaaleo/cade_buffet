@@ -1,0 +1,53 @@
+<h3>Orçamento - Válido até <%= I18n.localize(@order.quotation.expiry_date) %></h3>
+
+<table style="background-color: #BBBFBF">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Descrição</th>
+      <th>Valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Preço-base</td>
+      <td><%= "#{@order.event.name} - #{@order.event_date.strftime("%A")}" %></td>
+      <td><%= @order.base_price %></td>
+    </tr>
+    <tr>
+      <td>Número extra de pessoas</td>
+      <td><%= @order.extra_guests_number %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Adicional/pessoa</td>
+      <td><%= @order.plus_per_person %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Total do adicional/pessoa</td>
+      <td><%= @order.extra_guests_number %> * <%= @order.plus_per_person %></td>
+      <td><%= @order.extra_guests_number * @order.plus_per_person %></td>
+    </tr>
+    
+    <% if @order.quotation.discount_or_extra_fee %>
+      <tr>
+        <td>Desconto ou taxa adicional </td>
+        <td><%= @order.quotation.discount_or_extra_fee_description %></td>
+        <td><%= @order.quotation.discount_or_extra_fee %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>TOTAL</td>
+        <td><%=  @order.subtotal + @order.quotation.discount_or_extra_fee %></td>
+      </tr>
+    <% else %>
+      <tr>
+        <td></td>
+        <td>TOTAL</td>
+        <td><%=  @order.subtotal %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+</table>

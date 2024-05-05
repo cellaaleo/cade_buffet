@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      quotation: Orçamento
+    attributes:
+      quotation:
+        order: "Pedido"
+        order_id: "Pedido"
+        discount_or_extra_fee: "Desconto ou taxa adicional"
+        discount_or_extra_fee_description: "Descrição do desconto ou taxa adicional"
+        expiry_date: "Data de validade do orçamento"
