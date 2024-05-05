@@ -57,7 +57,7 @@ describe "Dono de buffet os pedidos que recebeu" do
     second_order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 75, 
                                  event_date: 2.months.from_now, status: :confirmed)
     third_order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 75, 
-                                event_date: 1.month.from_now, status: :canceled)
+                                event_date: 1.month.from_now, status: :approved)
 
     # Act
     login_as(user, :scope => :user)
@@ -65,13 +65,13 @@ describe "Dono de buffet os pedidos que recebeu" do
     click_on 'Pedidos'
 
     # Assert
-    within('#venue-orders > section:nth-child(1)') do
+    within('#orders-sections > section:nth-child(1)') do
       expect(page).to have_content first_order.code
     end
-    within('#venue-orders > section:nth-child(2)') do
+    within('#orders-sections > section:nth-child(2)') do
       expect(page).to have_content second_order.code
     end
-    within('#venue-orders > section:nth-child(3)') do
+    within('#orders-sections > section:nth-child(3)') do
       expect(page).to have_content third_order.code
     end
   end

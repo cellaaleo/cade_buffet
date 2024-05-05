@@ -6,14 +6,53 @@
 
 <% if current_user %>
 
-  <div id="venue-orders">
+  <div id="orders-sections">
     <section class="orders pending-orders">
-      <h4>Aguardando avaliação:</h4> 
+      <h4>Aguardando sua avaliação:</h4> 
       <% @orders.pending.each do |order| %>
         <%= render order %>
       <% end %>
     </section>
 
+    <section class="orders confirmed-orders">
+      <h4>Confirmados:</h4>
+      <% @orders.confirmed.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+
+    <section class="orders approved-orders">
+      <h4>Aprovados (aguardando confirmação do cliente):</h4>
+      <% @orders.approved.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+
+    <section class="orders canceled-orders">
+      <h4>Cancelados:</h4>
+      <% @orders.canceled.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+  </div>
+
+<% elsif current_customer %>
+
+  <div id="orders-sections">
+    <section class="orders approved-orders">
+      <h4>Aguardando sua confirmação:</h4>
+      <% @orders.approved.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+
+    <section class="orders pending-orders">
+      <h4>Aguardando avaliação do buffet:</h4> 
+      <% @orders.pending.each do |order| %>
+        <%= render order %>
+      <% end %>
+    </section>
+    
     <section class="orders confirmed-orders">
       <h4>Confirmados:</h4>
       <% @orders.confirmed.each do |order| %>
@@ -28,9 +67,5 @@
       <% end %>
     </section>
   </div>
-
-<% else %>
-  <% @orders.each do |order| %>
-    <%= render order %>
-  <% end %>
+  
 <% end %>
