@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:show, :index] do
-    resources :quotations, only: [:new, :create, :show]
+    resources :quotations, only: [:new, :create]
+    post 'approved', on: :member
   end
   
 end

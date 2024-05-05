@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:approved]
 
   def index
     if current_customer
@@ -47,6 +48,11 @@ class OrdersController < ApplicationController
     end
   end
   
+  def approved
+    @order = Order.find(params[:id])
+    @order.approved!
+    redirect_to @order
+  end
 
   private
   def order_params

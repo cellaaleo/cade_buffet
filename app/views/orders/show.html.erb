@@ -1,6 +1,6 @@
 <% if current_user && @same_date_orders.any? %>
   <div>
-    <p><strong>Atenção! Existem outros pedidos para esta data</strong></p>
+    <p><strong>Atenção! Existem outros pedidos para esta data:</strong></p>
     <%  @same_date_orders.each do |order| %>
       <%= render order %>
     <% end %>
@@ -41,7 +41,13 @@
   <div style="background-color: #F0F2F2">
 
     <% if @order.quotation %>
+      
+      <% if @order.pending? %>
+        <%= button_to 'Aprovar pedido', approved_order_path(@order.id) %>
+      <% end %>
+
       <%= render "quotations/table" %>
+
     <% else %>
       <% if @order.event.price %>
         <%= link_to 'Fazer orçamento', new_order_quotation_path(order_id: @order.id) %>
