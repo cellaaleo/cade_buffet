@@ -48,6 +48,6 @@
         <td><%=  @order.subtotal %></td>
       </tr>
     <% end %>
-    
   </tbody>
 </table>
+<p><strong>Meio de pagamento:</strong> <%= @order.quotation.payment_method %></p>

@@ -21,7 +21,6 @@ describe "Dono de buffet faz cotação do pedido" do
 
     # Assert
     expect(page).not_to have_link 'Fazer orçamento'
-    #expect(page).not_to have_content 'Orçamento do pedido:'
     expect(page).to have_content 'Este evento ainda não possui preços cadastrados'
     expect(page).to have_link 'Cadastrar preços deste evento'
   end
@@ -111,6 +110,7 @@ describe "Dono de buffet faz cotação do pedido" do
     fill_in "Desconto ou taxa adicional",	with: "1000" 
     fill_in "Descrição do desconto ou taxa adicional", with: "Serviço de decoração: +R$ 1000"
     fill_in "Data de validade do orçamento", with: 10.days.from_now 
+    fill_in "Meio de pagamento",	with: "Transferência bancária" 
     click_on 'Enviar orçamento'
 
     # Assert
@@ -118,6 +118,7 @@ describe "Dono de buffet faz cotação do pedido" do
     expect(page).to have_content 'Orçamento registrado com sucesso!'
     formatted_date = I18n.localize(10.days.from_now.to_date)
     expect(page).to have_content "Orçamento - Válido até #{formatted_date}"
+    expect(page).to have_content 'Meio de pagamento: Transferência bancária'
   end
 
 end

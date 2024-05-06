@@ -15,6 +15,7 @@ class QuotationsController < ApplicationController
   def quotation_params
     params.require(:quotation).permit(:discount_or_extra_fee,
                                       :discount_or_extra_fee_description,
-                                      :expiry_date)
+                                      :expiry_date,
+                                      :payment_method)
   end
 end
