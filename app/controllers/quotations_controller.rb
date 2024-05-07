@@ -7,8 +7,15 @@ class QuotationsController < ApplicationController
 
   def create
     @order = Order.find(params[:order_id])
-    @order.create_quotation!(quotation_params)
-    redirect_to @order, notice: 'Orçamento registrado com sucesso!'
+    @quotation = Quotation.new(quotation_params)
+    @quotation.order = @order
+
+    if @quotation.save
+      redirect_to @order, notice: 'Orçamento registrado com sucesso!'
+    else 
+      flash[:alert] = 'Não foi possível enviar o orçamento!'
+      render 'new'
+    end
   end
 
   private
