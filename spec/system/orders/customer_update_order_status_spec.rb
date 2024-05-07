@@ -17,7 +17,7 @@ describe "Cliente altera status do pedido" do
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 55, 
                           event_details: 'Incluir serviço de decoração',event_date: 6.months.from_now, status: :approved)
-    Quotation.create!(order: order, expiry_date: 10.days.from_now)
+    Quotation.create!(order: order, expiry_date: 10.days.from_now, payment_method: 'transferência bancária')
     
     # Act
     login_as(customer, :scope => :customer)
@@ -47,7 +47,7 @@ describe "Cliente altera status do pedido" do
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 55, 
                           event_details: 'Incluir serviço de decoração',event_date: 6.months.from_now, status: :approved)
-    Quotation.create!(order: order, expiry_date: 1.day.ago)
+    Quotation.create!(order: order, expiry_date: 1.day.ago, payment_method: 'transferência bancária')
     
     # Act
     login_as(customer, :scope => :customer)
