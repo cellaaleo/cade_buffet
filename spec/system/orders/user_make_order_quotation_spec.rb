@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Dono de buffet faz cotação do pedido" do
-  it "e não tem preços do evento cadastrados" do
+  it "e o evento ainda não tem preços" do
     # Arrange
     user = User.create!(email: 'buffet@email.com', password: 'password')
     venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
@@ -83,6 +83,36 @@ describe "Dono de buffet faz cotação do pedido" do
     expect(page).to have_content 'Adicional/pessoa: 200'
     expect(page).to have_content 'Total do adicional/pessoa: 1000'
     expect(page).to have_content 'Subtotal: 3000'
+  end
+
+  it "e o número de convidados é menor que o mínimo que o evento atende" do
+    # Arrange
+    user = User.create!(email: 'buffet@email.com', password: 'password')
+    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
+                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
+                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
+                      payment_methods: "", user: user)
+    event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue)
+    prices = Price.create!(weekday_base_price: 1000, weekday_plus_per_person: 100, weekday_plus_per_hour: 0,
+                            weekend_base_price: 2000, weekend_plus_per_person: 200, weekend_plus_per_hour: 0, event: event)
+    customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
+    order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 50, event_date: "01/08/2026") #sábado
+
+    # Act
+    login_as(user, :scope => :user)
+    visit orders_path
+    click_on order.code
+    click_on 'Fazer orçamento'
+
+    # Assert
+    expect(page).to have_content 'Orçamento do pedido'
+    expect(page).to have_content 'Preço-base: 2000'
+    expect(page).to have_content 'Número extra de pessoas: 0'
+    expect(page).to have_content 'Adicional/pessoa: 200'
+    expect(page).to have_content 'Total do adicional/pessoa: 0'
+    expect(page).to have_content 'Subtotal: 2000'
   end
   
   it "com sucesso" do

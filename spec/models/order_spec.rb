@@ -61,19 +61,7 @@ RSpec.describe Order, type: :model do
        expect(order.errors.include?(:number_of_guests)).to be true
     end
 
-    it "número de convidados deve superior ao mínimo de convidados do evento" do
-      # Arrange
-      event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
-      order = Order.new(event: event, number_of_guests: 20)
-      # Act
-      order.valid?
-      result = order.errors.include?(:number_of_guests)
-      # Assert
-      expect(result).to be true
-      expect(order.errors[:number_of_guests]).to include "deve ser no mínimo #{event.minimum_guests_number}"
-    end
-
-    it "número de convidados deve inferior ao máximo de convidados do evento" do
+    it "número de convidados deve menor ou igual ao máximo de convidados que evento atende" do
       # Arrange
       event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
       order = Order.new(event: event, number_of_guests: 120)
@@ -85,16 +73,6 @@ RSpec.describe Order, type: :model do
       expect(order.errors[:number_of_guests]).to include "deve ser no máximo #{event.maximum_guests_number}"
     end
 
-    it "número de convidados deve ser entre o mínimo e o máximo de convidados do evento" do
-      # Arrange
-      event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
-      order = Order.new(event: event, number_of_guests: 75)
-      # Act
-      order.valid?
-      result = order.errors.include?(:number_of_guest)
-      # Assert
-      expect(result).to be false
-    end
   end
 
 
