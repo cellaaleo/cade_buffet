@@ -9,7 +9,7 @@ describe "Usuário registra valores de um evento" do
                       phone_number: "(11)99111-1111", email: "eventostiella@email.com.br", 
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
-    event = Event.create!(name: 'Casamento', venue: venue)
+    event = Event.create!(name: 'Casamento', minimum_guests_number: 50, maximum_guests_number: 100, duration: 240, venue: venue)
     # Act - clicar em link para registrar os valores deste evento
     login_as user, :scope => :user
     visit event_path(event.id)

@@ -11,8 +11,12 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.venue = @venue
 
-    @event.save
-    redirect_to @event, notice: 'Evento cadastrado com sucesso!'
+    if @event.save 
+      redirect_to @event, notice: 'Evento cadastrado com sucesso!'
+    else
+      flash.now[:notice] = 'Evento não cadastrado'
+      render 'new'
+    end
   end
 
   def show

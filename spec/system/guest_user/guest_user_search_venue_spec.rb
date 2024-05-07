@@ -61,9 +61,12 @@ describe "Usuário não autenticado busca um buffet" do
                                 registration_number: "33.333.333/0003-30", address: "Rua Vale Formoso, 33",
                                 district: "Jardim das Oliveiras", city: 'Fortaleza', state: "CE", zip_code: "60820-000", 
                                 email: "eventos@third.com", phone_number: "(85)99330-9393", user: third_user)
-    first_venue_event =  Event.create!(name: "Eventos corporativos", venue: first_venue)
-    second_venue_event =  Event.create!(name: "Cerimônia e Festa de Casamento", venue: second_venue)
-    third_venue_event =  Event.create!(name: "Festa de Casamento", venue: third_venue)
+    first_venue_event =  Event.create!(name: "Eventos corporativos", minimum_guests_number: 50, maximum_guests_number: 100, 
+                                      duration: 240, venue: first_venue)
+    second_venue_event =  Event.create!(name: "Cerimônia e Festa de Casamento", minimum_guests_number: 50, maximum_guests_number: 100, 
+                                        duration: 240, venue: second_venue)
+    third_venue_event =  Event.create!(name: "Festa de Casamento", minimum_guests_number: 50, maximum_guests_number: 100, 
+                                      duration: 240, venue: third_venue)
     
     # Act
     query = 'casamento'

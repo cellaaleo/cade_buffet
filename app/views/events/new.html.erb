@@ -1,5 +1,14 @@
 <h3>Cadastre um tipo de evento para o <%= @venue.brand_name %>:</h3>
 
+<% if(@event.errors.any?) %>
+  <p>Verifique os erros abaixo:</p>
+  <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with(model: [@venue, @event]) do |f| %>
   <div>
     <%= f.label :name %>
