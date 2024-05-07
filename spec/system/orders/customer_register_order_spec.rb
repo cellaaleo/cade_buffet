@@ -10,7 +10,7 @@ describe "Cliente faz um pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
     customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
     
     # Act
@@ -30,7 +30,7 @@ describe "Cliente faz um pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
     
     # Act
     visit event_path(event.id)
@@ -49,7 +49,7 @@ describe "Cliente faz um pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
     customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
 
@@ -72,7 +72,7 @@ describe "Cliente faz um pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: false, venue: venue)
     customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
 
@@ -95,7 +95,7 @@ describe "Cliente faz um pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
     customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
     

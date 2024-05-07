@@ -24,10 +24,10 @@ describe "Dono de buffet os pedidos que recebeu" do
                                 phone_number: "(11)99111-1111", email: "email@email.com", 
                                 description: "Salão de festas...", payment_methods: "Cartão de crédito", user: second_user)
     first_event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                                minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, 
+                                minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, 
                                 menu: 'Cardápio completo e variado', venue: first_venue)
     second_event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                                minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, 
+                                minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, 
                                 menu: 'Cardápio completo e variado', venue: second_venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     first_order = Order.create!(customer: ana, event: first_event, venue: first_venue, number_of_guests: 75, event_date: 2.months.from_now)
@@ -50,7 +50,7 @@ describe "Dono de buffet os pedidos que recebeu" do
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", description: "...", payment_methods: "...", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     first_order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 75, 
                                 event_date: 3.months.from_now, status: :pending)
@@ -85,7 +85,7 @@ describe "Dono de buffet os pedidos que recebeu" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     order = Order.create!(customer: ana, event: event, venue: venue, number_of_guests: 75, event_date: 2.months.from_now)
@@ -114,7 +114,7 @@ describe "Dono de buffet os pedidos que recebeu" do
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", description: "...", payment_methods: "...", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     luis = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
     maria = Customer.create!(name: 'Maria', cpf: '921.946.990-15', email: "maria@email.com", password: "password")
@@ -144,7 +144,7 @@ describe "Dono de buffet os pedidos que recebeu" do
                       address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
                       phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", description: "...", payment_methods: "...", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', venue: venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     luis = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
     maria = Customer.create!(name: 'Maria', cpf: '921.946.990-15', email: "maria@email.com", password: "password")

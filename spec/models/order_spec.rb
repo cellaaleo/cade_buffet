@@ -11,7 +11,7 @@ RSpec.describe Order, type: :model do
                         description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                         payment_methods: "", user: user)
       event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                            maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                            maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                             can_be_catering: true, venue: venue)
       customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
       order = Order.new(venue: venue, event: event, customer: customer, event_date: 3.months.from_now, number_of_guests: 50)
@@ -63,7 +63,7 @@ RSpec.describe Order, type: :model do
 
     it "número de convidados deve superior ao mínimo de convidados do evento" do
       # Arrange
-      event = Event.new(minimum_guests_number: 50, maximun_guests_number: 100)
+      event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
       order = Order.new(event: event, number_of_guests: 20)
       # Act
       order.valid?
@@ -75,19 +75,19 @@ RSpec.describe Order, type: :model do
 
     it "número de convidados deve inferior ao máximo de convidados do evento" do
       # Arrange
-      event = Event.new(minimum_guests_number: 50, maximun_guests_number: 100)
+      event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
       order = Order.new(event: event, number_of_guests: 120)
       # Act
       order.valid?
       result = order.errors.include?(:number_of_guests)
       # Assert
       expect(result).to be true
-      expect(order.errors[:number_of_guests]).to include "deve ser no máximo #{event.maximun_guests_number}"
+      expect(order.errors[:number_of_guests]).to include "deve ser no máximo #{event.maximum_guests_number}"
     end
 
     it "número de convidados deve ser entre o mínimo e o máximo de convidados do evento" do
       # Arrange
-      event = Event.new(minimum_guests_number: 50, maximun_guests_number: 100)
+      event = Event.new(minimum_guests_number: 50, maximum_guests_number: 100)
       order = Order.new(event: event, number_of_guests: 75)
       # Act
       order.valid?
@@ -108,7 +108,7 @@ RSpec.describe Order, type: :model do
                         description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                         payment_methods: "", user: user)
       event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                            maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                            maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                             can_be_catering: true, venue: venue)
       customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
       order = Order.new(venue: venue, event: event, customer: customer, event_date: 3.months.from_now, number_of_guests: 50)
@@ -130,7 +130,7 @@ RSpec.describe Order, type: :model do
                         description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                         payment_methods: "", user: user)
       event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                            maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                            maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                             can_be_catering: true, venue: venue)
       customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
       first_order = Order.create!(venue: venue, event: event, customer: customer, event_date: '2025-04-30', number_of_guests: 50)

@@ -7,7 +7,7 @@ pt-BR:
         name: "Nome do evento"
         description: "Descrição"
         minimum_guests_number: "Quantidade mínima de convidados"
-        maximun_guests_number: "Quantidade máxima de convidados"
+        maximum_guests_number: "Quantidade máxima de convidados"
         duration: "Tempo de duração padrão"
         menu: "Cardápio"
         has_alcoholic_drinks: "Bebidas alcoólicas"

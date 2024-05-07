@@ -32,7 +32,7 @@ describe "Usuário registra valores de um evento" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de 15 anos', description: 'Festa e baile de 15 anos', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           has_alcoholic_drinks: false, has_decorations: true, has_parking_service: true,
                           has_valet_service: true, can_be_catering: false, venue: venue)
     # Act
@@ -67,7 +67,7 @@ describe "Usuário registra valores de um evento" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de 15 anos', description: 'Festa e baile de 15 anos', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           has_alcoholic_drinks: false, has_decorations: true, has_parking_service: true,
                           has_valet_service: true, can_be_catering: false, venue: venue)
     # Act

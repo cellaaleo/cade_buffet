@@ -18,7 +18,7 @@ describe "Cliente vê os próprios pedidos" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     luis = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
@@ -46,7 +46,7 @@ describe "Cliente vê os próprios pedidos" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
-                          maximun_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
     ana = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     order = Order.create!(customer: ana, event: event, venue: venue, number_of_guests: 75, event_date: 2.months.from_now)
@@ -77,7 +77,7 @@ describe "Cliente vê os próprios pedidos" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                          minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, menu: '...', venue: venue,
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue,
                           has_decorations: true)
     prices = Price.create!(weekday_base_price: 1000, weekday_plus_per_person: 100, weekday_plus_per_hour: 0,
                             weekend_base_price: 2000, weekend_plus_per_person: 200, weekend_plus_per_hour: 0, event: event)

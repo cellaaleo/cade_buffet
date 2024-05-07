@@ -14,11 +14,11 @@ describe "Usuário não autenticado vê detalhes de um buffet" do
                                 district: "Jardim das Oliveiras", city: 'Fortaleza', state: "CE", zip_code: "60820-000", 
                                 email: "eventos@third.com", phone_number: "(85)99330-9393", user: second_user)
     Event.create!(name: "Eventos corporativos", description: 'Evento para promover a interação entre o público interno e clientes', 
-                  minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                  minimum_guests_number: 80, maximum_guests_number: 120, duration: 240, 
                   menu: 'brunch ou coffee break', has_valet_service: true, can_be_catering: true,
                   venue: first_venue)
     Event.create!(name: "Casamento", description: 'Recepção e festa de casamento',
-                  minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                  minimum_guests_number: 80, maximum_guests_number: 120, duration: 240, 
                   menu: 'brunch e coffee breaks', has_valet_service: true, venue: second_venue)
 
     # Act
@@ -40,11 +40,11 @@ describe "Usuário não autenticado vê detalhes de um buffet" do
                           district: "Pinheiros", city: 'São Paulo', state: "SP", zip_code: "05422-000", 
                           email: "eventos@first.com", phone_number: "(11)99110-9191", user: user)
     Event.create!(name: "Eventos corporativos", description: 'Evento para promover a interação entre o público interno e clientes', 
-                  minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                  minimum_guests_number: 80, maximum_guests_number: 120, duration: 240, 
                   menu: 'brunch ou coffee break', has_valet_service: true, can_be_catering: true,
                   venue: venue)
     event = Event.create!(name: "Casamentos", description: 'Recepção e festa de casamento',
-                          minimum_guests_number: 80, maximun_guests_number: 120, duration: 240, 
+                          minimum_guests_number: 80, maximum_guests_number: 120, duration: 240, 
                           menu: 'brunch e coffee breaks', has_valet_service: true, venue: venue)
     Price.create!(weekday_base_price: 10000, weekday_plus_per_person: 100, weekday_plus_per_hour: 1500, 
                   weekend_base_price: 15000, weekend_plus_per_person: 150, weekend_plus_per_hour: 2000, event: event)

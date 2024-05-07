@@ -25,7 +25,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, 
                                   :description, 
                                   :minimum_guests_number,
-                                  :maximun_guests_number,
+                                  :maximum_guests_number,
                                   :duration, 
                                   :menu, 
                                   :has_alcoholic_drinks, 

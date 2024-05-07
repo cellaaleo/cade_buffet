@@ -65,8 +65,8 @@ class Order < ApplicationRecord
   end
 
   def number_of_guests_must_be_less_than_or_equal_to_maximum_guests_number
-    if self.number_of_guests.present? && self.number_of_guests > self.event.maximun_guests_number
-      self.errors.add(:number_of_guests, "deve ser no máximo #{self.event.maximun_guests_number}")
+    if self.number_of_guests.present? && self.number_of_guests > self.event.maximum_guests_number
+      self.errors.add(:number_of_guests, "deve ser no máximo #{self.event.maximum_guests_number}")
     end
   end
 end

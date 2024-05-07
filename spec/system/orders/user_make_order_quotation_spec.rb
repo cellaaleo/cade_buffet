@@ -10,7 +10,7 @@ describe "Dono de buffet faz cotação do pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                          minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, menu: '...', venue: venue)
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue)
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
     order = Order.create!(customer: customer, event: event, venue: venue, number_of_guests: 55, event_date: 6.months.from_now)
 
@@ -34,7 +34,7 @@ describe "Dono de buffet faz cotação do pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                          minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, menu: '...', venue: venue)
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue)
     prices = Price.create!(weekday_base_price: 1000, weekday_plus_per_person: 100, weekday_plus_per_hour: 0,
                             weekend_base_price: 2000, weekend_plus_per_person: 200, weekend_plus_per_hour: 0, event: event)
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
@@ -64,7 +64,7 @@ describe "Dono de buffet faz cotação do pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                          minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, menu: '...', venue: venue)
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue)
     prices = Price.create!(weekday_base_price: 1000, weekday_plus_per_person: 100, weekday_plus_per_hour: 0,
                             weekend_base_price: 2000, weekend_plus_per_person: 200, weekend_plus_per_hour: 0, event: event)
     customer = Customer.create!(name: 'Ana', cpf: '385.474.290-85', email: "ana@email.com", password: "password")
@@ -94,7 +94,7 @@ describe "Dono de buffet faz cotação do pedido" do
                       description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
                       payment_methods: "", user: user)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
-                          minimum_guests_number: 50, maximun_guests_number: 120, duration: 240, menu: '...', venue: venue,
+                          minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue,
                           has_decorations: true)
     prices = Price.create!(weekday_base_price: 1000, weekday_plus_per_person: 100, weekday_plus_per_hour: 0,
                             weekend_base_price: 2000, weekend_plus_per_person: 200, weekend_plus_per_hour: 0, event: event)
