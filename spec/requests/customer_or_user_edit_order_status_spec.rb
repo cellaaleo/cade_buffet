@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Usuário edita buffet", type: :request do
+RSpec.describe "Usuário edita buffet" do
   it "e não está autenticado" do
     # Arrange
     user = User.create!(email: 'buffet@email.com', password: 'password')
@@ -19,6 +19,7 @@ RSpec.describe "Usuário edita buffet", type: :request do
                           event_details: 'Incluir serviço de decoração',event_date: 6.months.from_now, status: :pending)
     # Act
     post(canceled_order_path(order.id))
+    
     # Assert
     expect(response).to redirect_to(new_customer_session_path)
   end

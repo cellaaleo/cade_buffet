@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "Usuário vê buffet", type: :request do
-#describe "Usuário dono de buffet tenta acessar um buffet" do
+RSpec.describe "Dono de buffet vê um buffet" do
   it "que não está vinculado à sua conta" do
+    # Arrange
     first_user = User.create!(email: "first@email.com", password: "password")
     second_user = User.create!(email: "second@email.com", password: "password")
     first_venue = Venue.create!(brand_name: "Pinheiros Hall", corporate_name: "Primeiro Buffet Ltda", 
@@ -15,11 +15,11 @@ RSpec.describe "Usuário vê buffet", type: :request do
                                 email: "eventos@second.com", phone_number: "(31)99220-9292", user: second_user,
                                 description: "Espaço ideal para casamentos, aniversários, eventos corporativos, entre outras ocasiões especiais")
     
-    # Act - fazer log in
+    # Act
     login_as(first_user, scope: :user)
     get(venue_path(second_venue.id))
 
-    # Assert - cair na página do buffet
+    # Assert
     expect(response).to redirect_to(venue_path(first_venue.id))
   end
   

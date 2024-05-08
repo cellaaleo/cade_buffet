@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Usuário edita buffet", type: :request do
-#describe "Usuário edita buffet" do
+RSpec.describe "Usuário edita buffet" do
   it "e não está autenticado" do
     # Arrange
     user = User.create!(email: "user@email.com", password: "password")
@@ -29,11 +28,11 @@ RSpec.describe "Usuário edita buffet", type: :request do
                                 email: "eventos@second.com", phone_number: "(31)99220-9292", user: second_user,
                                 description: "Espaço ideal para casamentos, aniversários, eventos corporativos, entre outras ocasiões especiais")
     
-    # Act - fazer log in
+    # Act
     login_as(second_user, scope: :user)
     patch(venue_path(first_venue.id), params: {venue: {phone_number: '(31)99220-9292'}})
 
-    # Assert - cair na página do buffet
+    # Assert
     expect(response).to redirect_to(venue_path(second_venue.id))
   end 
 end
