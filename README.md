@@ -1,24 +1,33 @@
-# README
+# Cadê Buffet?
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projeto Ruby on Rails com TDD desenvolvido para TreinaDev12.
 
-Things you may want to cover:
+### Pré-requisitos:
 
-* Ruby version
+* Rails 7.1.3.2
 
-* System dependencies
+* ruby 3.0.0
 
-* Configuration
+### Gems utilizadas:
 
-* Database creation
+Para criação de perfis de usuários:
 
-* Database initialization
+* devise
 
-* How to run the test suite
+Para testes de desenvolvimento:
 
-* Services (job queues, cache servers, search engines, etc.)
+* rspec-rails
 
-* Deployment instructions
+* capybara
 
-* ...
+
+
+
+# Cadê Buffet? - API
+
+## Documentação
+
+### Acessando detalhes de um buffet
+
+    http .../api/v1/venues/1
+
