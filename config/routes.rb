@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :quotations, only: [:new, :create]
     post 'approved', on: :member
     post 'confirmed', on: :member
+    post 'canceled', on: :member
   end
 
 end

@@ -65,12 +65,17 @@
 
 <% if current_customer %>
 
-  <% if @order.approved? %>
-    <%= render "quotations/table" %>
-    <% if Date.today <= @order.quotation.expiry_date %>
-      <%= button_to 'Confirmar pedido', confirmed_order_path(@order.id) %>
-    <% else %>
-      <p>O prazo de validade do orçamento expirou!</p>
+  <% if @order.pending? || @order.approved? %>
+    <%= button_to 'Cancelar pedido', canceled_order_path(@order.id) %>
+
+    <% if @order.quotation && @order.approved? %>
+      <%= render "quotations/table" %>
+
+      <% if Date.today <= @order.quotation.expiry_date %>
+        <%= button_to 'Confirmar pedido', confirmed_order_path(@order.id) %>
+      <% else %>
+        <p>O prazo de validade do orçamento expirou!</p>
+      <% end %>
     <% end %>
   <% end %>
 

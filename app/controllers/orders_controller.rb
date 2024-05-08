@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_customer!, only: [:new, :create, :confirmed]
+  before_action :authenticate_customer!, only: [:new, :create, :confirmed, :canceled]
   before_action :authenticate_user!, only: [:approved]
+  before_action :set_order_and_check_customer_or_user, only: [:show, :approved, :canceled, :confirmed]
 
   def index
     if current_customer
@@ -11,13 +12,10 @@ class OrdersController < ApplicationController
   end
   
   def show
-    if current_customer
-      @order = Order.find(params[:id])
-    elsif current_user
-      @order = Order.find(params[:id])
+    if current_user
       @same_date_orders = []
-
       orders = current_user.venue.orders
+
       orders.each do |ord|
         unless ord.status == 'canceled'
           if ord.code != @order.code && ord.event_date == @order.event_date
@@ -49,19 +47,36 @@ class OrdersController < ApplicationController
   end
   
   def approved
-    @order = Order.find(params[:id])
     @order.approved!
     redirect_to @order
   end
 
   def confirmed
-    @order = Order.find(params[:id])
     @order.confirmed!
+    redirect_to @order
+  end
+
+  def canceled
+    @order.canceled!
     redirect_to @order
   end
 
   private
   def order_params
     params.require(:order).permit(:event_date, :number_of_guests, :event_details, :event_address)
+  end
+
+  def set_order_and_check_customer_or_user
+    if current_customer 
+      @order = Order.find(params[:id])
+      if @order.customer != current_customer
+        return redirect_to root_path, alert: 'Você não tem acesso a este pedido'
+      end
+    elsif current_user
+      @order = Order.find(params[:id])
+      if @order.venue != current_user.venue
+        return redirect_to root_path, alert: 'Você não tem acesso a este pedido'
+      end
+    end
   end
 end
