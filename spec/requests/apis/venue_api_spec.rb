@@ -34,10 +34,19 @@ describe "Venue API" do
       expect(json_response.keys).not_to include("created_at")
       expect(json_response.keys).not_to include("updated_at")
     end
+
+    it "fail if venue not found" do
+      # Arrange
+       # Act
+       get "/api/v1/venues/99999"
+       # Assert
+       expect(response.status).to eq 404
+    end
+    
   end
 
   context "GET /api/v1/venues" do
-    it "success" do
+    it "list all venues" do
       # Arrange
       user = User.create!(email: 'buffet@email.com', password: 'password')
       venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", 
@@ -77,6 +86,15 @@ describe "Venue API" do
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
+    end
+
+    it "raise an internal error" do
+      # Arrange
+      allow(Venue).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+      # Act
+      get '/api/v1/venues'
+      # Assert
+      expect(response).to have_http_status(500)
     end
   end
   

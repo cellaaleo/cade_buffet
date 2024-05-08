@@ -27,6 +27,10 @@ Para testes de desenvolvimento:
 
 ## Documentação
 
+### Listando buffets
+
+    http .../api/v1/venues
+
 ### Acessando detalhes de um buffet
 
     http .../api/v1/venues/1
