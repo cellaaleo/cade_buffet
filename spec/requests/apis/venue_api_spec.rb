@@ -11,6 +11,11 @@ describe "Venue API" do
                             phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
                             description: "Espaços amplos e menus variados.",
                             payment_methods: "Transferência bancária e pix", user: user)
+      Event.create!(name: 'Eventos corporativos', minimum_guests_number: 50, 
+                    maximum_guests_number: 100, duration: 240, venue: venue)
+      Event.create!(name: 'Casamentos', minimum_guests_number: 50, 
+                    maximum_guests_number: 100, duration: 240, venue: venue)
+
       # Act
       get "/api/v1/venues/#{venue.id}"
 
@@ -33,6 +38,10 @@ describe "Venue API" do
       expect(json_response.keys).not_to include("user_id")
       expect(json_response.keys).not_to include("created_at")
       expect(json_response.keys).not_to include("updated_at")
+      expect(json_response["events"].class).to eq Array
+      expect(json_response["events"].length).to eq 2
+      expect(json_response["events"][0]["name"]).to eq "Eventos corporativos"
+      expect(json_response["events"][1]["name"]).to eq "Casamentos"
     end
 
     it "fail if venue not found" do
