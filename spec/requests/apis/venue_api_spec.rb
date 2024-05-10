@@ -97,5 +97,85 @@ describe "Venue API" do
       expect(response).to have_http_status(500)
     end
   end
-  
+
+
+  context "GET /api/v1/venues/search?q=" do
+    it "retorna um buffet que contenha as palavras especificadas na consulta" do
+      # Arrange
+      ana = User.create!(email: 'ana@email.com', password: 'password')
+      ana_buffet = Venue.create!(brand_name: "Buffet da Ana", corporate_name: "Buffet da Ana Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "...", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "01010-010", 
+                            phone_number: "...", email: "anabuffet@email.com", 
+                            description: "...", payment_methods: "...", user: ana)
+
+      bruna = User.create!(email: 'bruna@email.com', password: 'password')
+      bruna_buffet = Venue.create!(brand_name: "Buffet da Bruna", corporate_name: "Buffet da Bruna Ltda", 
+                            registration_number:"22.222.222/0002-00", address: "...", 
+                            district: "Ondina", city: "Salvador", state: "BA", zip_code: "40000-001", 
+                            phone_number: "...", email: "brunabuffet@email.com", 
+                            description: "...", payment_methods: "...", user: bruna)
+
+      # Act
+      get "/api/v1/venues/search?q=buffet da bruna"
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.class).to eq Array
+      expect(json_response.length).to eq 1
+      expect(json_response[0]["brand_name"]).to eq 'Buffet da Bruna'
+      expect(json_response[0].keys).not_to include("corporate_name")
+    end
+
+    it "retorna lista de buffets que contenham as palavras especificadas na consulta" do
+      # Arrange
+      ana = User.create!(email: 'ana@email.com', password: 'password')
+      ana_buffet = Venue.create!(brand_name: "Buffet da Ana", corporate_name: "Buffet da Ana Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "...", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "01010-010", 
+                            phone_number: "...", email: "anabuffet@email.com", 
+                            description: "...", payment_methods: "...", user: ana)
+
+      bruna = User.create!(email: 'bruna@email.com', password: 'password')
+      bruna_buffet = Venue.create!(brand_name: "Buffet da Bruna", corporate_name: "Buffet da Bruna Ltda", 
+                            registration_number:"22.222.222/0002-00", address: "...", 
+                            district: "Ondina", city: "Salvador", state: "BA", zip_code: "40000-001", 
+                            phone_number: "...", email: "brunabuffet@email.com", 
+                            description: "...", payment_methods: "...", user: bruna)
+
+      poliana = User.create!(email: 'poliana@email.com', password: 'password')
+      poliana_buffet = Venue.create!(brand_name: "Buffet da Poliana", corporate_name: "Buffet da Poliana Ltda", 
+                            registration_number:"33.333.333/0003-00", address: "...", 
+                            district: "Tijuca ", city: "Rio de Janeiro", state: "RJ", zip_code: "20000-001", 
+                            phone_number: "...", email: "polianasbuffet@email.com", 
+                            description: "...", payment_methods: "...", user: poliana)
+
+      # Act
+      get "/api/v1/venues/search?q=ana"
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.class).to eq Array
+      expect(json_response.length).to eq 2
+      expect(json_response[0]["brand_name"]).to eq 'Buffet da Ana'
+      expect(json_response[1]["brand_name"]).to eq 'Buffet da Poliana'
+    end
+
+    it "retorna vazio se não houver buffets com as palavras especificadas na consulta" do
+      # Arrange
+      # Act
+      get "/api/v1/venues/search?q=buffet"
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response).to eq []
+    end
+  end
+
 end

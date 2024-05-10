@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   namespace :api do 
     namespace :v1 do 
-      resources :venues, only: [:show, :index]
+      resources :venues, only: [:show, :index] do
+        get 'search', on: :collection
+      end
     end
   end
 
