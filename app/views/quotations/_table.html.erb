@@ -1,4 +1,6 @@
 <h3>Orçamento - Válido até <%= I18n.localize(@order.quotation.expiry_date) %></h3>
+<p><strong>Contratante: </strong> <%= @order.customer.name %> - <%= @order.customer.email %></p>
+<p><strong>Contratado: </strong> <%= @order.venue.brand_name %></p>
 
 <table style="background-color: #BBBFBF">
   <thead>

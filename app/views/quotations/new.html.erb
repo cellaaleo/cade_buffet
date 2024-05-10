@@ -9,6 +9,7 @@
   </ul>
 <% end %>
 
+<p><strong>Contratante: </strong> <%= @order.customer.description %></p>
 <p><strong>Dia da semana:</strong> <%= @order.event_date.strftime("%A") %> </p>
 <p><strong>Preço-base:</strong> <%= @order.base_price %></p>
 <p>Número extra de pessoas: <%= @order.extra_guests_number %></p>

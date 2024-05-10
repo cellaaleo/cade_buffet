@@ -14,6 +14,8 @@ pt-BR:
         venue: "Buffet responsável"
         event_id: "Evento"
         event: "Evento"
+        customer_id: "Cliente"
+        customer: "Cliente"
         event_date: "Data do evento"
         number_of_guests: "Número de convidados"
         event_details: "Detalhes do evento"

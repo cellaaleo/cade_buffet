@@ -12,6 +12,8 @@
   <h3><%= Order.model_name.human %>: <%= @order.code %></h3>
 
   <dl>
+    <dt><%= Order.human_attribute_name(:customer_id) %>:</dt>
+    <dd><%= @order.customer.description %></dd>
     <dt><%= Order.human_attribute_name(:event_id) %>:</dt>
     <dd><%= @order.event.name %></dd>
     <dt><%= Order.human_attribute_name(:event_date) %>:</dt>
