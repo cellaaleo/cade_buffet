@@ -108,7 +108,7 @@ describe "Venue API" do
   end
 
 
-  context "GET /api/v1/venues/search?q=" do
+  context "GET /api/v1/venues/search?venue=" do
     it "retorna um buffet que contenha as palavras especificadas na consulta" do
       # Arrange
       ana = User.create!(email: 'ana@email.com', password: 'password')
@@ -126,7 +126,7 @@ describe "Venue API" do
                             description: "...", payment_methods: "...", user: bruna)
 
       # Act
-      get "/api/v1/venues/search?q=buffet da bruna"
+      get "/api/v1/venues/search?venue=buffet da bruna"
 
       # Assert
       expect(response.status).to eq 200
@@ -162,7 +162,7 @@ describe "Venue API" do
                             description: "...", payment_methods: "...", user: poliana)
 
       # Act
-      get "/api/v1/venues/search?q=ana"
+      get "/api/v1/venues/search?venue=ana"
 
       # Assert
       expect(response.status).to eq 200
@@ -177,7 +177,7 @@ describe "Venue API" do
     it "retorna vazio se não houver buffets com as palavras especificadas na consulta" do
       # Arrange
       # Act
-      get "/api/v1/venues/search?q=buffet"
+      get "/api/v1/venues/search?venue=buffet"
 
       # Assert
       expect(response.status).to eq 200

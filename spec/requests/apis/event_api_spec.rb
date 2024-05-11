@@ -55,8 +55,10 @@ describe "Venue API" do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq []
     end
+  end
 
-    it "raise an internal error" do
+  context "GET /api/v1/venues/1/events/1" do
+    it "success" do
       # Arrange
       user = User.create!(email: 'ana@email.com', password: 'password')
       venue = Venue.create!(brand_name: "Buffet da Ana", corporate_name: "Buffet da Ana Ltda", 
@@ -64,12 +66,34 @@ describe "Venue API" do
                             district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "01010-010", 
                             phone_number: "...", email: "anabuffet@email.com", 
                             description: "...", payment_methods: "...", user: user)
-
-      allow(Event).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+      event = Event.create!(name: 'Casamentos', minimum_guests_number: 50, 
+                            maximum_guests_number: 100, duration: 240, venue: venue)
+      
       # Act
-      get "/api/v1/venues/#{venue.id}/events"
+      get "/api/v1/venues/#{venue.id}/events/#{event.id}"
+      
       # Assert
-      expect(response).to have_http_status(500)
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["name"]).to eq 'Casamentos'
+      expect(json_response["minimum_guests_number"]).to eq 50
+      expect(json_response["maximum_guests_number"]).to eq 100
+      expect(json_response["venue_id"]).to eq venue.id
+    end
+
+    it "fail if event not found" do
+      # Arrange
+      user = User.create!(email: 'ana@email.com', password: 'password')
+      venue = Venue.create!(brand_name: "Buffet da Ana", corporate_name: "Buffet da Ana Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "...", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "01010-010", 
+                            phone_number: "...", email: "anabuffet@email.com", 
+                            description: "...", payment_methods: "...", user: user)
+       # Act
+       get "/api/v1/venues/#{venue.id}/events/999999"
+       # Assert
+       expect(response.status).to eq 404
     end
   end
 end

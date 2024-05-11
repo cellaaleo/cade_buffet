@@ -8,6 +8,6 @@ class Api::V1::ApiController < ActionController::API
   end
 
   def return_404
-    render status: 404
+    render status: 404, json: {error: 'Buffet ou evento não encontrado'}
   end
 end

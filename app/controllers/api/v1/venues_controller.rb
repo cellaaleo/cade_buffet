@@ -15,7 +15,7 @@ class Api::V1::VenuesController < Api::V1::ApiController
   end
 
   def search
-    venues = Venue.where("brand_name LIKE ?", "%#{params[:q]}%")
+    venues = Venue.where("brand_name LIKE ?", "%#{params[:venue]}%")
     render status: 200, json: venues.as_json(except: [:corporate_name, :registration_number, 
                                                       :user_id, :created_at, :updated_at])
   end
