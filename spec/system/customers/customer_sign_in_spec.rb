@@ -41,7 +41,7 @@ describe "Cliente se autentica" do
 
     # Assert
     within('nav') do
-      expect(page).to have_link 'Criar sua conta'
+      expect(page).to have_link 'Criar uma conta'
       expect(page).to have_link 'Entrar'
       expect(page).not_to have_button 'Sair'
     end

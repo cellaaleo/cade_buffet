@@ -39,7 +39,7 @@ describe "Usuário não autenticado busca um buffet" do
     # Arrange - lista de resultados
     expect(page).to have_content "Resultado da busca por: '#{query}'"
     expect(page).to have_content '2 Buffets encontrados'
-    expect(page).to have_text(:all, "Buffet São Paulo Pinheiros Hall")
+    expect(page).to have_text(:all, "Buffet São Paulo - Belo Horizonte/MG Pinheiros Hall - São Paulo/SP")
     expect(page).not_to have_content 'Buffet do Vale'
   end
 
@@ -77,8 +77,8 @@ describe "Usuário não autenticado busca um buffet" do
     # Arrange
     expect(page).to have_content "Resultado da busca por: '#{query}'"
     expect(page).to have_content '2 Buffets encontrados'
-    expect(page).to have_text(:all, 'Buffet do Vale Casamento Mineiro Buffet')
-    expect(page).not_to have_content 'Pinheiros Hall'  
+    expect(page).to have_text(:all, 'Buffet do Vale - Fortaleza/CE Casamento Mineiro Buffet - Belo Horizonte/MG')
+    expect(page).not_to have_content 'Pinheiros Hall'
   end
   
   it "e vê detalhes de um buffet" do

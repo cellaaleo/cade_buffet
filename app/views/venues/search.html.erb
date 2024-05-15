@@ -15,6 +15,7 @@
     <ul>
       <li>
         <%= link_to v.brand_name, venue_path(v.id) %>
+        <%= " - #{v.city}/#{v.state}" %>
       </li>
     </ul>
   <% end %>

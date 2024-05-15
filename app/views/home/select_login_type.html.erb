@@ -1,6 +1,6 @@
-<h2>Você quer fazer login como:</h2>
+<h3 class="log-in">Você quer fazer login como?</h3>
 
-<div>
-  <%= link_to 'Dono de Buffet', new_user_session_path %> | 
-  <%= link_to 'Cliente', new_customer_session_path %>
+<div class="d-flex justify-content-evenly">
+  <%= link_to 'Dono de Buffet', new_user_session_path, class:"btn btn-outline-secondary btn-lg" %>
+  <%= link_to 'Cliente', new_customer_session_path, class:"btn btn-outline-secondary btn-lg" %>
 </div>

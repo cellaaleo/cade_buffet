@@ -8,7 +8,7 @@ describe "usuário não autenticado visita página inicial" do
     # Assert
     expect(page).to have_content 'Cadê Buffet?'
     within('nav') do
-      expect(page).to have_link 'Criar sua conta'
+      expect(page).to have_link 'Criar uma conta'
       expect(page).to have_link 'Entrar'
     end
   end

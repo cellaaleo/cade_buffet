@@ -5,7 +5,7 @@ describe "Usuário dono de buffet cria sua conta" do
     # Arrange 
     # Act - cria conta
     visit root_path
-    click_on "Criar sua conta"
+    click_on "Criar uma conta"
     click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
     fill_in "Senha",	with: "password"
@@ -28,7 +28,7 @@ describe "Usuário dono de buffet cria sua conta" do
 
     # Act
     visit root_path
-    click_on "Criar sua conta"
+    click_on "Criar uma conta"
     click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
     fill_in "Senha",	with: "password"
@@ -62,7 +62,7 @@ describe "Usuário dono de buffet cria sua conta" do
 
     # Act
     visit root_path
-    click_on "Criar sua conta"
+    click_on "Criar uma conta"
     click_on 'Dono de Buffet'
     fill_in "E-mail",	with: "buffet@buffet.com.br"
     fill_in "Senha",	with: "password"
