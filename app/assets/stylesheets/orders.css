@@ -1,0 +1,28 @@
+.my-orders{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#order h4 strong {
+    color: rgb(71, 65, 65);
+    text-decoration: underline;
+}
+
+#order .order-details {
+    margin: 30px;
+}
+
+.quotation-area {
+    font-size: 0.9rem;
+    width: 80%;
+    margin: 30px auto;
+    padding: 20px;
+    box-sizing: border-box; 
+    border: 2px solid gray; 
+    background-color: rgb(211, 208, 208);
+    align-content: center;
+}
+
+.container h5{
+    text-align: center;
+}

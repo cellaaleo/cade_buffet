@@ -112,7 +112,7 @@ describe "Cliente faz um pedido" do
 
     # Assert
     expect(page).to have_content 'Pedido registrado com sucesso'
-    expect(page).to have_content 'Pedido: ABC12345'
+    expect(page).to have_content 'pedido ABC12345'
     expect(page).to have_content 'Evento: Festa de Aniversário'
     expect(page).to have_content 'Data do evento: 30/04/2025'
     expect(page).to have_content 'Número de convidados: 80'

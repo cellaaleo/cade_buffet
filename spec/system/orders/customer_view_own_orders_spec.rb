@@ -58,7 +58,7 @@ describe "Cliente vê os próprios pedidos" do
     click_on order.code
 
     # Assert
-    expect(page).to have_content "Pedido: #{order.code}"
+    expect(page).to have_content "pedido #{order.code}"
     expect(page).to have_content 'Evento: Festa de Aniversário'
     formatted_date = I18n.localize(2.months.from_now.to_date)
     expect(page).to have_content "Data do evento: #{formatted_date}"
@@ -89,7 +89,7 @@ describe "Cliente vê os próprios pedidos" do
     # Act
     login_as(customer, :scope => :customer)
     visit orders_path
-    within('#orders-sections .approved-orders') do
+    within('#orders-sections #approved-orders') do
       click_on order.code
     end
 
