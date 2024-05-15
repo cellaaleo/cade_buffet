@@ -1,0 +1,29 @@
+.form-title {
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.ckeck-box {
+    margin-top: 10px;
+}
+
+.ckeck-box p {
+    font-weight: bold;
+}
+
+.form-button {
+    margin-top: 15px;
+}
+
+.alert {
+    color: rgb(177, 5, 5);
+    font-weight: bold;
+}
+
+.errors-msg {
+    background-color: #e9ecef;
+    padding-left: 10px;
+    margin: 0 20px;
+    font-size: 0.85rem;
+    font-style: italic;
+}

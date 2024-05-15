@@ -6,8 +6,12 @@ class OrdersController < ApplicationController
   def index
     if current_customer
       @orders = current_customer.orders
-    elsif current_user
-      @orders = current_user.venue.orders
+    elsif user_signed_in?
+      if current_user.venue
+        @orders = current_user.venue.orders
+      else
+        return redirect_to new_venue_path
+      end
     end
   end
   

@@ -1,27 +1,30 @@
-<h3><%= current_customer.name %>, informe detalhes do seu pedido:</h3>
+<h4 class="form-title"><%= current_customer.name %>, informe detalhes do seu pedido:</h4>
 <p><strong>Evento:</strong> <%= @event.name %></p>
 <p><strong>Buffet:</strong> <%= @event.venue.brand_name %></p>
-<br>
 
 <%= form_with(model: [@event, @order]) do |f| %>
-  <div>
+  <div class="form-group col-md-3">
     <%= f.label  :event_date %>
-    <%= f.date_field :event_date %>
+    <%= f.date_field :event_date, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-3">
     <%= f.label  :number_of_guests %>
-    <%= f.number_field :number_of_guests %>
+    <%= f.number_field :number_of_guests, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label  :event_details %>
-    <%= f.text_area :event_details %>
+    <%= f.text_area :event_details, class:"form-control" %>
   </div>
   <div>
     <% if @event.can_be_catering %>
       <p>Se quiser realizar o evento fora do nosso espaço, preencha o endereço abaixo:</p>
-      <%= f.label  :event_address, 'Endereço do evento' %>
-      <%= f.text_field :event_address %>
+      <div class="form-group col-md-8">
+        <%= f.label  :event_address, 'Endereço do evento' %>
+        <%= f.text_field :event_address, class:"form-control" %>
+      </div>
     <% end %>
   </div>
-  <%= f.submit "Enviar" %>
+  <div class="form-button">
+    <%= f.submit 'Enviar', class:"btn btn-secondary" %>
+  </div>
 <% end %>

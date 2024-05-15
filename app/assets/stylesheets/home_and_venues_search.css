@@ -1,3 +1,7 @@
+body {
+    margin-bottom: 40px;
+}
+
 .venues-list {
     margin: 30px 50px; 
     padding: 30px 50px

@@ -78,7 +78,7 @@ describe 'Usuário edita dados de seu buffet' do
     click_on 'Enviar'
     
     # Assert
-    expect(page).to have_content 'Não foi possível editar o seu buffet'
+    expect(page).to have_content 'Não foi possível editar dados do buffet'
     expect(page).to have_content 'Nome fantasia não pode ficar em branco'
     expect(page).to have_content 'E-mail não pode ficar em branco'
     expect(page).to have_field('Nome fantasia', with: '')

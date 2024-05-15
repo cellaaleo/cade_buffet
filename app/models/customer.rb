@@ -7,7 +7,7 @@ class Customer < ApplicationRecord
   has_many :orders
   
   validates :name, :cpf, presence: true
-  validates :cpf, cpf: { message: 'CPF inválido' }
+  validates :cpf, cpf: { message: 'inválido' }
   validates :cpf, uniqueness: true
 
   def description

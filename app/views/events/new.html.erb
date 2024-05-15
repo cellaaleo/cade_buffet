@@ -1,63 +1,67 @@
-<h3>Cadastre um tipo de evento para o <%= @venue.brand_name %>:</h3>
+<h3 class="form-title">Cadastre um tipo de evento para o <%= @venue.brand_name %>:</h3>
 
 <% if(@event.errors.any?) %>
-  <p>Verifique os erros abaixo:</p>
-  <ul>
-    <% @event.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div class="errors-msg">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>  
 <% end %>
 
 <%= form_with(model: [@venue, @event]) do |f| %>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :minimum_guests_number %>
-    <%= f.number_field :minimum_guests_number %>
+    <%= f.number_field :minimum_guests_number, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :maximum_guests_number %>
-    <%= f.number_field :maximum_guests_number %>
+    <%= f.number_field :maximum_guests_number, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :duration %>
-    <%= f.number_field :duration %>
+    <%= f.number_field :duration, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :menu %>
-    <%= f.text_area :menu %>
+    <%= f.text_area :menu, class:"form-control" %>
   </div>
-  <div>
-    <h3>Marque os serviços extras oferecidos:</h3>
-  </div>
-  <div>
-    <%= f.label :has_alcoholic_drinks %>
-    <%= f.check_box :has_alcoholic_drinks %>
-  </div>
-  <div>
-    <%= f.label :has_decorations %>
-    <%= f.check_box :has_decorations %>
-  </div>
-  <div>
-    <%= f.label :has_parking_service %>
-    <%= f.check_box :has_parking_service %>
-  </div>
-  <div>
-    <%= f.label :has_valet_service %>
-    <%= f.check_box :has_valet_service %>
-  </div>
-  <div>
-    <%= f.label :can_be_catering %>
-    <%= f.check_box :can_be_catering %>
-  </div>
-  <div>
-    <%= f.submit 'Enviar' %>
+
+  <div class="ckeck-box">
+    <p>Serviços opcionais oferecidos:</p>
+    <div class="form-check">
+      <%= f.label :has_alcoholic_drinks, class:"form-check-label" %>
+      <%= f.check_box :has_alcoholic_drinks, class:"form-check-input" %>
+    </div>
+    <div class="form-check">
+      <%= f.label :has_decorations, class:"form-check-label" %>
+      <%= f.check_box :has_decorations, class:"form-check-input" %>
+    </div>
+    <div class="form-check">
+      <%= f.label :has_parking_service, class:"form-check-label" %>
+      <%= f.check_box :has_parking_service, class:"form-check-input" %>
+    </div>
+    <div class="form-check">
+      <%= f.label :has_valet_service, class:"form-check-label" %>
+      <%= f.check_box :has_valet_service, class:"form-check-input" %>
+    </div>
+    <div class="form-check">
+      <%= f.label :can_be_catering, class:"form-check-label" %>
+      <%= f.check_box :can_be_catering, class:"form-check-input" %>
+    </div>
+  </div>  
+
+  <div class="form-button">
+    <%= f.submit 'Enviar', class:"btn btn-secondary" %>
   </div>
 <% end %>

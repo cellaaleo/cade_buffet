@@ -15,7 +15,7 @@ class VenuesController < ApplicationController
     if @venue.save
       redirect_to @venue, notice: 'Buffet cadastrado com sucesso'
     else
-      flash[:alert] = "Não foi possível cadastrar o seu buffet"
+      flash[:alert] = "Não foi possível cadastrar o seu buffet."
       render 'new'
     end
   end
@@ -26,7 +26,7 @@ class VenuesController < ApplicationController
     if @venue.update(venue_params)
       redirect_to @venue, notice: 'Buffet editado com sucesso'
     else
-      flash[:alert] = "Não foi possível editar o seu buffet"
+      flash[:alert] = "Não foi possível editar dados do buffet."
       render 'edit'
     end
   end

@@ -1,53 +1,64 @@
+<% if(@venue.errors.any?) %>
+  <div class="errors-msg">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @venue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: @venue) do |f| %>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :brand_name %>
-    <%= f.text_field :brand_name %>
+    <%= f.text_field :brand_name, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :corporate_name %>
-    <%= f.text_field :corporate_name %>
+    <%= f.text_field :corporate_name, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :registration_number %>
-    <%= f.text_field :registration_number %>
+    <%= f.text_field :registration_number, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :address %>
-    <%= f.text_field :address %>
+    <%= f.text_field :address, class:"form-control"  %>
   </div>
-  <div>
+  <div class="form-group col-md-6">
     <%= f.label :district %>
-    <%= f.text_field :district %>
+    <%= f.text_field :district, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-6">
     <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.text_field :city, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-2">
     <%= f.label :state %>
-    <%= f.text_field :state %>
+    <%= f.text_field :state, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :zip_code %>
-    <%= f.text_field :zip_code %>
+    <%= f.text_field :zip_code, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-4">
     <%= f.label :phone_number %>
-    <%= f.text_field :phone_number %>
+    <%= f.text_field :phone_number, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class:"form-control" %>
   </div>
-  <div>
+  <div class="form-group col-md-8">
     <%= f.label :payment_methods %>
-    <%= f.text_area :payment_methods %>
+    <%= f.text_area :payment_methods, class:"form-control" %>
   </div>
-  <div>
-    <%= f.submit 'Enviar' %>
+  <div class="form-button">
+    <%= f.submit 'Enviar', class:"btn btn-secondary" %>
   </div>
 <% end %>

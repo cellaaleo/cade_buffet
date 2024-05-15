@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     if @event.save 
       redirect_to @event, notice: 'Evento cadastrado com sucesso!'
     else
-      flash.now[:notice] = 'Evento não cadastrado'
+      flash.now[:alert] = 'Evento não cadastrado.'
       render 'new'
     end
   end
