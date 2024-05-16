@@ -3,7 +3,7 @@
   <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
   <p><strong>Descrição: </strong> <%= @venue.description %></p>
 
-  <div class="events-list">
+  <div class="list">
     <h4>Eventos que realizamos:</h4>
     <% if user_signed_in? && current_user.venue%>
       <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id), class:"btn btn-outline-primary btn-sm" %>

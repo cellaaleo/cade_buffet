@@ -13,25 +13,25 @@ body {
     font-weight: bold;
 }
 
-.events-list {
+.list {
     margin: 0 50px; 
     padding: 0 50px;
 }
 
-.events-list h2 {
+.list h2 {
     margin-bottom: 30px;
 }
 
-.events-list ul {
+.list ul {
     margin: 5px 50px; 
     padding: 0 50px;
 }
 
-.events-list li {
+.list li {
     list-style-type: none;
 }
 
-.events-list li a {
+.list li a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;
