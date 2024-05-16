@@ -51,6 +51,26 @@ describe "Venue API" do
        # Assert
        expect(response.status).to eq 404
     end
+
+    it "fail if venue is inactive" do
+      # Arrange
+      user = User.create!(email: 'buffet@email.com', password: 'password')
+      venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "Rua Eugênio de Medeiros, 530", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                            phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
+                            description: "Espaços amplos e menus variados.",
+                            payment_methods: "Transferência bancária e pix", user: user, status: :inactive)
+
+      # Act
+      get "/api/v1/venues/#{venue.id}"
+
+      # Assert
+      expect(response.status).to eq 403
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response["error"]).to eq 'Não foi possível acessar este conteúdo'
+    end
     
   end
 
@@ -83,6 +103,35 @@ describe "Venue API" do
       expect(json_response.length).to eq 2
       expect(json_response[0]["brand_name"]).to eq 'Casa Jardim'
       expect(json_response[1]["brand_name"]).to eq 'Buffet Festa'
+    end
+
+    it "list all active venues" do
+      # Arrange
+      user = User.create!(email: 'buffet@email.com', password: 'password')
+      venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "Rua Eugênio de Medeiros, 530", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                            phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
+                            description: "Espaços amplos e menus variados.", payment_methods: "Transferência bancária e pix", 
+                            user: user, status: :inactive)
+
+      other_user = User.create!(email: 'venue@email.com', password: 'password')
+      other_venue = Venue.create!(brand_name: "Buffet Festa", corporate_name: "Buffet Festa Ltda", 
+                                  registration_number: "22.222.222/0002-20", address: "Rua dos Timbiras, 2500",
+                                  district: "Barro Preto", city: 'Belo Horizonte', state: "MG", zip_code: "30140-000", 
+                                  phone_number: "(31)99220-9292", email: "eventos@buffetfesta.com",
+                                  description: "Espaços amplos e menus variados.", payment_methods: "Transferência bancária e pix", 
+                                  user: other_user, status: :active)
+      # Act
+      get '/api/v1/venues'
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.class).to eq Array
+      expect(json_response.length).to eq 1
+      expect(json_response[0]["brand_name"]).to eq 'Buffet Festa'
     end
 
     it "return empty if there is no venue" do
@@ -171,6 +220,42 @@ describe "Venue API" do
       expect(json_response.class).to eq Array
       expect(json_response.length).to eq 2
       expect(json_response[0]["brand_name"]).to eq 'Buffet da Ana'
+      expect(json_response[1]["brand_name"]).to eq 'Buffet da Poliana'
+    end
+
+    it "retorna lista de buffets ativos que contenham as palavras especificadas na consulta" do
+      # Arrange
+      ana = User.create!(email: 'ana@email.com', password: 'password')
+      ana_buffet = Venue.create!(brand_name: "Buffet da Ana", corporate_name: "Buffet da Ana Ltda", 
+                            registration_number:"11.111.111/0001-00", address: "...", 
+                            district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "01010-010", 
+                            phone_number: "...", email: "anabuffet@email.com", description: "...", 
+                            payment_methods: "...", user: ana, status: :inactive)
+
+      bruna = User.create!(email: 'bruna@email.com', password: 'password')
+      bruna_buffet = Venue.create!(brand_name: "Buffet da Bruna", corporate_name: "Buffet da Bruna Ltda", 
+                            registration_number:"22.222.222/0002-00", address: "...", 
+                            district: "Ondina", city: "Salvador", state: "BA", zip_code: "40000-001", 
+                            phone_number: "...", email: "brunabuffet@email.com", description: "...", 
+                            payment_methods: "...", user: bruna, status: :active)
+
+      poliana = User.create!(email: 'poliana@email.com', password: 'password')
+      poliana_buffet = Venue.create!(brand_name: "Buffet da Poliana", corporate_name: "Buffet da Poliana Ltda", 
+                            registration_number:"33.333.333/0003-00", address: "...", 
+                            district: "Tijuca ", city: "Rio de Janeiro", state: "RJ", zip_code: "20000-001", 
+                            phone_number: "...", email: "polianasbuffet@email.com", description: "...", 
+                            payment_methods: "...", user: poliana, status: :active)
+
+      # Act
+      get "/api/v1/venues/search?venue=buffet"
+
+      # Assert
+      expect(response.status).to eq 200
+      expect(response.content_type).to include 'application/json'
+      json_response = JSON.parse(response.body)
+      expect(json_response.class).to eq Array
+      expect(json_response.length).to eq 2
+      expect(json_response[0]["brand_name"]).to eq 'Buffet da Bruna'
       expect(json_response[1]["brand_name"]).to eq 'Buffet da Poliana'
     end
 
