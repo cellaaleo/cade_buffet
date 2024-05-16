@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create, :confirmed, :canceled]
   before_action :authenticate_user!, only: [:approved]
   before_action :set_order_and_check_customer_or_user, only: [:show, :approved, :canceled, :confirmed]
-  before_action :set_event_and_check_venue_status, only: [:new, :create]
+  before_action :set_event_and_check_deactivation, only: [:new, :create]
 
   def index
     if current_customer
@@ -83,10 +83,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def set_event_and_check_venue_status
+  def set_event_and_check_deactivation
     @event = Event.find(params[:event_id])
-    if @event.venue.inactive?
-      return redirect_to event_path(@event.id), alert: 'Não foi possível acessar cadastro de pedido. Buffet inativo!'
+    if @event.inactive? 
+      return redirect_to root_path, alert: 'Não foi possível acessar cadastro de pedido. Evento inativado pelo buffet!'
+    elsif @event.venue.inactive?
+      return redirect_to root_path, alert: 'Não foi possível acessar cadastro de pedido. Buffet inativo!'
     end
   end
 end
