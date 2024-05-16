@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     get 'search', on: :collection
     post 'active', on: :member
     post 'inactive', on: :member
-    resources :events, only: [:new, :create]
+    resources :events, only: [:new, :create] do
+      get 'deactivated', on: :collection
+    end
   end
   
   resources :events, only: [:show] do

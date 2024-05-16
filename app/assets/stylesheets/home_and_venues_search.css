@@ -13,25 +13,25 @@ body {
     font-weight: bold;
 }
 
-.venues-list {
+.events-list {
     margin: 0 50px; 
     padding: 0 50px;
 }
 
-.venues-list h2 {
+.events-list h2 {
     margin-bottom: 30px;
 }
 
-.venues-list ul {
-    margin: 30px 50px; 
+.events-list ul {
+    margin: 5px 50px; 
     padding: 0 50px;
 }
 
-.venues-list li {
+.events-list li {
     list-style-type: none;
 }
 
-.venues-list li a {
+.events-list li a {
     text-decoration: none;
     color: #495057;
     font-weight: 600;

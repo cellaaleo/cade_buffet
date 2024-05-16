@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :active, :inactive]
+  before_action :authenticate_user!, only: [:new, :create, :active, :inactive, :deactivated]
+  before_action :check_user_and_ser_event, only: [:active, :inactive]
 
   def new
     @venue = Venue.find(params[:venue_id])
@@ -25,15 +26,18 @@ class EventsController < ApplicationController
   end
 
   def active
-    @event = Event.find(params[:id])
     @event.active!
-    redirect_to @event
+    redirect_to @event, notice: 'Evento reativado com sucesso.'
   end
 
   def inactive
-    @event = Event.find(params[:id])
     @event.inactive!
     redirect_to @event, notice: 'Evento desativado com sucesso.'
+  end
+
+  def deactivated
+    @venue = Venue.find(params[:venue_id])
+    @events = @venue.events.inactive
   end
 
   private
@@ -49,5 +53,12 @@ class EventsController < ApplicationController
                                   :has_parking_service,
                                   :has_valet_service,
                                   :can_be_catering)
+  end
+
+  def check_user_and_ser_event
+    @event = Event.find(params[:id])
+    if @event.venue != current_user.venue
+      return redirect_to venue_path(current_user.venue.id)
+    end
   end
 end

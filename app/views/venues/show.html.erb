@@ -3,10 +3,11 @@
   <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
   <p><strong>Descrição: </strong> <%= @venue.description %></p>
 
-  <div class="venues-list">
+  <div class="events-list">
     <h4>Eventos que realizamos:</h4>
     <% if user_signed_in? && current_user.venue%>
-      <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id) %>
+      <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id), class:"btn btn-outline-primary btn-sm" %>
+      <%= link_to 'Ver eventos desativados', deactivated_venue_events_path(venue_id: current_user.venue.id), class:"btn btn-outline-primary btn-sm" %>
     <% end %>
 
     <% if @venue.events.active.any? %>

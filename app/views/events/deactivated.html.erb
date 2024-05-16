@@ -1,0 +1,15 @@
+<h3>Eventos desativados</h3>
+
+<div class="events-list">
+  <% if @events.any? %>
+    <% @events.each do |e| %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <%= link_to "#{e.name}", event_path(e.id) %>
+        </li>
+      </ul>
+    <% end %>
+  <% else %>
+    <p>Nenhum evento desativado</p>
+  <% end %>
+</div>
