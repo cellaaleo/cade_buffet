@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   def index
     @venues = Venue.all
+    @venues = @venues.active
 
     if user_signed_in?
       if current_user.venue

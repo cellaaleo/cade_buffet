@@ -24,10 +24,22 @@
   <p><strong>email: </strong> <%= @venue.email %></p>
   <p><strong>tel.: </strong> <%= @venue.phone_number %></p>
   <br>
+
   <h5>Outras informações:</h5>
-  <% if user_signed_in? && current_user.venue %>
-    <p><strong>Razão Social: </strong> <%= @venue.corporate_name %></p>
-  <% end %>
   <p><strong>Meios de pagamentos aceitos: </strong> <%= @venue.payment_methods %></p>
   <p><strong>CNPJ: </strong> <%= @venue.registration_number %></p>
+
+  <% if user_signed_in? && current_user.venue %>
+    <p><strong>Razão Social: </strong> <%= @venue.corporate_name %></p>
+    
+    <div class="d-flex justify-content-end">
+      <% if @venue.active? %>
+        <%= button_to 'Desativar buffet', inactive_venue_path(@venue.id), class:"btn btn-warning" %>
+      <% else %>
+        <%= button_to 'Reativar buffet', active_venue_path(@venue.id), class:"btn btn-info" %>
+      <% end %>
+    </div>
+    
+    
+  <% end %>
 </div>

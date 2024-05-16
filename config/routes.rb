@@ -8,6 +8,8 @@ Rails.application.routes.draw do
  
   resources :venues, only: [:new, :create, :show, :edit, :update, :index] do
     get 'search', on: :collection
+    post 'active', on: :member
+    post 'inactive', on: :member
     resources :events, only: [:new, :create]
   end
   

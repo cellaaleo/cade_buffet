@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_and_check_user, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :active, :inactive]
+  before_action :set_and_check_user, only: [:show, :edit, :update, :active, :inactive]
 
   def show; end
 
@@ -37,9 +37,11 @@ class VenuesController < ApplicationController
     second_condition = ["events.name LIKE ?", "%#{@query}%"]
 
     @venues = Venue.where(first_condition)
+    @venues = @venues.active
     @venues = @venues.order(:brand_name) if @venues.count > 1
 
     venues_by_event = Venue.joins(:events).where(second_condition).distinct
+    venues_by_event = venues_by_event.active
 
     if @venues.empty?
       @venues = venues_by_event
@@ -50,11 +52,14 @@ class VenuesController < ApplicationController
     end
   end
 
-  def set_and_check_user
-    @venue = Venue.find(params[:id])
-    if user_signed_in? && @venue.user != current_user
-      return redirect_to venue_path(current_user.venue.id), alert: 'Acesso não permitido!'
-    end
+  def active
+    @venue.active!
+    redirect_to @venue
+  end
+
+  def inactive
+    @venue.inactive!
+    redirect_to @venue
   end
   
   private
@@ -71,5 +76,12 @@ class VenuesController < ApplicationController
                                   :phone_number,
                                   :description,
                                   :payment_methods)
+  end
+
+  def set_and_check_user
+    @venue = Venue.find(params[:id])
+    if user_signed_in? && @venue.user != current_user
+      return redirect_to venue_path(current_user.venue.id), alert: 'Acesso não permitido!'
+    end
   end
 end
