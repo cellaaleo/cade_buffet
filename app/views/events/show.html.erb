@@ -16,6 +16,14 @@
   </div>
 <% end %>
 
+<% if user_signed_in? && @event.venue == current_user.venue %>
+  <% if @event.active? %>
+    <%= button_to 'Desativar evento', inactive_event_path(@event.id), class:"btn btn-warning" %>
+  <% else %>
+    <%= button_to 'Reativar evento', active_event_path(@event.id), class:"btn btn-info" %>
+  <% end %>
+<% end %>
+
 <p>
   <strong>Descrição: </strong>
   <%= @event.description %>, 

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :active, :inactive]
 
   def new
     @venue = Venue.find(params[:venue_id])
@@ -22,6 +22,18 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @price = @event.price
+  end
+
+  def active
+    @event = Event.find(params[:id])
+    @event.active!
+    redirect_to @event
+  end
+
+  def inactive
+    @event = Event.find(params[:id])
+    @event.inactive!
+    redirect_to @event, notice: 'Evento desativado com sucesso.'
   end
 
   private

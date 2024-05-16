@@ -9,8 +9,8 @@
       <%= link_to 'Cadastrar um evento', new_venue_event_path(venue_id: current_user.venue.id) %>
     <% end %>
 
-    <% if @venue.events.any? %>
-      <% @venue.events.each do |e| %>
+    <% if @venue.events.active.any? %>
+      <% @venue.events.active.each do |e| %>
         <ul>
           <li><%= link_to "#{e.name}", event_path(e.id) %></li>
         </ul>
