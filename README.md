@@ -2,18 +2,18 @@
 Projeto Ruby on Rails com TDD desenvolvido durante o TreinaDev12.
 
 ## Tópicos
-- (Sobre a aplicação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#sobre-a-aplica%C3%A7%C3%A3o]
-  - (Gems utilizadas)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#gems-utilizadas]
-  - (Models)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#models]
-- (Pré-requisitos)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#pr%C3%A9-requisitos]
-- (Como rodar a aplicação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#como-rodar-a-aplica%C3%A7%C3%A3o]
+- [Sobre a aplicação](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#sobre-a-aplica%C3%A7%C3%A3o)
+  - [Gems utilizadas](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#gems-utilizadas)
+  - [Models](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#models)
+- [Pré-requisitos](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#pr%C3%A9-requisitos)
+- [Como rodar a aplicação](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#como-rodar-a-aplica%C3%A7%C3%A3o)
 - [Cadê Buffet? - API Rest](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#cad%C3%AA-buffet---api-rest)
-  - (Documentação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#documenta%C3%A7%C3%A3o]
-    - (Listando buffets)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-buffets]
-    - (Acessando detalhes de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#acessando-detalhes-de-um-buffet]
-    - (Buscando um buffet pelo nome fantasia)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#buscando-um-buffet-pelo-nome-fantasia]
-    - (Listando eventos de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-eventos-um-buffet]
-    - (Consultando disponibilidade de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#consultando-disponibilidade-de-um-buffet]
+  - [Documentação](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#documenta%C3%A7%C3%A3o)
+    - [Listando buffets](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-buffets)
+    - [Acessando detalhes de um buffet](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#acessando-detalhes-de-um-buffet)
+    - [Buscando um buffet pelo nome fantasia](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#buscando-um-buffet-pelo-nome-fantasia)
+    - [Listando eventos de um buffet](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-eventos-um-buffet)
+    - [Consultando disponibilidade de um buffet](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#consultando-disponibilidade-de-um-buffet)
 
 ## Sobre a aplicação
 "Cadê Buffet?" é uma aplicação em que buffets cadastrados podem receber pedidos de clientes para a realização de determinado tipo de evento.
