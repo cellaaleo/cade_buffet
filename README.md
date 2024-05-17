@@ -2,18 +2,18 @@
 Projeto Ruby on Rails com TDD desenvolvido durante o TreinaDev12.
 
 ## Tópicos
-- Sobre a aplicação
- - Gems utilizadas
- - Models
-- Pré-requisitos
-- Como rodar a aplicação
+- (Sobre a aplicação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#sobre-a-aplica%C3%A7%C3%A3o]
+  - (Gems utilizadas)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#gems-utilizadas]
+  - (Models)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#models]
+- (Pré-requisitos)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#pr%C3%A9-requisitos]
+- (Como rodar a aplicação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#como-rodar-a-aplica%C3%A7%C3%A3o]
 - [Cadê Buffet? - API Rest](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#cad%C3%AA-buffet---api-rest)
-  - Documentação
-    - Listando buffets
-    - Acessando detalhes de um buffet
-    - Buscando um buffet pelo nome fantasia
-    - Listando eventos um buffet
-    - Consultando disponibilidade de um buffet
+  - (Documentação)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#documenta%C3%A7%C3%A3o]
+    - (Listando buffets)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-buffets]
+    - (Acessando detalhes de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#acessando-detalhes-de-um-buffet]
+    - (Buscando um buffet pelo nome fantasia)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#buscando-um-buffet-pelo-nome-fantasia]
+    - (Listando eventos de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-eventos-um-buffet]
+    - (Consultando disponibilidade de um buffet)[https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#consultando-disponibilidade-de-um-buffet]
 
 ## Sobre a aplicação
 "Cadê Buffet?" é uma aplicação em que buffets cadastrados podem receber pedidos de clientes para a realização de determinado tipo de evento.
@@ -111,7 +111,7 @@ O tipo de resultado que recebemos:
 Isso retornará todos os buffets que contenham em seu nome fantasia o texto especificado no valor de 'venue' (no caso acima: "buffet" traria resultados como "Buffet Bom Garfo", "Ana Buffet & Eventos" etc).
 
 
-### Listando eventos um buffet
+### Listando eventos de um buffet
 A partir do id de um buffet, é possível ver uma lista dos eventos que ele realiza:
 
     http://localhost:3000/api/v1/venues/1/events
