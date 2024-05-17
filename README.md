@@ -6,7 +6,7 @@ Projeto Ruby on Rails com TDD desenvolvido durante o TreinaDev12.
   - [Gems utilizadas](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#gems-utilizadas)
   - [Models](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#models)
 - [Pré-requisitos](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#pr%C3%A9-requisitos)
-- [Como rodar a aplicação](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#como-rodar-a-aplica%C3%A7%C3%A3o)
+- [Como rodar a aplicação e os testes](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#como-rodar-a-aplica%C3%A7%C3%A3o)
 - [Cadê Buffet? - API Rest](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#cad%C3%AA-buffet---api-rest)
   - [Documentação](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#documenta%C3%A7%C3%A3o)
     - [Listando buffets](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#listando-buffets)
@@ -19,7 +19,7 @@ Projeto Ruby on Rails com TDD desenvolvido durante o TreinaDev12.
 "Cadê Buffet?" é uma aplicação em que buffets cadastrados podem receber pedidos de clientes para a realização de determinado tipo de evento.
 
 A app possui dois tipos de usuário: dono de buffet e cliente.
-* **Dono de buffet** faz um cadastro inicial e, em seguida, deve cadastrar dados de sua empresa que posteriormente podem ser editados. A partir da página do buffet, é possível cadastrar eventos que oferece e posteriormente, cadastrar os respectivos preços. Ao clicar em 'Pedidos' é possível ver os pedidos que recebeu de clientes, separados de acordo com o status. Para pedidos que aguardam avaliação, deve-se fazer um orçamento para, em seguida poder ser aprovado. Dono de buffet pode desativar e reativar o perfil da empresa ou um evento. Buffets ou eventos desativados não aparecerão em listagens e não recebem pedidos.
+* **Dono de buffet** faz um cadastro inicial e, em seguida, deve cadastrar dados de sua empresa que posteriormente podem ser editados. A partir da página do buffet, é possível cadastrar eventos que oferece e posteriormente, cadastrar os respectivos preços. Ao clicar em 'Pedidos' é possível ver os pedidos que recebeu de clientes, separados de acordo com o status. Para pedidos que aguardam avaliação, deve-se fazer um orçamento para, em seguida poder ser aprovado. Dono de buffet pode desativar e reativar o perfil da empresa ou um evento. Buffets ou eventos desativados não aparecerão em listagens e não receberão novos pedidos.
 * **Cliente** devidamente autenticado pode fazer pedidos a partir da página de um evento sendo que a data escolhida deve ser pelo menos a partir de um mês da data de cadastro. Ao acessar 'Meus pedidos', é possível visualizá-los separados de acordo com o status. Um pedido aprovado apresenta o orçamento e é possível ser confirmado pelo cliente, desde que dentro do prazo de validade deste orçamento. 
 
 Visitante (usuário não autenticado) e clientes podem ver a relação de buffets cadastrados a partir da página inicial da app e podem pesquisar por um buffet através do nome, cidade ou tipo de evento.
@@ -28,10 +28,6 @@ Visitante (usuário não autenticado) e clientes podem ver a relação de buffet
 Para criação de perfis de usuários: [devise](https://github.com/heartcombo/devise)
 
 Para testes de desenvolvimento: [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails)
-
-Para rodar os testes, execute:
-
-    rspec
 
 ### Models
 * **dono de buffet:** user
@@ -46,7 +42,7 @@ Para rodar os testes, execute:
 * Rails 7.1.3.2
 * ruby 3.0.0
 
-## Como rodar a aplicação:
+## Como rodar a aplicação e os testes:
 No terminal, clone o projeto:
 
     git clone https://github.com/cellaaleo/cade_buffet
@@ -63,12 +59,15 @@ Faça as migrações:
 
     rails db:migrate
 
-Execute a aplicação:
+Para rodar os testes, execute:
+
+    rspec
+
+Para rodar a aplicação, execute:
 
     rails server
 
 Agora é possível acessar a aplicação a partir da rota http://localhost:3000/
-
 
 
 # Cadê Buffet? - API Rest
