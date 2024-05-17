@@ -1,12 +1,46 @@
 <h1 align="center"> Cadê Buffet? </h1> 
-[Cadê Buffet? - API Rest](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#cad%C3%AA-buffet---api-rest)
-
 Projeto Ruby on Rails com TDD desenvolvido durante o TreinaDev12.
+
+## Tópicos
+- Sobre a aplicação
+ - Gems utilizadas
+ - Models
+- Pré-requisitos
+- Como rodar a aplicação
+- [Cadê Buffet? - API Rest](https://github.com/cellaaleo/cade_buffet?tab=readme-ov-file#cad%C3%AA-buffet---api-rest)
+  - Documentação
+    - Listando buffets
+    - Acessando detalhes de um buffet
+    - Buscando um buffet pelo nome fantasia
+    - Listando eventos um buffet
+    - Consultando disponibilidade de um buffet
+
+## Sobre a aplicação
 "Cadê Buffet?" é uma aplicação em que buffets cadastrados podem receber pedidos de clientes para a realização de determinado tipo de evento.
-A app possui dois tipos de usuário: donos de buffet e clientes.
-* Donos de buffet fazem um cadastro inicial e, em seguida, devem cadastrar dados de sua empresa que posteriormente podem ser editados. A partir da página do buffet, é possível cadastrar eventos que oferece e posteriormente, cadastrar os respectivos preços. Ao clicar em 'Pedidos' é possível ver os pedidos que recebeu de clientes, separados de acordo com o status. Para pedidos que aguardam avaliação, deve-se fazer um orçamento para, em seguida poder ser aprovado. Dono de buffet pode desativar e reativar o seu perfil ou um evento. Buffet ou evento desativado não aparecerão em listagens e não recebem pedidos.
-* Clientes devidamente autenticados podem fazer pedidos a partir da página de um evento sendo que a data escolhida deve ser para pelo menos um mês da data de cadastro. Ao acessar 'Meus pedidos', é possível visualizá-los separados de acordo com o status. Um pedido aprovado apresenta o orçamento e é possível ser confirmado pelo cliente, desde que dentro do prazo de validade deste orçamento. 
-Visitante (usuário não autenticado) e clientes podem ver a relação de buffets cadastrados a partir da página inicial da app e podem pesquisar por um buffet atravé do nome, cidade ou tipo de evento.
+
+A app possui dois tipos de usuário: dono de buffet e cliente.
+* **Dono de buffet** faz um cadastro inicial e, em seguida, deve cadastrar dados de sua empresa que posteriormente podem ser editados. A partir da página do buffet, é possível cadastrar eventos que oferece e posteriormente, cadastrar os respectivos preços. Ao clicar em 'Pedidos' é possível ver os pedidos que recebeu de clientes, separados de acordo com o status. Para pedidos que aguardam avaliação, deve-se fazer um orçamento para, em seguida poder ser aprovado. Dono de buffet pode desativar e reativar o perfil da empresa ou um evento. Buffets ou eventos desativados não aparecerão em listagens e não recebem pedidos.
+* **Cliente** devidamente autenticado pode fazer pedidos a partir da página de um evento sendo que a data escolhida deve ser pelo menos a partir de um mês da data de cadastro. Ao acessar 'Meus pedidos', é possível visualizá-los separados de acordo com o status. Um pedido aprovado apresenta o orçamento e é possível ser confirmado pelo cliente, desde que dentro do prazo de validade deste orçamento. 
+
+Visitante (usuário não autenticado) e clientes podem ver a relação de buffets cadastrados a partir da página inicial da app e podem pesquisar por um buffet através do nome, cidade ou tipo de evento.
+
+### Gems utilizadas:
+Para criação de perfis de usuários: [devise](https://github.com/heartcombo/devise)
+
+Para testes de desenvolvimento: [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails)
+
+Para rodar os testes, execute:
+
+    rspec
+
+### Models
+* **dono de buffet:** user
+* **cliente:** customer
+* **buffet:** venue
+* **evento:** event
+* **preço:** price
+* **pedido:** order
+* **orçamento:** quotation
 
 ## Pré-requisitos:
 * Rails 7.1.3.2
@@ -14,38 +48,37 @@ Visitante (usuário não autenticado) e clientes podem ver a relação de buffet
 
 ## Como rodar a aplicação:
 No terminal, clone o projeto:
+
     git clone https://github.com/cellaaleo/cade_buffet
+
 Entre na pasta do projeto:
+
     cd cade_buffet
+
 Instale as dependecias:
+
     bundle install
+
 Faça as migrações:
+
     rails db:migrate
+
 Execute a aplicação:
+
     rails server
+
 Agora é possível acessar a aplicação a partir da rota http://localhost:3000/
 
-### Gems utilizadas:
-Para criação de perfis de usuários: [devise](https://github.com/heartcombo/devise)
-Para testes de desenvolvimento: [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails)
-Para rodar os testes, execute:
-    rspec
 
-### Models
-* dono de buffet: user
-* cliente: customer
-* buffet: venue
-* evento: event
-* preço: price
-* pedido: order
-* orçamento: quotation
 
 # Cadê Buffet? - API Rest
 
 ## Documentação
 Para executar a API, rode o rails server.
+
 ### Listando buffets
-É possível a lista de buffets cadastrados que estejam ativos fazendo no navegador a requisição:
+É possível ver a lista de buffets cadastrados que estejam ativos fazendo no navegador a requisição:
+
     http://localhost:3000/api/v1/venues/
 
 ### Acessando detalhes de um buffet
@@ -69,7 +102,6 @@ O tipo de resultado que recebemos:
       "payment_methods": "Pix, Cartão de Crédito, Transferência Bancária"
       "events": [...]
     }
-
 
 ### Buscando um buffet pelo nome fantasia
 É possível filtrar o resultado da lista de buffets fazendo uma busca pelo nome fantasia (brand_name) como no exemplo abaixo:
