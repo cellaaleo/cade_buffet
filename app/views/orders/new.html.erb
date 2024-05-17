@@ -1,4 +1,16 @@
 <h4 class="form-title"><%= current_customer.name %>, informe detalhes do seu pedido:</h4>
+
+<% if(@order.errors.any?) %>
+  <div class="errors-msg">
+    <p>Verifique os erros abaixo:</p>
+    <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>  
+<% end %>
+
 <p><strong>Evento:</strong> <%= @event.name %></p>
 <p><strong>Buffet:</strong> <%= @event.venue.brand_name %></p>
 

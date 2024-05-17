@@ -8,7 +8,7 @@ pt-BR:
         description: "Descrição"
         minimum_guests_number: "Quantidade mínima de convidados"
         maximum_guests_number: "Quantidade máxima de convidados"
-        duration: "Tempo de duração padrão"
+        duration: "Tempo de duração padrão (em minutos)"
         menu: "Cardápio"
         has_alcoholic_drinks: "Bebidas alcoólicas"
         has_decorations: "Decoração"

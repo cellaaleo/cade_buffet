@@ -107,7 +107,7 @@ describe "dono de buffet registra tipo de evento" do
     expect(page).to have_content 'Evento não cadastrado'
     expect(page).to have_content 'Quantidade mínima de convidados não pode ficar em branco'
     expect(page).to have_content 'Quantidade máxima de convidados não pode ficar em branco'
-    expect(page).to have_content 'Tempo de duração padrão não pode ficar em branco'
+    expect(page).to have_content 'Tempo de duração padrão (em minutos) não pode ficar em branco'
   end
   
   it "e aparece na página do seu buffet" do

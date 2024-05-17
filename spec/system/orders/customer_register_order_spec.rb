@@ -164,4 +164,32 @@ describe "Cliente faz um pedido" do
     expect(page).to have_content 'Endereço do evento: Rua dos Pinheiros, 100 - Pinheiros, São Paulo/SP'
     expect(page).to have_content 'Situação do pedido: Aguardando avaliação do buffet'
   end
+
+  it "com dados incompletos" do
+    # Arrange
+    user = User.create!(email: 'buffet@email.com', password: 'password')
+    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
+                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
+                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
+                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
+                      payment_methods: "", user: user)
+    event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
+                          maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
+                          can_be_catering: true, venue: venue)
+    customer = Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
+    
+    allow(SecureRandom).to receive(:alphanumeric).with(8).and_return('ABC12345')
+    # Act
+    login_as customer, :scope => :customer
+    visit event_path(event.id)
+    click_on 'Fazer um pedido'
+    fill_in "Data do evento",	with: ""
+    fill_in "Número de convidados",	with: ""
+    click_on 'Enviar'
+
+    # Assert
+    expect(page).to have_content 'Não foi possível registrar o pedido'
+    expect(page).to have_content 'Data do evento não pode ficar em branco'
+    expect(page).to have_content 'Número de convidados não pode ficar em branco'
+  end
 end
