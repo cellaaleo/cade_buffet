@@ -33,6 +33,8 @@ Para verificar cobertura de testes: [SimpleCov](https://rubydoc.info/gems/simple
 
 Para verificação de diretrizes Ruby: [RuboCop](https://docs.rubocop.org/rubocop/1.64/index.html) e [rubocop-rails](https://github.com/rubocop/rubocop-rails)
 
+Para auxiliar a criação de dados para testes: [factory_bot](https://thoughtbot.github.io/factory_bot/)
+
 ### Models
 * **dono de buffet:** user
 * **cliente:** customer

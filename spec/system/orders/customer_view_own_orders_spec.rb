@@ -11,12 +11,7 @@ describe "Cliente vê os próprios pedidos" do
 
   it "e não vê outros pedidos" do
     # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: user)
+    venue = FactoryBot.create(:venue)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
                           maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
@@ -39,12 +34,7 @@ describe "Cliente vê os próprios pedidos" do
 
   it "e visita um pedido" do
     # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: user)
+    venue = FactoryBot.create(:venue, brand_name: 'Casa Jardim')
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', minimum_guests_number: 50,
                           maximum_guests_number: 120, duration: 240, menu: '(Jantar com buffet e serviço de mesa)', 
                           can_be_catering: true, venue: venue)
@@ -70,12 +60,7 @@ describe "Cliente vê os próprios pedidos" do
 
   it "e o pedido foi aprovado pelo buffet" do
     # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: user)
+    venue = FactoryBot.create(:venue)
     event = Event.create!(name: 'Festa de Aniversário', description: 'Festa de aniversário para todas as idades', 
                           minimum_guests_number: 50, maximum_guests_number: 120, duration: 240, menu: '...', venue: venue,
                           has_decorations: true)

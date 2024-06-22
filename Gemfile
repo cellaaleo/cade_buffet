@@ -24,6 +24,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
   gem "rspec-rails"
   gem "capybara"
+  gem "factory_bot_rails"
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'simplecov', require: false

@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Cliente se autentica" do
   it "com sucesso" do
     # Arrange - fazer cadastro
-    Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
+    FactoryBot.create(:customer, email: 'luis@email.com', password: 'password')
 
     # Act - fazer log in
     visit root_path
@@ -26,7 +26,7 @@ describe "Cliente se autentica" do
 
   it "e faz log out" do
     # Arrange - fazer cadastro
-    Customer.create!(name: 'Luis', cpf: '197.424.430-09', email: "luis@email.com", password: "password")
+    create(:customer, email: 'luis@email.com', password: 'password')
 
     # Act
     visit root_path

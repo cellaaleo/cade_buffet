@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário altera status do buffet' do
   it "e o buffet fica inativo" do
     # Arrange 
-    u = User.create!(email: "buffet@buffet.com.br", password: "senha123")
+    u = FactoryBot.create(:user)
     Venue.create!(brand_name: "Meu Buffet", corporate_name: "Buffet & Eventos Ltda", registration_number:"66.666.666/0001-00",
                   address: "Avenida Tal, 2000", district: "Vila Tal", city: "Recife", state: "PE", zip_code: "56655-560", 
                   phone_number: "99555-6666", email: "sac@buffet.com.br", description: "Um buffet espaçoso para eventos diversos",
