@@ -28,6 +28,7 @@ Visitante (usuário não autenticado) e clientes podem ver a relação de buffet
 Para criação de perfis de usuários: [devise](https://github.com/heartcombo/devise)
 
 Para testes de desenvolvimento: [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails)
+Para verificar cobertura de testes: [SimpleCov](https://rubydoc.info/gems/simplecov/frames)
 
 ### Models
 * **dono de buffet:** user
