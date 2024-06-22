@@ -1,0 +1,17 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/Documentation:
+  # para não apontar falta de comentários antes das classes
+  Enabled: false  
+
+Style/FrozenStringLiteralComment:
+  Enabled: false  

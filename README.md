@@ -28,7 +28,10 @@ Visitante (usuário não autenticado) e clientes podem ver a relação de buffet
 Para criação de perfis de usuários: [devise](https://github.com/heartcombo/devise)
 
 Para testes de desenvolvimento: [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails)
+
 Para verificar cobertura de testes: [SimpleCov](https://rubydoc.info/gems/simplecov/frames)
+
+Para verificação de diretrizes Ruby: [RuboCop](https://docs.rubocop.org/rubocop/1.64/index.html) e [rubocop-rails](https://github.com/rubocop/rubocop-rails)
 
 ### Models
 * **dono de buffet:** user
@@ -69,6 +72,14 @@ Para rodar a aplicação, execute:
     rails server
 
 Agora é possível acessar a aplicação a partir da rota http://localhost:3000/
+
+Para rodar o Rubocop, execute:
+
+    rubocop
+
+Ou, para inspecionar um diretório ou arquivo mais específico:
+
+    rubocop app/models
 
 
 # Cadê Buffet? - API Rest
