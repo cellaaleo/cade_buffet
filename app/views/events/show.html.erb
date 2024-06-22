@@ -1,83 +1,96 @@
-<h2>
-  <%= @event.name %> - 
-  <%= link_to @event.venue.brand_name, venue_path(@event.venue_id) %>
-</h2>
+<div class="venue-details">
+  
+  <h3 style="text-align: center">
+    <%= @event.name %> - 
+    <%= link_to @event.venue.brand_name, venue_path(@event.venue_id) %>
+  </h3>
 
-<% unless user_signed_in? %>
-  <div>
-    <% if @event.venue.active? %>
-      <p>
-        Gostaria de solicitar este evento? Clique em 
-        <%= link_to "Fazer um pedido", new_event_order_path(event_id: @event.id), class:"btn btn-outline-secondary btn-sm" %>
-      </p>
-    <% else %>
-      <p style="color: rgb(177, 5, 5);">(Buffet inativo! Não é possível fazer pedidos.)</p>
-    <% end %>
-  </div>
-<% end %>
-
-<p>
-  <strong>Descrição: </strong>
-  <%= @event.description %>, 
-  a partir de <%= @event.minimum_guests_number %> 
-  até o máximo de <%= @event.maximum_guests_number %> convidados, 
-  com pelo menos <%= @event.duration %> minutos de duração.
-</p>
-
-<h3>Serviços opcionais que oferecemos:</h3>
-<ul>
-  <% if @event.has_alcoholic_drinks %>
-    <li>bebidas alcoólicas</li>
-  <% end%>
-  <% if @event.has_decorations %>
-    <li>decoração</li>
-  <% end%>
-  <% if @event.has_parking_service %>
-    <li>estacionamento</li>
-  <% end%>
-  <% if @event.has_valet_service %>
-    <li>valet</li>
-  <% end%>
-</ul>
-
-<h3>Observações:</h3>
-<% if @event.can_be_catering %>
-  <p>Além do nosso espaço, temos como opção o serviço de catering para que você possa realizar seu evento num espaço de sua preferência.</p>
-<% else %>
-  <p>Evento realizado exclusivamente em nosso espaço.</p>
-<% end %>
-
-<% if @event.price %>
-  <div>
-    <h3>Nossos preços:</h3>
-    <section>
-      <p>DIAS ÚTEIS</p>
-      <p>
-        Valor inicial:
-        <%= "R$ #{@price.weekday_base_price},00 (#{@event.minimum_guests_number} convidados)." %>
-      </p>
-      <p>Taxa extra por pessoa: R$ <%= @price.weekday_plus_per_person %>,00</p>
-      <p>Taxa por hora adicional: R$ <%= @price.weekday_plus_per_hour%>,00</p>
-    </section>
-    <section>
-      <p>FINS DE SEMANA</p>
-      <p>
-        Valor inicial:
-        <%= "R$ #{@price.weekend_base_price},00 (#{@event.minimum_guests_number} convidados)." %>
-      </p>
-      <p>Taxa extra por pessoa: R$ <%= @price.weekend_plus_per_person %>,00</p>
-      <p>Taxa por hora adicional: R$ <%= @price.weekend_plus_per_hour%>,00</p>
-    </section>
-  </div>
-<% else %>
-  <p>Este evento ainda não possui preços cadastrados.</p>
-<% end %>
-
-<% if user_signed_in? && @event.venue == current_user.venue %>
-  <%= link_to 'Cadastrar preços deste evento', new_event_price_path(event_id: @event.id), class:"btn btn-outline-primary btn-sm" %> 
-  <% if @event.active? %>
-    <%= button_to 'Desativar evento', inactive_event_path(@event.id), class:"btn btn-outline-warning btn-sm" %>
-  <% else %>
-    <%= button_to 'Reativar evento', active_event_path(@event.id), class:"btn btn-outline-info btn-sm" %>
+  <% unless user_signed_in? %>
+    <div>
+      <% if @event.venue.active? %>
+        <p style="text-align: center">
+          Gostaria de solicitar este evento? Clique em 
+          <%= link_to "Fazer um pedido", new_event_order_path(event_id: @event.id), class:"btn btn-outline-secondary btn-sm" %>
+        </p>
+      <% else %>
+        <p style="color: rgb(177, 5, 5);">(Buffet inativo! Não é possível fazer pedidos.)</p>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+
+  <p><strong>Descrição: </strong> <%= @event.description %></p>
+  <p><strong>Capacidade de atendimento: </strong> 
+    mín. <%= @event.minimum_guests_number %> | máx. <%= @event.maximum_guests_number %> convidados
+  </p>
+  <p><strong>Duração média: </strong> <%= @event.duration %> minutos</p>
+
+  <h4>Serviços opcionais que oferecemos:</h4>
+  <ul>
+    <% if @event.has_alcoholic_drinks %>
+      <li>bebidas alcoólicas</li>
+    <% end%>
+    <% if @event.has_decorations %>
+      <li>decoração</li>
+    <% end%>
+    <% if @event.has_parking_service %>
+      <li>estacionamento</li>
+    <% end%>
+    <% if @event.has_valet_service %>
+      <li>valet</li>
+    <% end%>
+  </ul>
+
+  <h4>Observações:</h4>
+  <% if @event.can_be_catering %>
+    <p>Além do nosso espaço, temos como opção o serviço de catering para que você possa realizar seu evento num espaço de sua preferência.</p>
+  <% else %>
+    <p>Evento realizado exclusivamente em nosso espaço.</p>
+  <% end %>
+
+  <% if @event.price %>
+    <div>
+      <h4>Nossos preços:</h4>
+      <table id="prices-table" class="table";">
+        <thead class="thead-dark">
+          <tr>
+            <th></th>
+            <th scope="col">Dias Úteis</th>
+            <th scope="col">Fins de Semana</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Valor inicial</td>
+            <td><%= "R$ #{@price.weekday_base_price},00" %></td>
+            <td><%= "R$ #{@price.weekend_base_price},00" %></td>
+          </tr>
+          <tr>
+            <td>Taxa extra por pessoa</td>
+            <td>R$ <%= @price.weekday_plus_per_person %>,00</td>
+            <td>R$ <%= @price.weekend_plus_per_person %>,00</td>
+          </tr>
+          <tr>
+            <td>Taxa por hora adicional</td>
+            <td>R$ <%= @price.weekday_plus_per_hour%>,00</td>
+            <td>R$ <%= @price.weekend_plus_per_hour%>,00</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>Este evento ainda não possui preços cadastrados.</p>
+      <% if user_signed_in? && @event.venue == current_user.venue %>
+        <%= link_to 'Cadastrar preços deste evento', new_event_price_path(event_id: @event.id), class:"btn btn-primary btn-sm" %> 
+      <% end %>
+  <% end %>
+
+  <% if user_signed_in? && @event.venue == current_user.venue %>
+    <% if @event.active? %>
+      <%= button_to 'Desativar evento', inactive_event_path(@event.id), class:"btn btn-warning btn-sm" %>
+    <% else %>
+      <%= button_to 'Reativar evento', active_event_path(@event.id), class:"btn btn-info btn-sm" %>
+    <% end %>
+  <% end %>
+
+</div>
+

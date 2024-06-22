@@ -37,14 +37,31 @@ body {
     font-weight: 600;
 }
 
-#venue-details {
+.venue-details {
     background-color: #f8f9fa;;
     margin: 0 50px;
     padding: 20px 50px;
 }
 
-#venue-details h2 {
+.venue-details h2 {
     text-align: center;
     padding: 20px 0;
     font-size: 3.5rem; 
+    font-weight: bold;
+}
+
+.venue-details h3 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.venue-details h4 {
+    font-size: 1.3rem; 
+    font-weight: bold;
+}
+
+#prices-table {
+    width: 50%;
 }

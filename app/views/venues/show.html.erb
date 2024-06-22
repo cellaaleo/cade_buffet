@@ -1,4 +1,4 @@
-<div id="venue-details">
+<div class="venue-details">
   <h2><%= @venue.brand_name %></h2>
   <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
   <p><strong>Descrição: </strong> <%= @venue.description %></p>
@@ -21,12 +21,12 @@
     <% end %>
   </div>
   
-  <h5>Contatos:</h5>
+  <h4>Contatos:</h4>
   <p><strong>email: </strong> <%= @venue.email %></p>
   <p><strong>tel.: </strong> <%= @venue.phone_number %></p>
   <br>
 
-  <h5>Outras informações:</h5>
+  <h4>Outras informações:</h4>
   <p><strong>Meios de pagamentos aceitos: </strong> <%= @venue.payment_methods %></p>
   <p><strong>CNPJ: </strong> <%= @venue.registration_number %></p>
 
@@ -40,7 +40,5 @@
         <%= button_to 'Reativar buffet', active_venue_path(@venue.id), class:"btn btn-info" %>
       <% end %>
     </div>
-    
-    
   <% end %>
 </div>
