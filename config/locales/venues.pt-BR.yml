@@ -20,3 +20,4 @@ pt-BR:
         description: "Descrição"
         payment_methods: "Opções de pagamento"
         user_id: "Dono / Proprietário"
+        photo: 'Foto do Buffet'

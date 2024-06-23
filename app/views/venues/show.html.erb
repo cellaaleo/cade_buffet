@@ -1,4 +1,11 @@
 <div class="venue-details">
+
+  <% if @venue.photo.present? %>
+    <div >
+      <%= image_tag @venue.photo, id:"venue-photo" %>
+    </div>
+  <% end %>
+  
   <h2><%= @venue.brand_name %></h2>
   <p><strong>Endereço: </strong> <%= @venue.full_address %> </p>
   <p><strong>Descrição: </strong> <%= @venue.description %></p>

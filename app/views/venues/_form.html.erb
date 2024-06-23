@@ -58,6 +58,10 @@
     <%= f.label :payment_methods %>
     <%= f.text_area :payment_methods, class:"form-control" %>
   </div>
+  <div class="form-group col-md-4">
+    <%= f.label :photo %>
+    <%= f.file_field :photo, class:"form-control" %>
+  </div>
   <div class="form-button">
     <%= f.submit 'Enviar', class:"btn btn-secondary" %>
   </div>

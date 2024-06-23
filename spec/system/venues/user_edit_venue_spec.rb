@@ -83,4 +83,31 @@ describe 'Usuário edita dados de seu buffet' do
     expect(page).to have_field('E-mail', with: '')
     expect(page).to have_field('Razão Social', with: 'Buffet & Eventos Ltda')
   end
+
+  it "e adiciona uma foto do buffet com sucesso" do
+    u = FactoryBot.create(:user)
+    v = FactoryBot.create(:venue, user: u)
+
+    login_as u, :scope => :user
+    visit root_path
+    click_on 'Editar dados do Buffet'
+    attach_file 'Foto do Buffet', Rails.root.join('spec', 'support', 'foto_de_um_buffet.jpg')
+    click_on 'Enviar'
+    
+    expect(page).to have_css('img[src*="foto_de_um_buffet.jpg"]')
+  end
+  
+  it "e altera foto do buffet com sucesso" do
+    u = FactoryBot.create(:user)
+    v = FactoryBot.create(:venue, user: u)
+    v.photo.attach(io: File.open(Rails.root.join('spec', 'support', 'foto_de_um_buffet.jpg')), filename: 'foto_de_um_buffet.jpg')
+
+    login_as u, :scope => :user
+    visit root_path
+    click_on 'Editar dados do Buffet'
+    attach_file 'Foto do Buffet', Rails.root.join('spec', 'support', 'foto_buffet_rustico.jpg')
+    click_on 'Enviar'
+    
+    expect(page).to have_css('img[src*="foto_buffet_rustico.jpg"]')
+  end
 end

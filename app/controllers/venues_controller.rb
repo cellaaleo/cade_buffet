@@ -75,7 +75,8 @@ class VenuesController < ApplicationController
                                   :email,
                                   :phone_number,
                                   :description,
-                                  :payment_methods)
+                                  :payment_methods,
+                                  :photo)
   end
 
   def set_and_check_user
