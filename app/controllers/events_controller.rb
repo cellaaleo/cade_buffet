@@ -1,6 +1,11 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :active, :inactive, :deactivated]
-  before_action :check_user_and_ser_event, only: [:active, :inactive]
+  before_action :authenticate_user!, only: %i[new create active inactive deactivated]
+  before_action :check_user_and_set_event, only: %i[active inactive]
+
+  def show
+    @event = Event.find(params[:id])
+    @price = @event.price
+  end
 
   def new
     @venue = Venue.find(params[:venue_id])
@@ -12,17 +17,12 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.venue = @venue
 
-    if @event.save 
+    if @event.save
       redirect_to @event, notice: 'Evento cadastrado com sucesso!'
     else
       flash.now[:alert] = 'Evento não cadastrado.'
       render 'new'
     end
-  end
-
-  def show
-    @event = Event.find(params[:id])
-    @price = @event.price
   end
 
   def active
@@ -41,24 +41,15 @@ class EventsController < ApplicationController
   end
 
   private
+
   def event_params
-    params.require(:event).permit(:name, 
-                                  :description, 
-                                  :minimum_guests_number,
-                                  :maximum_guests_number,
-                                  :duration, 
-                                  :menu, 
-                                  :has_alcoholic_drinks, 
-                                  :has_decorations, 
-                                  :has_parking_service,
-                                  :has_valet_service,
-                                  :can_be_catering)
+    params.require(:event).permit(:name, :description, :minimum_guests_number, :maximum_guests_number,
+                                  :duration, :menu, :has_alcoholic_drinks, :has_decorations,
+                                  :has_parking_service, :has_valet_service, :can_be_catering)
   end
 
-  def check_user_and_ser_event
+  def check_user_and_set_event
     @event = Event.find(params[:id])
-    if @event.venue != current_user.venue
-      return redirect_to venue_path(current_user.venue.id)
-    end
+    redirect_to venue_path(current_user.venue.id) if @event.venue != current_user.venue
   end
 end

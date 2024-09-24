@@ -12,17 +12,17 @@ class PricesController < ApplicationController
     @price.event = @event
 
     if @price.save
-      redirect_to @event, notice: "Preços cadastrados com sucesso"
+      redirect_to @event, notice: 'Preços cadastrados com sucesso'
     else
-      flash[:alert] = "Não foi possível cadastrar os preços"
+      flash[:alert] = 'Não foi possível cadastrar os preços'
       render 'new'
     end
-    
   end
-  
+
   private
+
   def price_params
-    params.require(:price).permit(:weekday_base_price, 
+    params.require(:price).permit(:weekday_base_price,
                                   :weekday_plus_per_person,
                                   :weekday_plus_per_hour,
                                   :weekend_base_price,

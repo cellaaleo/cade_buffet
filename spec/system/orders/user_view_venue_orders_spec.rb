@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Dono de buffet os pedidos que recebeu" do
+describe "Dono de buffet vê os pedidos que recebeu" do
   it "e deve estar autenticado" do
     # Arrange
     # Act
@@ -107,7 +107,7 @@ describe "Dono de buffet os pedidos que recebeu" do
     expect(page).to have_content 'Situação do pedido: Aguardando avaliação do buffet'
   end
 
-  it "e há outros pedidos para a mesma data" do
+  it "e há outros pedidos (não cancelados) para a mesma data" do
     # Arrange
     user = User.create!(email: 'buffet@email.com', password: 'password')
     venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
@@ -121,9 +121,9 @@ describe "Dono de buffet os pedidos que recebeu" do
     ana_order = Order.create!(customer: ana, event: event, venue: venue, number_of_guests: 75, 
                               event_date: 3.months.from_now, status: :pending)
     luis_order = Order.create!(customer: luis, event: event, venue: venue, number_of_guests: 75, 
-                                event_date: 3.months.from_now, status: :pending)
-    maria_order = Order.create!(customer: maria, event: event, venue: venue, number_of_guests: 75, 
                                 event_date: 3.months.from_now, status: :confirmed)
+    maria_order = Order.create!(customer: maria, event: event, venue: venue, number_of_guests: 75, 
+                                event_date: 3.months.from_now, status: :canceled)
 
     # Act
     login_as(user, :scope => :user)
@@ -134,10 +134,10 @@ describe "Dono de buffet os pedidos que recebeu" do
     # Assert
     expect(page).to have_content 'Atenção! Existem outros pedidos para esta data'
     expect(page).to have_link luis_order.code
-    expect(page).to have_link maria_order.code 
+    expect(page).not_to have_link maria_order.code 
   end
 
-  it "e não há outro pedido para a mesma data" do
+  it "e não há outros pedidos (não cancelados) para a mesma data" do
     # Arrange
     user = User.create!(email: 'buffet@email.com', password: 'password')
     venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
@@ -151,7 +151,7 @@ describe "Dono de buffet os pedidos que recebeu" do
     ana_order = Order.create!(customer: ana, event: event, venue: venue, number_of_guests: 75, 
                               event_date: 5.months.from_now, status: :pending)
     luis_order = Order.create!(customer: luis, event: event, venue: venue, number_of_guests: 75, 
-                                event_date: 4.months.from_now, status: :pending)
+                                event_date: 5.months.from_now, status: :canceled)
     maria_order = Order.create!(customer: maria, event: event, venue: venue, number_of_guests: 75, 
                                 event_date: 3.months.from_now, status: :confirmed)
 

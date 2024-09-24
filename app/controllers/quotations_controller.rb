@@ -1,5 +1,4 @@
 class QuotationsController < ApplicationController
-
   def new
     @order = Order.find(params[:order_id])
     @quotation = Quotation.new
@@ -12,13 +11,14 @@ class QuotationsController < ApplicationController
 
     if @quotation.save
       redirect_to @order, notice: 'Orçamento registrado com sucesso!'
-    else 
+    else
       flash[:alert] = 'Não foi possível enviar o orçamento!'
       render 'new'
     end
   end
 
   private
+
   def quotation_params
     params.require(:quotation).permit(:discount_or_extra_fee,
                                       :discount_or_extra_fee_description,

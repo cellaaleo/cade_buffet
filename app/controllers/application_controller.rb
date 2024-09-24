@@ -3,8 +3,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def after_sign_in_path_for(resource) 
-
+  def after_sign_in_path_for(resource)
     if resource.is_a?(User)
       if current_user.venue
         venue_path(current_user.venue.id)
@@ -14,12 +13,9 @@ class ApplicationController < ActionController::Base
     else
       super
     end
-
   end
-
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :cpf])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name cpf])
   end
-
 end
