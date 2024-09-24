@@ -52,10 +52,10 @@ describe "Availability API" do
       get "/api/v1/venues/#{venue.id}/events/#{event.id}/availability?#{query}"
 
       # Assert
-      expect(response.status).to eq 500
+      expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
-      expect(json_response["error"]).to eq "O buffet já está reservado para a data escolhida."
+      expect(json_response['message']).to eq 'O buffet já está reservado para a data escolhida.'
     end
     
     it "the guests number is higher than the guests number the venue can serve" do
@@ -74,10 +74,10 @@ describe "Availability API" do
       get "/api/v1/venues/#{venue.id}/events/#{event.id}/availability?#{query}"
 
       # Assert
-      expect(response.status).to eq 422
+      expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse(response.body)
-      expect(json_response["error"]).to eq "O número de convidados excede a capacidade máxima do buffet para este evento."
+      expect(json_response['message']).to eq 'O número de convidados excede a capacidade máxima do buffet para este evento.'
     end
   end
 end
