@@ -1,4 +1,14 @@
 pt-BR:
+  alerts:
+    order:
+      access_denied: 'Não foi possível acessar cadastro de pedido. Buffet ou Evento inativo.'
+      not_created: 'Não foi possível cadastrar Pedido'
+  notices:
+    order:
+      approved: 'Pedido aprovado com sucesso'
+      canceled: 'Pedido cancelado com sucesso'
+      confirmed: 'Pedido confirmado com sucesso'
+      created: 'Pedido cadastrado com sucesso'
   pending: "Aguardando avaliação do buffet"
   approved: "Aprovado pelo buffet"
   confirmed: "Confirmado pelo cliente"

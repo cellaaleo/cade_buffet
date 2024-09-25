@@ -1,4 +1,10 @@
 pt-BR:
+  alerts:
+    price:
+      not_created: 'Não foi possível cadastrar Preços'
+  notices:
+    price:
+      created: 'Preços cadastrados com sucesso'
   activerecord:
     models:
       price: Preço

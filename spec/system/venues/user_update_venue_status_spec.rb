@@ -12,11 +12,12 @@ describe 'Usuário altera status do buffet' do
     # Act
     login_as(u, scope: :user)
     visit root_path
-    click_on 'Desativar buffet'
+    click_on 'Desativar Buffet'
 
     # Assert
-    expect(page).to have_button 'Reativar buffet'
-    expect(page).not_to have_button 'Desativar buffet'
+    expect(page).to have_content 'Buffet desativado com sucesso'
+    expect(page).to have_button 'Reativar Buffet'
+    expect(page).not_to have_button 'Desativar Buffet'
   end
 
   it "e não aparece para visitantes na página inicial" do
@@ -62,5 +63,21 @@ describe 'Usuário altera status do buffet' do
     # Arrange 
     expect(page).to have_content 'Nenhum buffet encontrado'
   end
-  
+
+  it 'e o buffet fica ativo' do
+    u = FactoryBot.create(:user)
+    Venue.create!(brand_name: 'Meu Buffet', corporate_name: 'Buffet & Eventos Ltda',
+                  registration_number: '66.666.666/0001-00', phone_number: '99555-6666', email: 'sac@buffet.com.br',
+                  address: 'Avenida Tal, 2000', district: 'Vila Tal', city: 'Recife', state: 'PE',
+                  zip_code: '56655-560', description: 'Um buffet espaçoso para eventos diversos', payment_methods: '',
+                  user: u, status: :inactive)
+
+    login_as(u, scope: :user)
+    visit root_path
+    click_on 'Reativar Buffet'
+
+    expect(page).to have_content 'Buffet reativado com sucesso'
+    expect(page).not_to have_button 'Reativar Buffet'
+    expect(page).to have_button 'Desativar Buffet'
+  end
 end

@@ -145,7 +145,7 @@ describe "Dono de buffet faz cotação do pedido" do
 
     # Assert
     expect(current_path).to eq order_path(order.id)
-    expect(page).to have_content 'Orçamento registrado com sucesso!'
+    expect(page).to have_content 'Orçamento cadastrado com sucesso'
     formatted_date = I18n.localize(10.days.from_now.to_date)
     expect(page).to have_content "Orçamento - Válido até #{formatted_date}"
     expect(page).to have_content 'Meio de pagamento: Transferência bancária'
@@ -180,7 +180,7 @@ describe "Dono de buffet faz cotação do pedido" do
     click_on 'Enviar orçamento'
 
     # Assert
-    expect(page).to have_content 'Não foi possível enviar o orçamento'
+    expect(page).to have_content 'Não foi possível cadastrar Orçamento'
     expect(page).to have_content 'Data de validade do orçamento não pode ficar em branco'
     expect(page).to have_content 'Meio de pagamento não pode ficar em branco'
   end

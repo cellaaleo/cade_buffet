@@ -42,9 +42,9 @@
     
     <div class="d-flex justify-content-end">
       <% if @venue.active? %>
-        <%= button_to 'Desativar buffet', inactive_venue_path(@venue.id), class:"btn btn-warning" %>
+        <%= button_to 'Desativar Buffet', inactive_venue_path(@venue.id), class:"btn btn-warning" %>
       <% else %>
-        <%= button_to 'Reativar buffet', active_venue_path(@venue.id), class:"btn btn-info" %>
+        <%= button_to 'Reativar Buffet', active_venue_path(@venue.id), class:"btn btn-info" %>
       <% end %>
     </div>
   <% end %>

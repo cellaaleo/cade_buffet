@@ -35,27 +35,27 @@ class OrdersController < ApplicationController
     @order.venue = @event.venue
     @order.customer = current_customer
 
-    if @order.save
-      redirect_to @order, notice: 'Pedido registrado com sucesso!'
-    else
-      flash.now[:alert] = 'Não foi possível registrar o pedido.'
-      render :new
+    unless @order.save
+      flash.now[:alert] = t('alerts.order.not_created')
+      return render :new, status: :unprocessable_entity
     end
+
+    redirect_to @order, notice: t('notices.order.created')
   end
 
   def approved
     @order.approved!
-    redirect_to @order
+    redirect_to @order, notice: t('notices.order.approved')
   end
 
   def confirmed
     @order.confirmed!
-    redirect_to @order
+    redirect_to @order, notice: t('notices.order.confirmed')
   end
 
   def canceled
     @order.canceled!
-    redirect_to @order
+    redirect_to @order, notice: t('notices.order.canceled')
   end
 
   private
@@ -66,19 +66,15 @@ class OrdersController < ApplicationController
 
   def set_order_and_check_customer_or_user
     @order = Order.find(params[:id])
-    if current_customer
-      redirect_to root_path, alert: 'Você não tem acesso a este pedido' if @order.customer != current_customer
-    elsif current_user
-      redirect_to root_path, alert: 'Você não tem acesso a este pedido' if @order.venue != current_user.venue
+    if (current_customer && @order.customer != current_customer) || (current_user && @order.venue != current_user.venue)
+      redirect_to root_path, alert: 'Você não tem acesso a este pedido'
     end
   end
 
   def set_event_and_check_deactivation
     @event = Event.find(params[:event_id])
-    if @event.inactive?
-      redirect_to root_path, alert: 'Não foi possível acessar cadastro de pedido. Evento inativado pelo buffet!'
-    elsif @event.venue.inactive?
-      redirect_to root_path, alert: 'Não foi possível acessar cadastro de pedido. Buffet inativo!'
-    end
+    return unless @event.inactive? || @event.venue.inactive?
+
+    redirect_to root_path, alert: t('alerts.order.access_denied')
   end
 end

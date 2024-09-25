@@ -27,8 +27,8 @@ describe "Dono de bufet altera status do pedido" do
 
     # Assert
     expect(current_path).to eq order_path(order.id)
+    expect(page).to have_content 'Pedido aprovado com sucesso'
     expect(page).to have_content 'Situação do pedido: Aprovado pelo buffet'
     expect(page).not_to have_button 'Aprovar pedido'
   end
-  
 end

@@ -27,6 +27,7 @@ describe "Cliente altera status do pedido" do
 
     # Assert
     expect(current_path).to eq order_path(order.id)
+    expect(page).to have_content 'Pedido confirmado com sucesso'
     expect(page).to have_content 'Situação do pedido: Confirmado pelo cliente'
     expect(page).not_to have_button 'Confirmar pedido'
   end
@@ -83,9 +84,9 @@ describe "Cliente altera status do pedido" do
 
     # Assert
     expect(current_path).to eq order_path(order.id)
+    expect(page).to have_content 'Pedido cancelado com sucesso'
     expect(page).not_to have_button 'Confirmar pedido'
     expect(page).not_to have_button 'Cancelar pedido'
     expect(page).to have_content 'Situação do pedido: Cancelado'
   end
-  
 end

@@ -87,7 +87,7 @@ describe "Usuário registra valores de um evento" do
     click_on 'Enviar'
     
     # Assert
-    expect(page).to have_content 'Não foi possível cadastrar os preços'
+    expect(page).to have_content 'Não foi possível cadastrar Preços'
     expect(page).to have_content 'preço-base não pode ficar em branco'
     expect(page).to have_content 'taxa adicional por pessoa não pode ficar em branco'
     expect(page).to have_content 'hora extra não pode ficar em branco'

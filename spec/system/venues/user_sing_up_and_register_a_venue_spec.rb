@@ -14,7 +14,7 @@ describe "Usuário dono de buffet cria sua conta" do
 
     # Assert - encaminhado à página de registro do buffet
     expect(current_path).to eq new_venue_path
-    expect(page).to have_content 'Cadastre o seu buffet'
+    expect(page).to have_content 'Cadastre o seu Buffet'
     expect(page).to have_field "Nome fantasia"
     expect(page).to have_field "CNPJ"
     expect(page).to have_field "Bairro"
@@ -83,7 +83,8 @@ describe "Usuário dono de buffet cria sua conta" do
     click_on "Enviar"
 
     # Assert
-    expect(page).to have_content 'Não foi possível cadastrar o seu buffet'
+    expect(page).to have_content 'Cadastre o seu Buffet:'
+    expect(page).to have_content 'Não foi possível cadastrar o seu Buffet'
     expect(page).to have_content 'CNPJ não pode ficar em branco'
     expect(page).to have_content 'Endereço não pode ficar em branco'
     expect(page).to have_content 'Bairro não pode ficar em branco'

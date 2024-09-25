@@ -17,22 +17,22 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.venue = @venue
 
-    if @event.save
-      redirect_to @event, notice: 'Evento cadastrado com sucesso!'
-    else
-      flash.now[:alert] = 'Evento não cadastrado.'
-      render 'new'
+    unless @event.save
+      flash.now[:alert] = t('alerts.event.not_created')
+      return render :new, status: :unprocessable_entity
     end
+
+    redirect_to @event, notice: t('notices.event.created')
   end
 
   def active
     @event.active!
-    redirect_to @event, notice: 'Evento reativado com sucesso.'
+    redirect_to @event, notice: t('notices.event.reactivated')
   end
 
   def inactive
     @event.inactive!
-    redirect_to @event, notice: 'Evento desativado com sucesso.'
+    redirect_to @event, notice: t('notices.event.deactivated')
   end
 
   def deactivated

@@ -1,4 +1,14 @@
 pt-BR:
+  alerts:    
+    venue:
+      not_created: 'Não foi possível cadastrar o seu Buffet'
+      not_updated: 'Não foi possível editar dados do Buffet'
+  notices:
+    venue:
+      created: 'Buffet cadastrado com sucesso'
+      deactivated: 'Buffet desativado com sucesso'
+      reactivated: 'Buffet reativado com sucesso'
+      updated: 'Buffet editado com sucesso'
   activerecord:
     models:
       venue: Buffet

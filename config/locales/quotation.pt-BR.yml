@@ -1,4 +1,10 @@
 pt-BR:
+  alerts:
+    quotation:
+      not_created: 'Não foi possível cadastrar Orçamento'
+  notices:
+    quotation:
+      created: 'Orçamento cadastrado com sucesso'
   activerecord:
     models:
       quotation: Orçamento

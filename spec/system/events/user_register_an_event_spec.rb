@@ -70,7 +70,7 @@ describe "dono de buffet registra tipo de evento" do
     click_on "Enviar"
     
     # Assert
-    expect(page).to have_content 'Evento cadastrado com sucesso!'
+    expect(page).to have_content 'Evento cadastrado com sucesso'
     expect(page).to have_content 'Casamento'
     expect(page).to have_content 'Festas e recepções de casamento'
     expect(page).to have_content 'mín. 60 | máx. 200 convidados'
@@ -105,7 +105,7 @@ describe "dono de buffet registra tipo de evento" do
     click_on "Enviar"
     
     # Assert
-    expect(page).to have_content 'Evento não cadastrado'
+    expect(page).to have_content 'Não foi possível cadastrar Evento'
     expect(page).to have_content 'Quantidade mínima de convidados não pode ficar em branco'
     expect(page).to have_content 'Quantidade máxima de convidados não pode ficar em branco'
     expect(page).to have_content 'Tempo de duração padrão (em minutos) não pode ficar em branco'

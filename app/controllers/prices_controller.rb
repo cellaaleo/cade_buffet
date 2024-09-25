@@ -11,12 +11,12 @@ class PricesController < ApplicationController
     @price = Price.new(price_params)
     @price.event = @event
 
-    if @price.save
-      redirect_to @event, notice: 'Preços cadastrados com sucesso'
-    else
-      flash[:alert] = 'Não foi possível cadastrar os preços'
-      render 'new'
+    unless @price.save
+      flash.now[:alert] = t('alerts.price.not_created')
+      return render :new, status: :unprocessable_entity
     end
+
+    redirect_to @event, notice: t('notices.price.created')
   end
 
   private

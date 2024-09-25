@@ -14,21 +14,21 @@ class VenuesController < ApplicationController
     @venue = Venue.new(venue_params)
     @venue.user = current_user
 
-    if @venue.save
-      redirect_to @venue, notice: 'Buffet cadastrado com sucesso'
-    else
-      flash[:alert] = 'Não foi possível cadastrar o seu buffet.'
-      render 'new'
+    unless @venue.save
+      flash.now[:alert] = t('alerts.venue.not_created')
+      return render :new, status: :unprocessable_entity
     end
+
+    redirect_to @venue, notice: t('notices.venue.created')
   end
 
   def update
-    if @venue.update(venue_params)
-      redirect_to @venue, notice: 'Buffet editado com sucesso'
-    else
-      flash[:alert] = 'Não foi possível editar dados do buffet.'
-      render 'edit'
+    unless @venue.update(venue_params)
+      flash[:alert] = t('alerts.venue.not_updated')
+      return render 'edit'
     end
+
+    redirect_to @venue, notice: t('notices.venue.updated')
   end
 
   def search
@@ -45,12 +45,12 @@ class VenuesController < ApplicationController
 
   def active
     @venue.active!
-    redirect_to @venue
+    redirect_to @venue, notice: t('notices.venue.reactivated')
   end
 
   def inactive
     @venue.inactive!
-    redirect_to @venue
+    redirect_to @venue, notice: t('notices.venue.deactivated')
   end
 
   private
@@ -67,6 +67,6 @@ class VenuesController < ApplicationController
 
     return unless user_signed_in? && @venue.user != current_user
 
-    redirect_to venue_path(current_user.venue.id), alert: 'Acesso não permitido!'
+    redirect_to venue_path(current_user.venue.id), alert: t('alerts.access_denied')
   end
 end

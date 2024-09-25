@@ -1,4 +1,12 @@
 pt-BR:
+  alerts:
+    event:
+      not_created: 'Não foi possível cadastrar Evento'
+  notices:
+    event:
+      created: 'Evento cadastrado com sucesso'
+      deactivated: 'Evento desativado com sucesso'
+      reactivated: 'Evento reativado com sucesso'
   activerecord:
     models:
       event: Evento

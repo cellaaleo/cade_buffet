@@ -9,12 +9,12 @@ class QuotationsController < ApplicationController
     @quotation = Quotation.new(quotation_params)
     @quotation.order = @order
 
-    if @quotation.save
-      redirect_to @order, notice: 'Orçamento registrado com sucesso!'
-    else
-      flash[:alert] = 'Não foi possível enviar o orçamento!'
-      render 'new'
+    unless @quotation.save
+      flash.now[:alert] = t('alerts.quotation.not_created')
+      return render :new, status: :unprocessable_entity
     end
+
+    redirect_to @order, notice: t('notices.quotation.created')
   end
 
   private

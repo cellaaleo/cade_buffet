@@ -58,7 +58,7 @@ describe "Cliente faz um pedido" do
 
     # Assert
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Não foi possível acessar cadastro de pedido. Buffet inativo!'
+    expect(page).to have_content 'Não foi possível acessar cadastro de pedido. Buffet ou Evento inativo.'
   end
 
   it "e o evento está inativo" do
@@ -79,9 +79,8 @@ describe "Cliente faz um pedido" do
 
     # Assert
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Não foi possível acessar cadastro de pedido. Evento inativado pelo buffet'
+    expect(page).to have_content 'Não foi possível acessar cadastro de pedido. Buffet ou Evento inativo.'
   end
-
 
   it "e é possível registrar um outro endereço para a realização do evento" do
     # Arrange
@@ -154,7 +153,7 @@ describe "Cliente faz um pedido" do
     click_on 'Enviar'
 
     # Assert
-    expect(page).to have_content 'Pedido registrado com sucesso'
+    expect(page).to have_content 'Pedido cadastrado com sucesso'
     expect(page).to have_content 'pedido ABC12345'
     expect(page).to have_content 'Evento: Festa de Aniversário'
     expect(page).to have_content 'Data do evento: 30/04/2025'
@@ -188,7 +187,7 @@ describe "Cliente faz um pedido" do
     click_on 'Enviar'
 
     # Assert
-    expect(page).to have_content 'Não foi possível registrar o pedido'
+    expect(page).to have_content 'Não foi possível cadastrar Pedido'
     expect(page).to have_content 'Data do evento não pode ficar em branco'
     expect(page).to have_content 'Número de convidados não pode ficar em branco'
   end

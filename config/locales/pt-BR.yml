@@ -1,5 +1,6 @@
 pt-BR:
-  hello: "Olá mundo"
+  alerts:
+    access_denied: 'Acesso não permitido'
   found:
     one: 'encontrado'
     other: 'encontrados'

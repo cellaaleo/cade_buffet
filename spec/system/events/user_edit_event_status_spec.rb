@@ -19,7 +19,7 @@ describe "Dono de buffet edita status de um evento" do
     click_on 'Desativar evento'
 
     # Assert
-    expect(page).to have_content 'Evento desativado com sucesso.'
+    expect(page).to have_content 'Evento desativado com sucesso'
     expect(page).to have_button 'Reativar evento'
     expect(page).not_to have_button 'Desativar evento'
   end
@@ -96,7 +96,7 @@ describe "Dono de buffet edita status de um evento" do
     click_on 'Reativar evento'
 
     # Assert
-    expect(page).to have_content 'Evento reativado com sucesso.'
+    expect(page).to have_content 'Evento reativado com sucesso'
     expect(page).not_to have_button 'Reativar evento'
     expect(page).to have_button 'Desativar evento'
   end
