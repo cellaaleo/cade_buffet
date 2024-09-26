@@ -1,103 +1,71 @@
 require 'rails_helper'
 
-describe "Dono de buffet edita status de um evento" do
-  it "e evento é desativado" do
-    # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "...", payment_methods: "..", user: user, status: :active)
-    first_event = Event.create!(name: 'Festas de Aniversário', description: '...', menu: '...', duration: 240, 
-                                minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                status: :active)
+describe 'Dono de Buffet edita status de um evento' do
+  it 'e evento é desativado' do
+    venue = create :venue
+    create :event, name: 'Aniversário', venue: venue, status: :active
 
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on 'Festas de Aniversário'
-    click_on 'Desativar evento'
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
+    click_on 'Aniversário'
+    click_on 'Desativar Evento'
 
-    # Assert
     expect(page).to have_content 'Evento desativado com sucesso'
-    expect(page).to have_button 'Reativar evento'
-    expect(page).not_to have_button 'Desativar evento'
+    expect(page).to have_button 'Reativar Evento'
+    expect(page).not_to have_button 'Desativar Evento'
   end
 
-  it "e evento não aparece na relação de eventos que realiza" do
-    # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "...", payment_methods: "..", user: user, status: :active)
-    first_event = Event.create!(name: 'Festas de Aniversário', description: '...', menu: '...', duration: 240, 
-                                minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                status: :active)
-    second_event = Event.create!(name: 'Festas de Halloween', description: '...', menu: '...', duration: 240, 
-                                  minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                  status: :active)
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
-    click_on 'Festas de Aniversário'
-    click_on 'Desativar evento'
-    click_on 'Cadê Buffet?'
+  it 'e evento não aparece na relação de eventos que realiza' do
+    venue = create :venue
+    create :event, name: 'Aniversário', venue: venue, status: :inactive
+    create :event, name: 'Halloween', venue: venue, status: :active
 
-    # Assert
-    expect(page).not_to have_content 'Festas de Aniversário'
-    expect(page).to have_content 'Festas de Halloween'
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
+
+    expect(page).not_to have_content 'Aniversário'
+    expect(page).to have_content 'Halloween'
   end
 
-  it "e vê relação de eventos desativados" do
-    # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "...", payment_methods: "..", user: user, status: :active)
-    first_event = Event.create!(name: 'Festas de Aniversário', description: '...', menu: '...', duration: 240, 
-                                minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                status: :inactive)
-    second_event = Event.create!(name: 'Festas de Halloween', description: '...', menu: '...', duration: 240, 
-                                  minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                  status: :active)
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
+  it 'e vê relação de eventos desativados' do
+    venue = create :venue
+    create :event, name: 'Aniversário', venue: venue, status: :inactive
+    create :event, name: 'Halloween', venue: venue, status: :active
+
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
     click_on 'Ver eventos desativados'
 
     # Assert
     expect(current_path).to eq deactivated_venue_events_path(venue.id)
     expect(page).to have_content 'Eventos desativados'
-    expect(page).to have_content 'Festas de Aniversário'
-    expect(page).not_to have_button 'Festas de Halloween'
+    expect(page).to have_content 'Aniversário'
+    expect(page).not_to have_link 'Halloween'
   end
-  
 
-  it "e evento é reativado" do
-    # Arrange
-    user = User.create!(email: 'buffet@email.com', password: 'password')
-    venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventosbuffet@email.com", 
-                      description: "...", payment_methods: "..", user: user, status: :active)
-    first_event = Event.create!(name: 'Festas de Aniversário', description: '...', menu: '...', duration: 240, 
-                                minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                status: :inactive)
-    second_event = Event.create!(name: 'Festas de Halloween', description: '...', menu: '...', duration: 240, 
-                                  minimum_guests_number: 50, maximum_guests_number: 100, venue: venue,
-                                  status: :active)
-    # Act
-    login_as(user, scope: :user)
-    visit root_path
+  it 'e evento é reativado' do
+    venue = create :venue
+    create :event, name: 'Aniversário', venue: venue, status: :inactive
+    create :event, name: 'Halloween', venue: venue, status: :active
+
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
     click_on 'Ver eventos desativados'
-    click_on 'Festas de Aniversário'
-    click_on 'Reativar evento'
+    click_on 'Aniversário'
+    click_on 'Reativar Evento'
 
-    # Assert
     expect(page).to have_content 'Evento reativado com sucesso'
-    expect(page).not_to have_button 'Reativar evento'
-    expect(page).to have_button 'Desativar evento'
+    expect(page).not_to have_button 'Reativar Evento'
+    expect(page).to have_button 'Desativar Evento'
+  end
+
+  it 'de não tem nenhum evento desativado' do
+    venue = create :venue
+    create :event, name: 'Aniversário', venue: venue, status: :active
+
+    login_as venue.user, scope: :user
+    visit deactivated_venue_events_path(venue.id)
+
+    expect(page).to have_content 'Nenhum evento desativado'
   end
 end

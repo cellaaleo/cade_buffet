@@ -1,5 +1,4 @@
 <div class="venue-details">
-  
   <h3 style="text-align: center">
     <%= @event.name %> - 
     <%= link_to @event.venue.brand_name, venue_path(@event.venue_id) %>
@@ -23,6 +22,7 @@
     mín. <%= @event.minimum_guests_number %> | máx. <%= @event.maximum_guests_number %> convidados
   </p>
   <p><strong>Duração média: </strong> <%= @event.duration %> minutos</p>
+  <p><strong>Menu: </strong> <%= @event.menu %></p>
 
   <h4>Serviços opcionais que oferecemos:</h4>
   <ul>
@@ -86,11 +86,9 @@
 
   <% if user_signed_in? && @event.venue == current_user.venue %>
     <% if @event.active? %>
-      <%= button_to 'Desativar evento', inactive_event_path(@event.id), class:"btn btn-warning btn-sm" %>
+      <%= button_to 'Desativar Evento', inactive_event_path(@event.id), class:"btn btn-warning btn-sm" %>
     <% else %>
-      <%= button_to 'Reativar evento', active_event_path(@event.id), class:"btn btn-info btn-sm" %>
+      <%= button_to 'Reativar Evento', active_event_path(@event.id), class:"btn btn-info btn-sm" %>
     <% end %>
   <% end %>
-
 </div>
-

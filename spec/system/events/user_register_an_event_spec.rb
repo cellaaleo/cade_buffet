@@ -1,159 +1,101 @@
 require 'rails_helper'
 
-describe "dono de buffet registra tipo de evento" do
-  it "se estiver autenticado" do
-    u = User.create!(email: 'buffet@email.com.br', password: 'password', buffet_owner: true)
-    v = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: u)
-    # Act
-    visit new_venue_event_path(v.id)
-    # Assert
+describe 'Dono de Buffet registra tipo de evento' do
+  it 'se estiver autenticado' do
+    venue = create :venue
+
+    visit new_venue_event_path(venue.id)
+
     expect(current_path).to eq new_user_session_path
   end
-  
+
   it 'a partir da página do seu buffet' do
-    # Arrange criar usuário e buffet
-    u = User.create!(email: 'buffet@email.com.br', password: 'password', buffet_owner: true)
-    v = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: u)
-    # Act
-    login_as u, :scope => :user
-    visit root_path
+    venue = create :venue
+
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
     within('main') do
       click_on 'Cadastrar um evento'
     end
 
-    # Assert
+    expect(current_path).to eq new_venue_event_path(venue.id)
     expect(page).to have_content 'Cadastre um tipo de evento'
-    expect(page).to have_field 'Nome do evento'
-    expect(page).to have_field 'Descrição'
-    expect(page).to have_field 'Quantidade mínima de convidados'
-    expect(page).to have_field 'Quantidade máxima de convidados'
-    expect(page).to have_field 'Tempo de duração padrão'
-    expect(page).to have_field 'Cardápio'
     expect(page).to have_unchecked_field 'Bebidas alcoólicas'
     expect(page).to have_unchecked_field 'Decoração'
     expect(page).to have_unchecked_field 'Estacionamento'
     expect(page).to have_unchecked_field 'Valet'
     expect(page).to have_unchecked_field 'Catering'
-    expect(page).to have_button 'Enviar'
   end
 
   it 'com sucesso' do
-    # Arrange
-    u = User.create!(email: 'buffet@email.com.br', password: 'password')
-    v = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: u)
-    # Act
-    login_as u, :scope => :user
-    visit root_path
-    within('main') do
-      click_on 'Cadastrar um evento'
-    end
-    fill_in "Nome do evento",	with: "Casamento"
-    fill_in "Descrição",	with: "Festas e recepções de casamento"
-    fill_in "Quantidade mínima de convidados",	with: "60"
-    fill_in "Quantidade máxima de convidados",	with: "200"
-    fill_in "Tempo de duração padrão",	with: "240"
-    fill_in "Cardápio",	with: "Brunchs, Almoços, Jantares..."
-    page.check "event_has_alcoholic_drinks"
-    page.check "event_has_parking_service"
-    click_on "Enviar"
-    
-    # Assert
+    venue = create :venue
+
+    login_as venue.user, scope: :user
+    visit new_venue_event_path(venue.id)
+
+    fill_in 'Nome do evento',	with: 'Chá Bar'
+    fill_in 'Descrição',	with: 'Pequena celebração pré-casamento...'
+    fill_in 'Quantidade mínima de convidados',	with: '60'
+    fill_in 'Quantidade máxima de convidados',	with: '100'
+    fill_in 'Tempo de duração padrão',	with: '240'
+    fill_in 'Cardápio',	with: 'Entradas e Petiscos (...) Pratos Principais (...)'
+    page.check 'event_has_alcoholic_drinks'
+    page.check 'event_has_parking_service'
+    page.check 'event_has_decorations'
+    click_on 'Enviar'
+
+    expect(current_path).to eq event_path(venue.events.last)
     expect(page).to have_content 'Evento cadastrado com sucesso'
-    expect(page).to have_content 'Casamento'
-    expect(page).to have_content 'Festas e recepções de casamento'
-    expect(page).to have_content 'mín. 60 | máx. 200 convidados'
+    expect(page).to have_content 'Chá Bar'
+    expect(page).to have_content 'Pequena celebração pré-casamento...'
+    expect(page).to have_content 'Entradas e Petiscos (...) Pratos Principais (...)'
+    expect(page).to have_content 'mín. 60 | máx. 100 convidados'
     expect(page).to have_content 'bebidas alcoólicas'
     expect(page).to have_content 'estacionamento'
-    expect(page).not_to have_content 'decoração'
+    expect(page).to have_content 'decoração'
     expect(page).not_to have_content 'valet'
     expect(page).not_to have_content 'catering'
     expect(page).to have_content 'Evento realizado exclusivamente em nosso espaço'
   end
 
-  it "com dados incompletos" do
-    # Arrange
-    u = User.create!(email: 'buffet@email.com.br', password: 'password')
-    v = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: u)
-    # Act
-    login_as u, :scope => :user
-    visit root_path
-    within('main') do
-      click_on 'Cadastrar um evento'
-    end
-    fill_in "Nome do evento",	with: "Casamento"
-    fill_in "Descrição",	with: "Festas e recepções de casamento"
-    fill_in "Quantidade mínima de convidados",	with: ""
-    fill_in "Quantidade máxima de convidados",	with: ""
-    fill_in "Tempo de duração padrão",	with: ""
-    fill_in "Cardápio",	with: "Brunchs, Almoços, Jantares..."
-    click_on "Enviar"
-    
-    # Assert
+  it 'com dados incompletos' do
+    venue = create :venue
+
+    login_as venue.user, scope: :user
+    visit new_venue_event_path(venue.id)
+    click_on 'Enviar'
+
     expect(page).to have_content 'Não foi possível cadastrar Evento'
-    expect(page).to have_content 'Quantidade mínima de convidados não pode ficar em branco'
+    expect(page).to have_content 'Cadastre um tipo de evento'
+    expect(page).to have_content 'Verifique os erros abaixo'
+    expect(page).to have_content 'Nome do evento não pode ficar em branco'
     expect(page).to have_content 'Quantidade máxima de convidados não pode ficar em branco'
     expect(page).to have_content 'Tempo de duração padrão (em minutos) não pode ficar em branco'
   end
-  
-  it "e aparece na página do seu buffet" do
-    # Arrange
-    u = User.create!(email: 'buffet@email.com.br', password: 'password')
-    v = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: u)
-    Event.create!(name: 'Eventos corporativos', minimum_guests_number: 50, maximum_guests_number: 100, duration: 240, venue: v)
-    Event.create!(name: 'Aniversários', minimum_guests_number: 50, maximum_guests_number: 100, duration: 240, venue: v)
 
-    # Act
-    login_as u, :scope => :user
-    visit root_path
+  it 'e aparece na página do seu buffet' do
+    venue = create :venue
+    create :event, name: 'Eventos corporativos', venue: venue
+    create :event, name: 'Aniversários', venue: venue
 
-    # Assert
+    login_as venue.user, scope: :user
+    visit venue_path(venue.id)
+
+    expect(page).to have_content 'Eventos que realizamos:'
     expect(page).to have_link 'Eventos corporativos'
-    expect(page).to have_link 'Aniversários' 
+    expect(page).to have_link 'Aniversários'
   end
-  
-  it "e não vê eventos de outros buffets" do
-    # Arrange
-    first_user = User.create!(email: 'buffet@email.com.br', password: 'password')
-    first_venue = Venue.create!(brand_name: "Buffet Pinheiros", corporate_name: "Pinheiros Eventos Ltda", registration_number:"11.111.111/0001-00",
-                      address: "Rua Eugênio de Medeiros, 530", district: "Pinheiros", city: "São Paulo", state: "SP", zip_code: "05050-050", 
-                      phone_number: "(11)99111-1111", email: "eventospinheiros@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: first_user)
-    second_user = User.create!(email: 'casajardim@email.com.br', password: 'password')
-    second_venue = Venue.create!(brand_name: "Casa Jardim", corporate_name: "Casa Jardim Buffet Ltda", registration_number:"22.222.222/0002-00",
-                      address: "Av. Brasil, 2000", district: "Centor", city: "Rio de Janeiro", state: "RJ", zip_code: "12345-050", 
-                      phone_number: "(21)99222-2222", email: "eventoscasajardim@email.com.br", 
-                      description: "Salão de festas com decoração rústica e chique, vários ambientes, jardim arborizado e pista de dança.",
-                      payment_methods: "", user: second_user)
-    Event.create!(name: 'Eventos corporativos', minimum_guests_number: 50, maximum_guests_number: 100, duration: 240, venue: first_venue)
-    Event.create!(name: 'Casamento', minimum_guests_number: 50, maximum_guests_number: 100, duration: 240, venue: second_venue)
 
-    # Act
-    login_as first_user, :scope => :user
-    visit root_path
+  it 'e não vê eventos de outros buffets' do
+    first_venue = create :venue
+    second_venue = create :venue
+    create :event, name: 'Festa de 15 Anos', venue: first_venue
+    create :event, name: 'Formatura', venue: second_venue
 
-    # Assert
-    expect(page).not_to have_link 'Casamento'
+    login_as first_venue.user, scope: :user
+    visit venue_path(first_venue.id)
+
+    expect(page).to have_link 'Festa de 15 Anos'
+    expect(page).not_to have_link 'Formatura'
   end
-  
 end
