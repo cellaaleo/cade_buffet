@@ -7,6 +7,11 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
 
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
+  Exclude:
+    - 'spec/factories/**/*'
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
