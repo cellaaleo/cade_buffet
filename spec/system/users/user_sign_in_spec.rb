@@ -1,50 +1,52 @@
 require 'rails_helper'
 
-describe "Usuário se autentica" do
-  it "com sucesso" do
-    # Arrange - fazer cadastro
-    User.create!(email: "sac@eventos.com", password: "senha123")
+describe 'Usuário se autentica' do
+  it 'com sucesso' do
+    User.create!(email: 'dono_buffet@email.com', password: 'password')
 
-    # Act - fazer log in
     visit root_path
-    click_on "Entrar"
+    click_on 'Entrar'
     click_on 'Dono de Buffet'
-    fill_in "E-mail",	with: "sac@eventos.com"
-    fill_in "Senha",	with: "senha123"
+    fill_in 'E-mail',	with: 'dono_buffet@email.com'
+    fill_in 'Senha',	with: 'password'
     within('main form') do
-      click_on "Entrar"
+      click_on 'Entrar'
     end
 
-    # Assert
+    expect(page).to have_content 'Login efetuado com sucesso'
     within('nav') do
       expect(page).not_to have_link 'Criar sua conta'
       expect(page).not_to have_link 'Entrar'
       expect(page).to have_button 'Sair'
     end
-    expect(page).to have_content 'Login efetuado com sucesso'
   end
 
-  it "e faz log out" do
-    # Arrange - fazer cadastro
-    User.create!(email: "sac@eventos.com", password: "senha123")
+  it 'e faz log out' do
+    user = User.create!(email: 'dono_buffet@email.com', password: 'password')
 
-    # Act - fazer log in
+    login_as user, scope: :user
     visit root_path
-    click_on "Entrar"
-    click_on 'Dono de Buffet'
-    fill_in "E-mail",	with: "sac@eventos.com"
-    fill_in "Senha",	with: "senha123"
-    within('main form') do
-      click_on "Entrar"
-    end
     click_on 'Sair'
 
-    # Assert
+    expect(page).to have_content 'Logout efetuado com sucesso'
     within('nav') do
       expect(page).to have_link 'Criar uma conta'
       expect(page).to have_link 'Entrar'
       expect(page).not_to have_button 'Sair'
     end
-    expect(page).to have_content 'Logout efetuado com sucesso'
+  end
+
+  it 'e não pode se autenticar como cliente' do
+    User.create!(email: 'dono_buffet@email.com', password: 'password')
+
+    visit new_customer_session_path
+    fill_in 'E-mail',	with: 'dono_buffet@email.com'
+    fill_in 'Senha',	with: 'password'
+    within('main form') do
+      click_on 'Entrar'
+    end
+
+    expect(page).to have_content 'E-mail ou senha inválidos.'
+    expect(page).to have_link 'Cadastre-se como cliente'
   end
 end
